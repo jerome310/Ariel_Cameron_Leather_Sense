@@ -14,24 +14,31 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
-        <!-- Search icon -->
+        <!-- Desktop Search icon -->
         <div class="text-[#2E2D34] hidden md:block">
             {% render 'icon-search' %}
         </div>
-        <!-- Logo -->
+        <!-- Desktop Logo -->
         <div class="text-center">
             <a href="">
-                <img src="{{ 'logo.png' | asset_url }}" alt="My company logo" width="150" height="150">
+                <img class="w-[150px] h-[150px] md:w-[175px] md:h-[175px]" src="{{ 'logo.png' | asset_url }}" alt="My company logo">
             </a>
         </div>
-        <!-- Mobile Search icon -->
-        <div class="text-[#2E2D34] md:hidden pr-4">
-            {% render 'icon-search' %}
-        </div>
-        <!-- Shopping icon -->
-        <div class="text-[#2E2D34]">
+        <!-- Desktop Cart -->
+        <div class="text-[#2E2D34] hidden md:block">
             {% render 'icon-cart' %}
         </div>
+        <!-- Mobile Search icon -->
+        <div class="flex md:block text-[#2E2D34] md:hidden">
+            <div class="pr-4">
+                {% render 'icon-search' %}
+            </div>
+            <div>
+                {% render 'icon-cart' %}
+            </div>
+        </div>
+        <!-- Shopping icon -->
+        
     </div>
     <!-- Slider -->
     <div class="bg-gray-700 md:hidden" x-show="open" x-transition:enter="transition ease-out duration-300"
@@ -40,18 +47,10 @@
         x-transition:leave-end="transform -translate-x-full">
         <!-- Links -->
         <div class="flex flex-col px-4 py-2 space-y-2">
-            <a href="#"
-                class="text-[#2E2D34] hover:bg-gray-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Skin Care</a>
-            <a href="#"
-                class="text-[#2E2D34] hover:bg-gray-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Hair Care</a>
-            <a href="#"
-                class="text-[#2E2D34] hover:bg-gray-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Body Care</a>
-            <a href="#"
-                class="text-[#2E2D34] hover:bg-gray-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Nail Polish</a>
-            <a href="#"
-                class="text-[#2E2D34] hover:bg-gray-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Blog</a>
-            <a href="#"
-                class="text-[#2E2D34] hover:bg-gray-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About Us</a>
+           {% for link in linklists.main-menu.links %}
+            <a class="font-normal text-[#5E5C66] hover:underline underline-offset-4 decoration-1 block px-3 py-2 rounded-md text-base"
+            href="{{ link.url }}">{{ link.title }}</a>
+           {% endfor %}
         </div>
         <!-- Social Media Icons -->
          <div class="flex px-6 pt-16 pb-6">
