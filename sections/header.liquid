@@ -70,3 +70,39 @@
     </div>
     <!-- Desktop Navabar -->
 </div>
+
+{% schema %}
+    {
+        "name": "Logo",
+        "settings": [
+            {
+                "type": "text",
+                "id": "image",
+                "label": "Image",
+                "default": "Logo",
+                "info": "This is the logo section" 
+            }
+        ]
+    }
+{% endschema %}
+
+{% comment %} 
+    Look further into this code for schema to upload new images
+    {% capture store_logo_json %}
+    {
+    "@type": "ImageObject",
+    "url": "https://example.com/logo.png",
+    "caption": "My store logo",
+    "height": 100,
+    "width": 200,
+    "encodingFormat": "image/png"
+    }
+    {% endcapture %}
+    
+    {% assign store_logo = store_logo_json | json_parse %}
+    
+    <div class="store-logo">
+        <img src="{{ store_logo.url }}" alt="{{ store_logo.caption }}" height="{{ store_logo.height }}"
+            width="{{ store_logo.width }}">
+    </div> 
+ {% endcomment %}
