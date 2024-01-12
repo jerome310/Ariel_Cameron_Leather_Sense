@@ -21,7 +21,12 @@
         <!-- Desktop Logo -->
         <div class="text-center">
             <a href="">
-                <img class="w-[150px] h-[150px] md:w-[175px] md:h-[175px]" src="{{ 'logo.png' | asset_url }}" alt="My company logo">
+                {% if  section.settings.image == blank %}
+                    <img class="w-[150px] h-[150px] md:w-[175px] md:h-[175px]" src="{{ 'logo.png' |  asset_url }}"
+                        alt="My company logo">
+                    {% else %}
+                        <img class="w-[150px] h-[150px] md:w-[175px] md:h-[175px]" src="{{ section.settings.image | img_url: 'master' }}" alt="My company logo">
+                {% endif %}
             </a>
         </div>
         <!-- Desktop Cart -->
@@ -76,33 +81,10 @@
         "name": "Logo",
         "settings": [
             {
-                "type": "text",
+                "type": "image_picker",
                 "id": "image",
-                "label": "Image",
-                "default": "Logo",
-                "info": "This is the logo section" 
+                "label": "Image"
             }
         ]
     }
 {% endschema %}
-
-{% comment %} 
-    Look further into this code for schema to upload new images
-    {% capture store_logo_json %}
-    {
-    "@type": "ImageObject",
-    "url": "https://example.com/logo.png",
-    "caption": "My store logo",
-    "height": 100,
-    "width": 200,
-    "encodingFormat": "image/png"
-    }
-    {% endcapture %}
-    
-    {% assign store_logo = store_logo_json | json_parse %}
-    
-    <div class="store-logo">
-        <img src="{{ store_logo.url }}" alt="{{ store_logo.caption }}" height="{{ store_logo.height }}"
-            width="{{ store_logo.width }}">
-    </div> 
- {% endcomment %}
