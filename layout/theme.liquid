@@ -18,7 +18,16 @@
 </head>
 
 <body class="bg-[#FEB82B]/20 font-comic">
-  {% section 'homepage' %}
+  {% section 'navbar' %}
+{% if template.name == 'index' %}
+    {% render 'homepage_hero' %}
+    {% render 'sparkle-button' %}
+    {% else %}
+      <div class="hidden">
+        {% render 'homepage_hero' %}
+        {% render 'sparkle-button' %}
+      </div>
+{% endif %} 
   <main role="main">
     {{ content_for_layout }}
   </main>
