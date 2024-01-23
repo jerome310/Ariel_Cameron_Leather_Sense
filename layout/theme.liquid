@@ -18,7 +18,9 @@
 </head>
 
 <body class="bg-[#FEB82B]/20 font-comic">
-  {% section 'navbar' %}
+  {% unless template.name == '404' %}
+    {% section 'navbar' %}
+  {% endunless %}
 {% if template.name == 'index' %}
     {% render 'homepage_hero' %}
     {% render 'sparkle-button' %}
