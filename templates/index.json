@@ -1,5 +1,13 @@
 {
     "sections": {
+        "homepage-hero": {
+            "type": "homepage-hero",
+            "settings": {}
+        },
+        "sparkle-button": {
+            "type": "sparkle-button",
+            "settings": {}
+        },
         "featured-collection": {
             "type": "featured-collection",
             "settings": {
@@ -7,5 +15,5 @@
             }
         }
     },
-    "order": ["featured-collection"]
+    "order": ["homepage-hero","sparkle-button","featured-collection"]
 }
