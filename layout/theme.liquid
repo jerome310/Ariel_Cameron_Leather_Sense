@@ -21,15 +21,6 @@
   {% unless template.name == '404' %}
     {% section 'navbar' %}
   {% endunless %}
-{% if template.name == 'index' %}
-    {% render 'homepage_hero' %}
-    {% render 'sparkle-button' %}
-    {% else %}
-      <div class="hidden">
-        {% render 'homepage_hero' %}
-        {% render 'sparkle-button' %}
-      </div>
-{% endif %} 
   <main role="main">
     {{ content_for_layout }}
   </main>
