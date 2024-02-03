@@ -1,0 +1,18 @@
+<div class="background: bg-gradient-to-r from-[#feb82b] 33% via-[#2387ff] 66% to-[#e561a1] 100%; w-full h-56">
+    <div class="text-white pt-10 flex flex-col items-center mx-auto">
+        <h1 class="text-2xl">Join our email list for exclusive offers and the latest news.</h1>
+        {% form 'customer' %}
+        <div class="container mx-auto">
+            <div class="email py-4 relative flex">
+                <input type="email" name="contact[email]" placeholder="Email"
+                    class="w-72 mt-2 p-2 border border-gray-300 rounded-md focus:outline-none hover:border-2 hover:border-black" />
+                <svg class="absolute left-[85%] h-6 w-6 text-gray-400 mt-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </div>
+        </div>
+
+        {% endform %}
+    </div>
+</div>
