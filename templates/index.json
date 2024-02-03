@@ -13,7 +13,15 @@
             "settings": {
                 "featured_collection": "all"
             }
+        },
+        "gradient-message": {
+            "type": "gradient-message",
+            "settings": {}
+        },
+        "footer": {
+            "type": "footer",
+            "settings": {}
         }
     },
-    "order": ["homepage-hero","sparkle-button","featured-collection"]
+    "order": ["homepage-hero","sparkle-button","featured-collection","gradient-message","footer"]
 }
