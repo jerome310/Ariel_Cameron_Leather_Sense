@@ -17,11 +17,7 @@
         "gradient-message": {
             "type": "gradient-message",
             "settings": {}
-        },
-        "footer": {
-            "type": "footer",
-            "settings": {}
         }
     },
-    "order": ["homepage-hero","sparkle-button","featured-collection","gradient-message","footer"]
+    "order": ["homepage-hero","sparkle-button","featured-collection","gradient-message"]
 }
