@@ -17,7 +17,11 @@
         "gradient-message": {
             "type": "gradient-message",
             "settings": {}
+        },
+        "variety-product-card": {
+            "type": "variety-product-card",
+            "settings": {}
         }
     },
-    "order": ["homepage-hero","sparkle-button","featured-collection","gradient-message"]
+    "order": ["homepage-hero","sparkle-button","featured-collection","gradient-message", "variety-product-card"]
 }
