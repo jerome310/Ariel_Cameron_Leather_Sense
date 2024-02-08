@@ -1,0 +1,19 @@
+<div class="flex items-center justify-center">
+    <div class="flex flex-col mb-10">
+        <div>
+            {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
+            {{ all_products['cameron'].title }}
+            <p>{{ all_products['cameron'].price | money }}</p>
+        </div>
+        <div>
+            {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
+            {{ all_products['diana'].title }}
+            <p>{{ all_products['diana'].price | money }}</p>
+        </div>
+    </div>
+    <div>
+        {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
+        {{ all_products['sierra'].title }}
+        <p>{{ all_products['sierra'].price | money }}</p>
+    </div>
+</div>
