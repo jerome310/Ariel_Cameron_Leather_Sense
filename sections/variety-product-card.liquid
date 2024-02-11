@@ -1,39 +1,87 @@
 <div class="flex justify-center mb-20">
     <div class="flex flex-col mr-5">
 
-        <div class="mb-20">
-            <div class="hover:underline underline-offset-2 w-full h-80">
-                <img src="{{ all_products['cameron'].featured_image.src | img_url }}" alt="Cameron Product Image" class="w-full h-full object-cover bg-gray-100 rounded-t-2xl">
-                <div class="text-white hover:underline underline-offset-2 decoration-black text-center py-6 px-6">
-                    <p>{{ all_products['cameron'].title }}</p>
+        <a href="{{ 'products/cameron' | url }}">
+            <div class="relative group mb-5">
+                <div class="hover:underline underline-offset-2 decoration-white w-full h-80 relative">
+                    <img src="{{ all_products['cameron'].featured_image.src | img_url }}" alt="Cameron Product Image"
+                        class="w-full h-full object-cover bg-gray-100 rounded-t-2xl transition-opacity duration-300 group-hover:opacity-0">
+        
+                    {% assign images = all_products['cameron'].images %}
+                    {% if images.size > 1 %}
+                    <img src="{{ images[1].src | img_url }}" alt="Cameron Alternate Image"
+                        class="w-full h-full object-cover bg-gray-100 rounded-t-2xl absolute top-0 left-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    {% endif %}
+        
+                    <div class="text-white hover:underline underline-offset-2 decoration-white text-center py-6 px-6">
+                        <p class="text-xl">{{ all_products['cameron'].title }}</p>
+                        </div>
+                    </div>
+                    <div class="text-center bg-red-900 py-10 pt-14 px-10 rounded-b-2xl text-white">
+                    <p class="text-lg">{{ all_products['cameron'].price | money }}</p>
+                    <!-- Additional content if needed -->
                 </div>
             </div>
-            <div class="text-center bg-red-900 py-10 pt-14 px-10 rounded-b-2xl text-white">
-                <p>{{ all_products['cameron'].price | money }}</p>
-            </div>
-        </div>
+        </a>
 
 
 
-        <div class="mt-20 w-full h-80">
+<a href="{{ 'products/diana' | url }}">
+    <div class="relative group mt-5">
+        <div class="hover:underline underline-offset-2 decoration-white w-full h-80 relative">
             <img src="{{ all_products['diana'].featured_image.src | img_url }}" alt="Diana Product Image"
-                class="w-full h-full object-cover bg-gray-100 rounded-t-2xl">
-            {% comment %} {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100 rounded-t-2xl' }} {% endcomment %}
-            <div class="text-center bg-red-900 py-10 px-10 rounded-b-2xl text-white">
-                {{ all_products['diana'].title }}
-                <p>{{ all_products['diana'].price | money }}</p>
+                class="w-full h-full object-cover bg-gray-100 rounded-t-2xl transition-opacity duration-300 group-hover:opacity-0">
+
+            {% assign images = all_products['diana'].images %}
+            {% if images.size > 1 %}
+            <img src="{{ images[1].src | img_url }}" alt="Diana Alternate Image"
+                class="w-full h-full object-cover bg-gray-100 rounded-t-2xl absolute top-0 left-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            {% endif %}
+
+            <div class="text-white hover:underline underline-offset-2 decoration-white text-center py-6 px-6">
+                <p class="text-xl">{{ all_products['diana'].title }}</p>
             </div>
-        </div>  
-    </div>
-
-
-    <div class="ml-5">
-        <img src="{{ all_products['rae'].featured_image.src | img_url }}" alt="Rae Product Image"
-            class="w-[750px] h-[800px] object-cover bg-gray-100 rounded-t-2xl">
-        {% comment %} {{ 'product-1' | placeholder_svg_tag: 'w-[750px] h-[800px] object-cover bg-gray-100 rounded-t-2xl' }} {% endcomment %}
-        <div class="text-center bg-red-900 py-10 px-10 rounded-b-2xl text-white">
-            {{ all_products['rae'].title }}
-            <p>{{ all_products['rae'].price | money }}</p>
+        </div>
+        <div class="text-center bg-red-900 py-10 pt-14 px-10 rounded-b-2xl text-white">
+            <p class="text-lg">{{ all_products['diana'].price | money }}</p>
+            <!-- Additional content if needed -->
         </div>
     </div>
+</a>  
+    </div>
+
+
+
+
+    
+<a href="{{ 'products/rae' | url }}">
+    <div class="relative group ml-5">
+        <div class="hover:underline underline-offset-2 decoration-white w-full h-full relative">
+            <img src="{{ all_products['rae'].featured_image.src | img_url }}" alt="Rae Product Image"
+                class="w-[750px] h-[800px] object-cover bg-gray-100 rounded-t-2xl transition-opacity duration-300 group-hover:opacity-0">
+
+            {% assign images = all_products['rae'].images %}
+            {% if images.size > 1 %}
+            <img src="{{ images[1].src | img_url }}" alt="Rae Alternate Image"
+                class="w-[750px] h-[800px] object-cover bg-gray-100 rounded-t-2xl absolute top-0 left-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            {% endif %}
+
+            <div class="text-white bg-red-900 hover:underline underline-offset-2 decoration-white text-center pt-9 px-6">
+                <div>
+                    <p class="text-xl">{{ all_products['rae'].title }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center bg-red-900 py-2 pb-7 px-10 rounded-b-2xl text-white">
+            <p class="text-lg">{{ all_products['rae'].price | money }}</p>
+            <!-- Additional content if needed -->
+        </div>
+    </div>
+</a>
+
+
+
+
+
+    
 </div>
