@@ -1,4 +1,4 @@
-<div class="flex justify-center mb-20">
+<div class="flex flex-col md:flex-row md:justify-center mb-20">
     <div class="flex flex-col mr-5">
 
         <a href="{{ 'products/cameron' | url }}">
@@ -19,7 +19,6 @@
                     </div>
                     <div class="text-center bg-red-900 py-10 pt-14 px-10 rounded-b-2xl text-white">
                     <p class="text-lg">{{ all_products['cameron'].price | money }}</p>
-                    <!-- Additional content if needed -->
                 </div>
             </div>
         </a>
@@ -44,11 +43,10 @@
         </div>
         <div class="text-center bg-red-900 py-10 pt-14 px-10 rounded-b-2xl text-white">
             <p class="text-lg">{{ all_products['diana'].price | money }}</p>
-            <!-- Additional content if needed -->
         </div>
     </div>
 </a>  
-    </div>
+</div>
 
 
 
