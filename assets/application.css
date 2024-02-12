@@ -1070,6 +1070,11 @@ video {
   padding: 1rem;
 }
 
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -1138,16 +1143,6 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-
-.px-52 {
-  padding-left: 13rem;
-  padding-right: 13rem;
-}
-
-.px-20 {
-  padding-left: 5rem;
-  padding-right: 5rem;
 }
 
 .px-16 {
@@ -1223,6 +1218,11 @@ video {
   font-family: "Comic Neue", cursive;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -1251,11 +1251,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .font-bold {
@@ -1568,28 +1563,8 @@ video {
     width: 175px;
   }
 
-  .md\:w-\[800px\] {
-    width: 800px;
-  }
-
   .md\:w-full {
     width: 100%;
-  }
-
-  .md\:w-\[80px\] {
-    width: 80px;
-  }
-
-  .md\:w-\[8px\] {
-    width: 8px;
-  }
-
-  .md\:w-\[82px\] {
-    width: 82px;
-  }
-
-  .md\:w-\[825px\] {
-    width: 825px;
   }
 
   .md\:max-w-lg {
