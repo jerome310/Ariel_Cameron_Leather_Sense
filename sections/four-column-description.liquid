@@ -1,1 +1,37 @@
-Four Column Section
+{% comment %} 
+4 Images
+_______
+1) Leather: Talk about the quality of the leather 
+2) Notebook: The designing and idea aspect of the products
+3) Ruler: The process of making the product
+4) People: The customers that we as a business thrive to cater top quality products
+{% endcomment %}
+
+<div class="flex items-center justify-arounf w-11/12 mx-auto mb-32">
+    {% comment %} 1st Column {% endcomment %}
+  <div class="flex flex-col items-center justify-center text-center">
+    <img class="w-[75px] h-[75px] mt-10 md:mt-0" src="{{ 'leather-hide.svg' |  asset_url }}" alt="Leather Hide">
+    <h2 class="font-bold text-2xl py-4">Leather</h2>
+    <p class="px-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat placeat minus consectetur eum.</p>
+  </div>
+{% comment %} 2nd Column {% endcomment %}
+<div class="flex flex-col items-center justify-center text-center">
+    <img class="w-[75px] h-[75px] mt-10 md:mt-0" src="{{ 'notebook_black.svg' |  asset_url }}" alt="Leather Hide">
+    <h2 class="font-bold text-2xl py-4">Design</h2>
+    <p class="px-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat placeat minus consectetur eum.</p>
+</div>
+
+{% comment %} 3rd Column {% endcomment %}
+<div class="flex flex-col items-center justify-center text-center">
+    <img class="w-[75px] h-[75px] mt-10 md:mt-0" src="{{ 'triangle-ruler.svg' |  asset_url }}" alt="Leather Hide">
+    <h2 class="font-bold text-2xl py-4">Measurements</h2>
+    <p class="px-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat placeat minus consectetur eum.</p>
+</div>
+
+{% comment %} 4th Column {% endcomment %}
+<div class="flex flex-col items-center justify-center text-center">
+    <img class="w-[75px] h-[75px] mt-10 md:mt-0" src="{{ 'customer.svg' |  asset_url }}" alt="Leather Hide">
+    <h2 class="font-bold text-2xl py-4">Customer</h2>
+    <p class="px-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat placeat minus consectetur eum.</p>
+</div>
+</div>
