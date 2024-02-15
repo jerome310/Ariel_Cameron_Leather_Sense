@@ -714,6 +714,18 @@ video {
   margin-top: 1.25rem;
 }
 
+.mb-0 {
+  margin-bottom: 0px;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.mb-32 {
+  margin-bottom: 8rem;
+}
+
 .block {
   display: block;
 }
@@ -782,6 +794,10 @@ video {
   height: 553px;
 }
 
+.h-\[75px\] {
+  height: 75px;
+}
+
 .h-full {
   height: 100%;
 }
@@ -828,6 +844,10 @@ video {
 
 .w-\[40\%\] {
   width: 40%;
+}
+
+.w-\[75px\] {
+  width: 75px;
 }
 
 .w-full {
@@ -1210,6 +1230,11 @@ video {
 
 .font-comic {
   font-family: "Comic Neue", cursive;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .text-3xl {
