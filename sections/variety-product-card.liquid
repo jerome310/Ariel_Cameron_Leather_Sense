@@ -49,8 +49,6 @@
 </div>
 
 
-
-
 {% comment %} 3RD CARD {% endcomment %}
 <a href="{{ 'products/rae' | url }}">
     <div class="relative group w-11/12 mx-auto md:w-full mt-10 md:mt-0 md:ml-5">
@@ -76,10 +74,14 @@
         </div>
     </div>
 </a> 
-
-
-
-
-
-    
 </div>
+
+{% schema %}
+    {
+        "name": "Variety-Products-Card",
+        "settings": [],
+        "presets": [{
+        "name": "Variety-Products"
+        }]
+    }
+{% endschema %}
