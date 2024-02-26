@@ -1,0 +1,35 @@
+<div class="max-w-6xl mx-auto my-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div class="product--medias">
+            <div class="hidden md:block">
+                {% for media in product.media %}
+                <div class="h-100 overflow-hidden p-2">
+                    {% comment %} PRODUCT IMAGES {% endcomment %}
+                    {% case media.media_type %}
+                    {% when 'image' %}
+                    <img src="{{ media | img_url: 'large' }}" alt="{{ media.preview_image.alt }}" class="w-full h-full object-cover">
+                    
+                    {% when 'external_video' %}
+                    {{ media | external_video_tag: class: 'w-full h-80 object-cover' }}
+                    
+                    {% when 'video' %}
+                    {{ media | video_tag: controls: true, class: 'w-full h-full object-cover' }}
+                    
+                    {% when 'model' %}
+                    {{ media | model_viewer_tag }}
+                    
+                    {% else %}
+                    {{ media | media_tag }}
+                    
+                    {% else %}
+                    
+                    {% endcase %}
+                    {% comment %} PRODUCT IMAGES {% endcomment %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="product--information"></div>
+    </div>
+</div>
