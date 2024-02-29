@@ -1,9 +1,9 @@
 {
-    "sections": {
-        "product-items": {
-            "type": "product-items",
-            "settings": {}
-        }
-    },
-        "order": ["product-items"]
+  "sections": {
+    "product-items": {
+      "type": "product-items",
+      "settings": {}
+    }
+  },
+  "order": ["product-items"]
 }
