@@ -4,10 +4,6 @@
             "type": "homepage-hero",
             "settings": {}
         },
-        "sparkle-button": {
-            "type": "sparkle-button",
-            "settings": {}
-        },
         "featured-collection": {
             "type": "featured-collection",
             "settings": {
@@ -27,5 +23,5 @@
             "settings": {}
         }
     },
-    "order": ["homepage-hero","sparkle-button","featured-collection","gradient-message", "variety-product-card", "four-column-description"]
+    "order": ["homepage-hero","featured-collection","gradient-message", "variety-product-card", "four-column-description"]
 }
