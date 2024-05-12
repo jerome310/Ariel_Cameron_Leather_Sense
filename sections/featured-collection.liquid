@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center my-8">
+{% comment %} <div class="flex flex-col items-center my-8">
     <h1 class="text-center text-3xl">{{ section.settings.title }}</h1>
 
     <div class="max-w-6xl mx-auto">
@@ -13,11 +13,11 @@
             {% endfor %}
         </div>
     </div>
-</div>
+</div> {% endcomment %}
 
 
 
-{% schema %}
+{% comment %} {% schema %}
 {
 "name": "Featured Collection",
 "settings": [
@@ -50,4 +50,4 @@
 }
 ]
 }
-{% endschema %}
+{% endschema %} {% endcomment %}
