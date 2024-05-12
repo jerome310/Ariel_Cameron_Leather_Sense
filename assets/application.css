@@ -679,6 +679,10 @@ video {
   margin-bottom: 2rem;
 }
 
+.mb-12 {
+  margin-bottom: 3rem;
+}
+
 .mb-14 {
   margin-bottom: 3.5rem;
 }
@@ -923,6 +927,10 @@ video {
   width: 100%;
 }
 
+.w-3 {
+  width: 0.75rem;
+}
+
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -1132,6 +1140,11 @@ video {
   background-color: rgb(229 97 161 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#f6f6f6\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 246 246 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#feb82b\] {
   --tw-bg-opacity: 1;
   background-color: rgb(254 184 43 / var(--tw-bg-opacity));
@@ -1172,22 +1185,9 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-\[\] {
-  background-color: ;
-}
-
-.bg-\[\#\] {
-  background-color: #;
-}
-
-.bg-\[\#A9A9A9\] {
+.bg-blue-400 {
   --tw-bg-opacity: 1;
-  background-color: rgb(169 169 169 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#F5F5F5\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
+  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-r {
@@ -1333,10 +1333,6 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-
-.pb-2 {
-  padding-bottom: 0.5rem;
 }
 
 .pb-6 {
@@ -1552,6 +1548,10 @@ video {
   text-decoration-line: underline;
 }
 
+.decoration-black {
+  text-decoration-color: #000;
+}
+
 .decoration-white {
   text-decoration-color: #fff;
 }
@@ -1625,10 +1625,6 @@ video {
   transition-duration: 150ms;
 }
 
-.duration-1000 {
-  transition-duration: 1000ms;
-}
-
 .duration-300 {
   transition-duration: 300ms;
 }
@@ -1637,18 +1633,8 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-}
-
-.hover\:scale-105:hover {
-  --tw-scale-x: 1.05;
-  --tw-scale-y: 1.05;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .hover\:border-2:hover {
@@ -1794,6 +1780,10 @@ video {
     width: 25%;
   }
 
+  .md\:w-3\/4 {
+    width: 75%;
+  }
+
   .md\:w-80 {
     width: 20rem;
   }
@@ -1812,6 +1802,22 @@ video {
 
   .md\:w-full {
     width: 100%;
+  }
+
+  .md\:w-\[\] {
+    width: ;
+  }
+
+  .md\:w-\[8\] {
+    width: 8;
+  }
+
+  .md\:w-\[85\] {
+    width: 85;
+  }
+
+  .md\:w-\[85\%\] {
+    width: 85%;
   }
 
   .md\:max-w-lg {
