@@ -4,12 +4,24 @@
 
     <div class="max-w-6xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {% for product in collections['belt-bag-collection'].products %}
+            {% if collection.handle == 'belt-bag-collection' or collection.handle == 'wristlet-collection' or collection.handle ==
+            'card-holder-collection' or collection.handle == 'keychain-collection' %}
+            {% for product in collection.products %}
             <a href="{{ product.url | within: collection }}">
                 <img src="{{ product.images.first | img_url: 'medium' }}" alt="{{ product.title | escape }}">
                 {{ product.title }}
             </a>
             {% endfor %}
+            {% endif %}
+
+
+
+            {% comment %} {% for product in collections['wristlet-collection'].products %}
+            <a href="{{ product.url | within: collection }}">
+                <img src="{{ product.images.first | img_url: 'medium' }}" alt="{{ product.title | escape }}">
+                {{ product.title }}
+            </a>
+            {% endfor %} {% endcomment %}
         </div>
     </div>
 
