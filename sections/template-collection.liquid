@@ -2,15 +2,21 @@
     {% paginate collection.products by section.settings.number_of_products_per_page %}
     <h1 class="text-3xl text-center">{{ collection.title }}</h1>
 
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-6xl mx-auto mt-10">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             {% if collection.handle == 'belt-bag-collection' or collection.handle == 'wristlet-collection' or collection.handle ==
             'card-holder-collection' or collection.handle == 'keychain-collection' %}
             {% for product in collection.products %}
             <a href="{{ product.url | within: collection }}">
-                <img src="{{ product.images.first | img_url: 'medium' }}" alt="{{ product.title | escape }}">
-                {{ product.title }}
-            </a>
+                <div class="flex flex-col w-2/4 mx-auto pb-8">
+                    <img src="{{ product.images.first | img_url: 'medium' }}" alt="{{ product.title | escape }}" class="w-full md:h-full object-cover bg-gray-100 rounded-t-2xl transition-opacity duration-300 group-hover:opacity-0"> 
+                    
+                    <div style="background-color: #ffffff75"
+                        class="text-center bg-[#f6f6f6] py-10 pt-14 px-10 rounded-b-2xl text-black mt-0">
+                        <p class="text-center">{{ product.title }}</p>
+                    </div>
+                </div>
+             </a>
             {% endfor %}
             {% endif %}
 
