@@ -10,10 +10,13 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        '94': '22rem'
+        94: "22rem",
       },
       fontFamily: {
         comic: ['"Comic Neue"', "cursive"],
+      },
+      opacity: {
+        75: ".75",
       },
     },
   },
