@@ -1,12 +1,27 @@
-// Removing Cart Button Text
-let cartButton = document.querySelector('.button');
-console.log(cartButton);
+// Product Slider Navbar
+let productFeature = document.getElementById("productFeature");
+let slideButton = document.getElementById("slideButton");
+let closeButton = document.getElementById("closeButton");
 
-cartButton.addEventListener('click', () => {
-  let cartText = document.querySelector('.text');
-  cartText.textContent = 'Thank You!'
-})
+slideButton.addEventListener("click", function () {
+  productFeature.style.transform = "translateX(0)";
+  console.log('working')
+});
 
+closeButton.addEventListener("click", function () {
+  productFeature.style.transform = "translateX(100%)";
+});
+
+window.addEventListener("click", function (event) {
+  if (
+    event.target == slideButton ||
+    event.target == productFeature ||
+    productFeature.contains(event.target)
+  ) {
+    return;
+  }
+  productFeature.style.transform = "translateX(100%)";
+});
 
 // Confetti Feature
 var confetti = {
@@ -245,7 +260,6 @@ var confetti = {
 // start
 const celebrate = () => {
   let button = document.querySelector(".button");
-  console.log(button);
   button.addEventListener("click", () => {
     setTimeout(function () {
       confetti.start();
@@ -253,7 +267,7 @@ const celebrate = () => {
   });
 };
 
-//  Stop 
+//  Stop
 
 const stop = () => {
   setTimeout(function () {
@@ -263,8 +277,3 @@ const stop = () => {
 
 celebrate();
 stop();
-    
-
-
-
-
