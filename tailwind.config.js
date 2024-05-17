@@ -15,9 +15,6 @@ module.exports = {
       fontFamily: {
         comic: ['"Comic Neue"', "cursive"],
       },
-      opacity: {
-        75: ".75",
-      },
     },
   },
   plugins: [],
