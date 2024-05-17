@@ -100,6 +100,7 @@ input[type="number"]::-webkit-inner-spin-button{
             <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
 
             <!-- Quantity input -->
+            <form action="/cart/add" method="post">
                 <div class="flex">
                     <input type="hidden" name="id" value="{{ product.variants.first.id }}">
                     <!-- Quantity input -->
@@ -121,6 +122,7 @@ input[type="number"]::-webkit-inner-spin-button{
             <div class="description-par">
                 <p class="text-left pr-28">{{ product.description }}</p>
             </div>
+            </form>
         </div>
 
     </div>
