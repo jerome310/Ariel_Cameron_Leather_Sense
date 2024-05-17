@@ -1,14 +1,37 @@
 <body class="bg-gray-200 flex items-center justify-center h-screen">
     <div id="productFeature"
-        class="fixed top-0 right-0 transform translate-x-full transition-transform duration-700 ease-in-out bg-white p-8 shadow-lg w-64 h-full">
-        <button id="closeButton" class="absolute top-0 right-0 m-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                class="h-6 w-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-        <h2 class="text-2xl mb-4">Product Feature</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod eget lorem quis pharetra.</p>
+        class="fixed top-0 right-0 transform translate-x-full transition-transform duration-700 ease-in-out bg-white py-4 px-4 shadow-lg w-1/4 h-full">
+        <div class="flex justify-between items-center relative px-6">
+            <button id="closeButton" class="absolute top-0 right-0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+            <h1 class="text-2xl">Cart</h1>
+        </div>
+        <div class="mt-4 border-b border-solid border-[#CFCFCF]">
+
+        </div>
+        <div>
+            <div class="flex justify-around items-center mt-6">
+                <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}" alt="Cameron Product Image"
+                    class="w-24 h-16 object-cover rounded-lg">
+                <p class="text-xl">{{ all_products['cameron'].title }}</p>
+            </div>
+            {% comment %} <p class="text-lg mb-4">{{ all_products['cameron'].price | money }}</p>
+            <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
+                class="text-sm font-medium text-red-500 my-1">remove</a>
+            <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
+                onclick="decrementQuantity()">-</button>
+
+            <input type="number" id="quantity" name="quantity" value="1" min="1"
+                class="w-32 px-5 py-2 border rounded-md text-center border-black bg-[#FEF0D4]">
+
+            <button type="button" class="absolute top-4 right-0 p-2 text-gray-500 text-3xl"
+                onclick="incrementQuantity()">+</button> {% endcomment %}
+        </div>
     </div>
     <button id="slideButton" class="py-2 border-solid border-2 border-black px-4 rounded-full">Add to cart</button>
 </body>
