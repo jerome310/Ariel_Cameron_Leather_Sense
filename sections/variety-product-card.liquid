@@ -1,7 +1,6 @@
 <div class="flex flex-col md:flex-row md:justify-center mb-32">
     <div class="w-11/12 mx-auto flex flex-col md:mx-0 md:w-1/4 md:mr-5">
         {% comment %} 1ST CARD {% endcomment %}
-        <a href="{{ 'products/cameron' | url }}">
             <div class="relative group mb-5">
                 <div class="hover:underline underline-offset-2 decoration-white w-full h-80 relative">
                     <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}" alt="Cameron Product Image"
@@ -18,12 +17,11 @@
                         <p class="text-xl">{{ all_products['cameron'].title }}</p>
                     </div>
                 </div>
-                <div class="text-center opacity bg-[#f6f6f6] pt-16 pb-10 px-10 rounded-b-2xl text-black mt-20 md:mt-0">
+                <div style="background-color: #ffffff75" class="text-center pt-16 pb-10 px-10 rounded-b-2xl text-black mt-20 md:mt-0">
                     <p class="text-lg mb-4">{{ all_products['cameron'].price | money }}</p>
-                    <button class="py-2 border-solid border-2 border-black px-4 rounded-full">Add to cart</button>
+                    {% render 'confetti-button' %}
                 </div>
             </div>
-        </a>
 
 
     {% comment %} 2ND CARD {% endcomment %}
