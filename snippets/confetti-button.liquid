@@ -1,6 +1,6 @@
 <body class="bg-gray-200 flex items-center justify-center h-screen">
     <div id="productFeature"
-        class="fixed top-0 right-0 transform translate-x-full transition-transform duration-700 ease-in-out bg-white py-4 px-4 shadow-lg w-1/4 h-full">
+        class="fixed top-0 right-0 transform translate-x-full transition-transform duration-700 ease-in-out bg-white py-4 px-4 shadow-lg w-3/4 md:w-1/4 h-full">
         <div class="flex justify-between items-center relative px-6">
             <button id="closeButton" class="absolute top-0 right-0">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -15,22 +15,28 @@
 
         </div>
         <div>
-            <div class="flex justify-around items-center mt-6">
+            <div class="flex justify-around mt-6">
+                <a href="{{ 'products/cameron' | url }}">
                 <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}" alt="Cameron Product Image"
                     class="w-24 h-16 object-cover rounded-lg">
+                </a>
+               <div class="flex flex-col">
+                <a href="{{ 'products/cameron' | url }}">
                 <p class="text-xl">{{ all_products['cameron'].title }}</p>
+                </a>
+                <p class="text-lg my-2 text-left">{{ all_products['cameron'].price | money }}</p>
+                <div class="flex items-center">
+                    <div class="flex items-center">
+                        <button type="button" class="relative left-6 text-gray-500 text-2xl" onclick="decrementQuantity()">-</button>
+                        <input id="quantity" name="quantity" value="1" min="1"
+                            class="w-24 px-5 py-1 border rounded-md text-center border-black bg-[#FEF0D4] text-xl">
+                        <button type="button" class="relative right-6 text-gray-500 text-2xl" onclick="incrementQuantity()">+</button>
+                    </div>
+                    <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
+                        class="text-sm font-medium text-red-500 my-1 pl-4">remove</a>
+                </div>
+               </div>
             </div>
-            {% comment %} <p class="text-lg mb-4">{{ all_products['cameron'].price | money }}</p>
-            <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
-                class="text-sm font-medium text-red-500 my-1">remove</a>
-            <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
-                onclick="decrementQuantity()">-</button>
-
-            <input type="number" id="quantity" name="quantity" value="1" min="1"
-                class="w-32 px-5 py-2 border rounded-md text-center border-black bg-[#FEF0D4]">
-
-            <button type="button" class="absolute top-4 right-0 p-2 text-gray-500 text-3xl"
-                onclick="incrementQuantity()">+</button> {% endcomment %}
         </div>
     </div>
     <button id="slideButton" class="py-2 border-solid border-2 border-black px-4 rounded-full">Add to cart</button>
