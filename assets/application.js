@@ -23,18 +23,6 @@ window.addEventListener("click", function (event) {
   productFeature.style.transform = "translateX(100%)";
 });
 
-// Incrementing and decrementing the product quantity amount
-    function incrementQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            quantityInput.value = parseInt(quantityInput.value) + 1;
-        }
-
-        function decrementQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            if (parseInt(quantityInput.value) > 1) {
-                quantityInput.value = parseInt(quantityInput.value) - 1;
-            }
-        }
 
 // Confetti Feature
 var confetti = {
