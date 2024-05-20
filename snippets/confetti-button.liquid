@@ -20,31 +20,20 @@
                     alt="Cameron Product Image" class="w-24 h-16 object-cover rounded-lg">
             </a>
             <div class="flex flex-col">
-                <p id="productPrice" data-price="{{ all_products['cameron'].price }}" class="text-lg my-2 text-left">{{
-                    all_products['cameron'].price | money }}</p>
-                <input id="quantity" name="quantity" value="1" min="1"
-                    class="w-24 px-5 py-1 border rounded-md text-center border-black bg-[#FEF0D4] text-xl">
-                <h3 id="subtotal" class="text-xl text-left">Subtotal: {{ all_products['cameron'].price | money }}</h3>
-                <button id="incrementButton">Increment</button>
-                <button id="decrementButton">Decrement</button>
-
-
-                {% comment %} <a href="{{ 'products/cameron' | url }}">
+                <a href="{{ 'products/cameron' | url }}">
                     <p class="text-xl">{{ all_products['cameron'].title }}</p>
                 </a>
-                <p id="productPrice" data-price="{{ all_products['cameron'].price }}" class="text-lg my-2 text-left">{{all_products['cameron'].price | money }}</p>
+                <p id="productPrice" data-price="{{ all_products['cameron'].price }}" class="text-lg my-2 text-left">{{ all_products['cameron'].price | money }}</p>
                 <div class="flex items-center">
                     <div class="flex items-center">
-                        <button type="button" class="relative left-6 text-gray-500 text-2xl"
-                            onclick="decrementQuantity()">-</button>
+                        <button id="decrementButton" type="button" class="relative left-6 text-gray-500 text-2xl" >-</button>
                         <input id="quantity" name="quantity" value="1" min="1"
                             class="w-24 px-5 py-1 border rounded-md text-center border-black bg-[#FEF0D4] text-xl">
-                        <button type="button" class="relative right-6 text-gray-500 text-2xl"
-                            onclick="incrementQuantity()">+</button>
+                        <button id="incrementButton" type="button" class="relative right-6 text-gray-500 text-2xl" >+</button>
                     </div>
                     <button id="removeProduct" class="text-sm font-medium text-red-500 my-1 pl-4">remove</button>
                 </div>
-                <h3 class="text-xl text-left">Subtotal: {{ total | money }}</h3> {% endcomment %}
+                <h3 id="subtotal" class="text-xl text-left">Subtotal: {{ all_products['cameron'].price | money }}</h3>
             </div>
         </div>
     </div>
@@ -54,22 +43,23 @@
 
 <script>
     // Incrementing and decrementing the product quantity amount
-    function incrementQuantity() {
-        const quantityInput = document.getElementById('quantity');
-        quantityInput.value = parseInt(quantityInput.value) + 1;
-    }
+    // function incrementQuantity() {
+    //     const quantityInput = document.getElementById('quantity');
+    //     quantityInput.value = parseInt(quantityInput.value) + 1;
+    // }
 
-    function decrementQuantity() {
-        const quantityInput = document.getElementById('quantity');
-        if (parseInt(quantityInput.value) > 1) {
-            quantityInput.value = parseInt(quantityInput.value) - 1;
-        }
-    }
+    // function decrementQuantity() {
+    //     const quantityInput = document.getElementById('quantity');
+    //     if (parseInt(quantityInput.value) > 1) {
+    //         quantityInput.value = parseInt(quantityInput.value) - 1;
+    //     }
+    // }
 
     // Rendering total amount for the subTotal amount within the product slider
 
     // Increment Amount
-   document.getElementById('incrementButton').addEventListener('click', function () {
+        document.getElementById('incrementButton').addEventListener('click', function () {
+        console.log('Hello Button', incrementButton)
         let quantityInput = document.getElementById('quantity');
         let quantity = parseInt(quantityInput.value);
         quantity += 1;  // Increment the quantity
