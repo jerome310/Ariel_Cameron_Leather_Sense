@@ -15,27 +15,29 @@
 
         </div>
         <div id="productDiv" class="flex justify-around mt-6">
-                <a href="{{ 'products/cameron' | url }}">
-                    <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}" alt="Cameron Product Image"
-                        class="w-24 h-16 object-cover rounded-lg">
-                    <p class="text-xl">{{ all_products['cameron'].title }}</p>
-                </a>
+            <a href="{{ 'products/cameron' | url }}">
+                <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}"
+                    alt="Cameron Product Image" class="w-24 h-16 object-cover rounded-lg">
+                <p class="text-xl">{{ all_products['cameron'].title }}</p>
+            </a>
             <div class="flex flex-col">
-                <p id="productPrice" data-price="{{ all_products['cameron'].price }}" class="text-lg my-2 text-left">{{ all_products['cameron'].price | money }}</p>
+                <p id="productPrice" data-price="{{ all_products['cameron'].price }}" class="text-lg my-2 text-left">{{
+                    all_products['cameron'].price | money }}</p>
                 <div class="flex items-center">
                     <div class="flex items-center">
-                        <button id="decrementButton" type="button" class="relative left-6 text-gray-500 text-2xl" >-</button>
+                        <button id="decrementButton" type="button"
+                            class="relative left-6 text-gray-500 text-2xl">-</button>
                         <input id="quantity" name="quantity" value="1" min="1"
                             class="w-24 px-5 py-1 border rounded-md text-center border-black bg-[#FEF0D4] text-xl">
-                        <button id="incrementButton" type="button" class="relative right-6 text-gray-500 text-2xl" >+</button>
+                        <button id="incrementButton" type="button"
+                            class="relative right-6 text-gray-500 text-2xl">+</button>
                     </div>
                     <button id="removeProduct" class="text-sm font-medium text-red-500 my-1 pl-4">remove</button>
                 </div>
                 <h3 id="subtotal" class="text-xl text-left">Subtotal: {{ all_products['cameron'].price | money }}</h3>
-                <div id="emptyCart" style="width: 100%; height: 50px;"></div>
-
             </div>
         </div>
+        <div id="emptyCart">YOUR CART IS EMPTY</div>
     </div>
     <button id="slideButton" class="addProduct py-2 border-solid border-2 border-black px-4 rounded-full">Add to
         cart</button>
@@ -45,7 +47,7 @@
     // Rendering total amount for the subTotal amount within the product slider
 
     // Increment Amount
-        document.getElementById('incrementButton').addEventListener('click', function () {
+    document.getElementById('incrementButton').addEventListener('click', function () {
         console.log('Hello Button', incrementButton)
         let quantityInput = document.getElementById('quantity');
         let quantity = parseInt(quantityInput.value);
@@ -64,54 +66,56 @@
 
     // Decrement Amount
     document.getElementById('decrementButton').addEventListener('click', function () {
-            var quantityInput = document.getElementById('quantity');
-            var quantity = parseInt(quantityInput.value);
-            if (quantity > 1) {  // Ensure quantity does not go below 1
-                quantity -= 1;  // Decrement the quantity
-                quantityInput.value = quantity.toString();  // Update the quantity input field
+        var quantityInput = document.getElementById('quantity');
+        var quantity = parseInt(quantityInput.value);
+        if (quantity > 1) {  // Ensure quantity does not go below 1
+            quantity -= 1;  // Decrement the quantity
+            quantityInput.value = quantity.toString();  // Update the quantity input field
 
-                var price = parseFloat(document.getElementById('productPrice').dataset.price);
-                var totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
+            var price = parseFloat(document.getElementById('productPrice').dataset.price);
+            var totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
 
-                // Format the total price with two decimal places
-                var formattedTotalPrice = totalPrice.toFixed(2);
+            // Format the total price with two decimal places
+            var formattedTotalPrice = totalPrice.toFixed(2);
 
-                // Update the subtotal
-                document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
-            }
-        });
+            // Update the subtotal
+            document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
+        }
+    });
 
 
 
-    // Removing a product and adding a product inside the product slider and rendering the subTotal to being the default product price
-    
+    // Removing a product and adding a product inside the product slider
+    // Displaying the subTotal amount equal to original shopify product item amount
+    // Displaying "YOUR CART IS EMPTY" when you click the removeProduct button
+
     //  WORKING ON displaying a message when the cart is empty
-        let removeProduct = document.getElementById('removeProduct');
-            let addProduct = document.getElementById('slideButton');
-            let productDiv = document.getElementById('productDiv');
-            let quantity = document.getElementById('quantity');
-            let subtotal = document.getElementById('subtotal');
-            let emptyCart = document.getElementById('emptyCart');
+    let removeProduct = document.getElementById('removeProduct');
+    let addProduct = document.getElementById('slideButton');
+    let productDiv = document.getElementById('productDiv');
+    let quantity = document.getElementById('quantity');
+    let subtotal = document.getElementById('subtotal');
+    let emptyCart = document.getElementById('emptyCart');
 
-            // Get the price of the product
-            let price = parseFloat(subtotal.textContent.replace('Subtotal: ', '').replace('$', ''));
+    // Get the price of the product
+    let price = parseFloat(subtotal.textContent.replace('Subtotal: ', '').replace('$', ''));
 
-            // empty cart
-            emptyCart.textContent = 'YOUR CART IS EMPTY'
+    removeProduct.addEventListener('click', () => {
+        productDiv.style.display = 'none'; // Hide the div
+        emptyCart.style.display = 'flex';
+        emptyCart.style.justifyContent = 'center';
+        emptyCart.style.alignItems = 'center';
+        emptyCart.style.height = '100vh';
+        quantity.value = 1; // Set the quantity value to 1
+    })
 
-            removeProduct.addEventListener('click', () => {
-                productDiv.style.display = 'none'; // Hide the div
-                emptyCart.style.display = 'block';
-                quantity.value = 1; // Set the quantity value to 1
-            })
-
-            addProduct.addEventListener('click', () => {
-                productDiv.style.display = 'block'; // Show the div
-                emptyCart.style.display = 'none'; // Hide the empty cart div
-            })
+    addProduct.addEventListener('click', () => {
+        productDiv.style.display = 'block'; // Show the div
+        emptyCart.style.display = 'none'; // Hide the empty cart div
+    })
 
 
- 
+
     // let removeProduct = document.getElementById('removeProduct');
     // let addProduct = document.getElementById('slideButton');
     // let productDiv = document.getElementById('productDiv');
