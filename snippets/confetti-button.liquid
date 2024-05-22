@@ -15,14 +15,12 @@
 
         </div>
         <div id="productDiv" class="flex justify-around mt-6">
-            <a href="{{ 'products/cameron' | url }}">
-                <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}"
-                    alt="Cameron Product Image" class="w-24 h-16 object-cover rounded-lg">
-            </a>
-            <div class="flex flex-col">
                 <a href="{{ 'products/cameron' | url }}">
+                    <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}" alt="Cameron Product Image"
+                        class="w-24 h-16 object-cover rounded-lg">
                     <p class="text-xl">{{ all_products['cameron'].title }}</p>
                 </a>
+            <div class="flex flex-col">
                 <p id="productPrice" data-price="{{ all_products['cameron'].price }}" class="text-lg my-2 text-left">{{ all_products['cameron'].price | money }}</p>
                 <div class="flex items-center">
                     <div class="flex items-center">
@@ -34,6 +32,8 @@
                     <button id="removeProduct" class="text-sm font-medium text-red-500 my-1 pl-4">remove</button>
                 </div>
                 <h3 id="subtotal" class="text-xl text-left">Subtotal: {{ all_products['cameron'].price | money }}</h3>
+                <div id="emptyCart" style="width: 100%; height: 50px;"></div>
+
             </div>
         </div>
     </div>
@@ -42,19 +42,6 @@
 </body>
 
 <script>
-    // Incrementing and decrementing the product quantity amount
-    // function incrementQuantity() {
-    //     const quantityInput = document.getElementById('quantity');
-    //     quantityInput.value = parseInt(quantityInput.value) + 1;
-    // }
-
-    // function decrementQuantity() {
-    //     const quantityInput = document.getElementById('quantity');
-    //     if (parseInt(quantityInput.value) > 1) {
-    //         quantityInput.value = parseInt(quantityInput.value) - 1;
-    //     }
-    // }
-
     // Rendering total amount for the subTotal amount within the product slider
 
     // Increment Amount
@@ -96,24 +83,52 @@
 
 
 
-    // Removing a product and adding a product inside the product slider
-    let removeProduct = document.getElementById('removeProduct');
-    let addProduct = document.getElementById('slideButton');
-    let productDiv = document.getElementById('productDiv');
-    let parentDiv = productDiv.parentNode; // Keep a reference to the parent
-    let clonedDiv = productDiv.cloneNode(true); // Clone the div before removing
+    // Removing a product and adding a product inside the product slider and rendering the subTotal to being the default product price
+    
+    //  WORKING ON displaying a message when the cart is empty
+        let removeProduct = document.getElementById('removeProduct');
+            let addProduct = document.getElementById('slideButton');
+            let productDiv = document.getElementById('productDiv');
+            let quantity = document.getElementById('quantity');
+            let subtotal = document.getElementById('subtotal');
+            let emptyCart = document.getElementById('emptyCart');
 
-    removeProduct.addEventListener('click', () => {
-        if (productDiv) {
-            parentDiv.removeChild(productDiv);
-            productDiv = null; // Clear the reference after removing
-        }
-    })
+            // Get the price of the product
+            let price = parseFloat(subtotal.textContent.replace('Subtotal: ', '').replace('$', ''));
 
-    addProduct.addEventListener('click', () => {
-        if (!productDiv) { // If the productDiv doesn't exist, append the cloned div
-            parentDiv.appendChild(clonedDiv);
-            productDiv = clonedDiv; // Update the reference to the newly added div
-        }
-    })
+            // empty cart
+            emptyCart.textContent = 'YOUR CART IS EMPTY'
+
+            removeProduct.addEventListener('click', () => {
+                productDiv.style.display = 'none'; // Hide the div
+                emptyCart.style.display = 'block';
+                quantity.value = 1; // Set the quantity value to 1
+            })
+
+            addProduct.addEventListener('click', () => {
+                productDiv.style.display = 'block'; // Show the div
+                emptyCart.style.display = 'none'; // Hide the empty cart div
+            })
+
+
+ 
+    // let removeProduct = document.getElementById('removeProduct');
+    // let addProduct = document.getElementById('slideButton');
+    // let productDiv = document.getElementById('productDiv');
+    // let parentDiv = productDiv.parentNode; // Keep a reference to the parent
+    // let clonedDiv = productDiv.cloneNode(true); // Clone the div before removing
+
+    // removeProduct.addEventListener('click', () => {
+    //     if (productDiv) {
+    //         parentDiv.removeChild(productDiv);
+    //         productDiv = null; // Clear the reference after removing
+    //     }
+    // })
+
+    // addProduct.addEventListener('click', () => {
+    //     if (!productDiv) { // If the productDiv doesn't exist, append the cloned div
+    //         parentDiv.appendChild(clonedDiv);
+    //         productDiv = clonedDiv; // Update the reference to the newly added div
+    //     }
+    // })
 </script>
