@@ -883,6 +883,22 @@ video {
   height: 100vh;
 }
 
+.h-1\/5 {
+  height: 20%;
+}
+
+.h-1 {
+  height: 0.25rem;
+}
+
+.h-2 {
+  height: 0.5rem;
+}
+
+.h-2\/4 {
+  height: 50%;
+}
+
 .w-11\/12 {
   width: 91.666667%;
 }
