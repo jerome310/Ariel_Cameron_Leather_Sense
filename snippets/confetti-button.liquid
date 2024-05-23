@@ -15,14 +15,18 @@
 
         </div>
         <div id="productDiv" class="flex justify-around mt-6">
-            <a href="{{ 'products/cameron' | url }}">
-                <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}"
-                    alt="Cameron Product Image" class="w-24 h-16 object-cover rounded-lg">
-                <p class="text-xl">{{ all_products['cameron'].title }}</p>
-            </a>
-            <div class="flex flex-col">
-                <p id="productPrice" data-price="{{ all_products['cameron'].price }}" class="text-lg my-2 text-left">{{
-                    all_products['cameron'].price | money }}</p>
+            <div class="flex flex-row items-center justify-center">
+                <a href="{{ 'products/cameron' | url }}">
+                    <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}" alt="Cameron Product Image"
+                        class="w-24 h-16 object-cover rounded-lg">
+                </a>
+                <div class="flex flex-col">
+                    <p class="text-xl pl-6"><a href="{{ 'products/cameron' | url }}">{{ all_products['cameron'].title }}</p></a>
+                    <p id="productPrice" data-price="{{ all_products['cameron'].price }}" class="text-lg text-left pl-6">{{
+                        all_products['cameron'].price | money }}</p>
+                </div>
+            </div>
+            <div class="flex flex-col items-center justify-center">
                 <div class="flex items-center">
                     <div class="flex items-center">
                         <button id="decrementButton" type="button"
