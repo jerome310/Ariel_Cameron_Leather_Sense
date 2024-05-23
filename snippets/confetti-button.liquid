@@ -41,6 +41,7 @@
                 <h3 id="subtotal" class="text-xl text-left pl-2">Subtotal: {{ all_products['cameron'].price | money }}</h3>
             </div>
         </div>
+        <button id="view-cart">View Cart</button>
         <div id="emptyCart">YOUR CART IS EMPTY</div>
     </div>
     <button id="slideButton" class="addProduct py-2 border-solid border-2 border-black px-4 rounded-full">Add to
@@ -118,25 +119,20 @@
         emptyCart.style.display = 'none'; // Hide the empty cart div
     })
 
-
-
-    // let removeProduct = document.getElementById('removeProduct');
-    // let addProduct = document.getElementById('slideButton');
-    // let productDiv = document.getElementById('productDiv');
-    // let parentDiv = productDiv.parentNode; // Keep a reference to the parent
-    // let clonedDiv = productDiv.cloneNode(true); // Clone the div before removing
-
-    // removeProduct.addEventListener('click', () => {
-    //     if (productDiv) {
-    //         parentDiv.removeChild(productDiv);
-    //         productDiv = null; // Clear the reference after removing
-    //     }
-    // })
-
-    // addProduct.addEventListener('click', () => {
-    //     if (!productDiv) { // If the productDiv doesn't exist, append the cloned div
-    //         parentDiv.appendChild(clonedDiv);
-    //         productDiv = clonedDiv; // Update the reference to the newly added div
-    //     }
-    // })
+// adding product to cart page
+    document.getElementById('view-cart').addEventListener('click', function () {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/cart/add.js', true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                window.location.href = '/cart'; // Redirect to the cart page
+            }
+        };
+        var data = {
+            id: '{{ all_products["cameron"].variants.first.id }}',
+            quantity: 1
+        };
+        xhr.send(JSON.stringify(data));
+    });
 </script>
