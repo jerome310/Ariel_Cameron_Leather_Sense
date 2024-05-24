@@ -51,42 +51,54 @@
 <script>
     // Rendering total amount for the subTotal amount within the product slider
 
-    // Increment Amount
-    document.getElementById('incrementButton').addEventListener('click', function () {
-        console.log('Hello Button', incrementButton)
+    // Get the quantity input field
         let quantityInput = document.getElementById('quantity');
-        let quantity = parseInt(quantityInput.value);
-        quantity += 1;  // Increment the quantity
-        quantityInput.value = quantity.toString();  // Update the quantity input field
 
-        let price = parseFloat(document.getElementById('productPrice').dataset.price);
-        let totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
+        // Add an event listener for the 'keydown' event
+        quantityInput.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                updateCart();
+            }
+        });
 
-        // Format the total price with two decimal places
-        let formattedTotalPrice = totalPrice.toFixed(2);
+        function updateCart() {
+                let quantity = parseInt(quantityInput.value);
 
-        // Update the subtotal
-        document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
-    });
+                // Ensure quantity does not go below 1
+                if (quantity < 1) {
+                    quantity = 1;
+                    quantityInput.value = quantity.toString();  // Update the quantity input field
+                }
 
-    // Decrement Amount
-    document.getElementById('decrementButton').addEventListener('click', function () {
-        var quantityInput = document.getElementById('quantity');
-        var quantity = parseInt(quantityInput.value);
-        if (quantity > 1) {  // Ensure quantity does not go below 1
-            quantity -= 1;  // Decrement the quantity
-            quantityInput.value = quantity.toString();  // Update the quantity input field
+                let price = parseFloat(document.getElementById('productPrice').dataset.price);
+                let totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
 
-            var price = parseFloat(document.getElementById('productPrice').dataset.price);
-            var totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
+                // Format the total price with two decimal places
+                let formattedTotalPrice = totalPrice.toFixed(2);
 
-            // Format the total price with two decimal places
-            var formattedTotalPrice = totalPrice.toFixed(2);
+                // Update the subtotal
+                document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
+            }
 
-            // Update the subtotal
-            document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
-        }
-    });
+        // Decrement Amount
+        document.getElementById('decrementButton').addEventListener('click', function () {
+            var quantity = parseInt(quantityInput.value);
+            if (quantity > 1) {  // Ensure quantity does not go below 1
+                quantity -= 1;  // Decrement the quantity
+                quantityInput.value = quantity.toString();  // Update the quantity input field
+
+                var price = parseFloat(document.getElementById('productPrice').dataset.price);
+                var totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
+
+                // Format the total price with two decimal places
+                var formattedTotalPrice = totalPrice.toFixed(2);
+
+                // Update the subtotal
+                document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
+            }
+        });
+
 
 
 
@@ -129,9 +141,10 @@
                 window.location.href = '/cart'; // Redirect to the cart page
             }
         };
+        let quantity = document.getElementById('quantity').value;
         var data = {
             id: '{{ all_products["cameron"].variants.first.id }}',
-            quantity: 1
+            quantity: quantity
         };
         xhr.send(JSON.stringify(data));
     });
