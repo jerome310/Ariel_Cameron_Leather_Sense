@@ -1,3 +1,64 @@
+{% comment %} View Cart Button Styles {% endcomment %}
+{% comment %} <style>
+    @media only screen and (max-width: 600px) {
+
+        /* Your CSS rules for screens up to 600px wide go here */
+        /* For example: */
+        .view-cart {
+            margin-top: 10% !important;
+        }
+    }
+
+    .view-cart {
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-top: 7%;
+    }
+
+    .button {
+        display: block;
+        width: 40%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 18px;
+        font-family: sans-serif;
+        text-decoration: none;
+        color: #333;
+        border: 2px solid #333;
+        letter-spacing: 2px;
+        text-align: center;
+        position: relative;
+        transition: all .35s;
+        border: 1px solid black;
+        border-radius: 6px;
+    }
+
+    .button span {
+        position: relative;
+        z-index: 2;
+    }
+
+    .button:after {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(to right, #feb82b, #2387ff, #e561a1);
+        transition: all .35s;
+    }
+
+    .button:hover {
+        color: #fff;
+    }
+
+    .button:hover:after {
+        width: 100%;
+    }
+</style> {% endcomment %}
+
 <body class="bg-gray-200 flex items-center justify-center h-screen">
     <div id="productFeature"
         class="fixed top-0 right-0 transform translate-x-full transition-transform duration-700 ease-in-out bg-white py-4 px-4 shadow-lg w-3/4 md:w-1/4 h-full">
@@ -41,8 +102,8 @@
                 <h3 id="subtotal" class="text-xl text-left pl-2">Subtotal: {{ all_products['cameron'].price | money }}</h3>
             </div>
         </div>
-        <button id="view-cart">View Cart</button>
-        <div id="emptyCart">YOUR CART IS EMPTY</div>
+        <button id="view-cart" class="button !h-12 !text-sm !mx-auto !my-16"><span class="text">View Cart</span></button>
+        <div id="emptyCart" class="">YOUR CART IS EMPTY</div>
     </div>
     <button id="slideButton" class="addProduct py-2 border-solid border-2 border-black px-4 rounded-full">Add to
         cart</button>
@@ -50,6 +111,23 @@
 
 <script>
     // Rendering total amount for the subTotal amount within the product slider
+
+    // Increment Amount
+        document.getElementById('incrementButton').addEventListener('click', function () {
+            let quantity = parseInt(quantityInput.value);
+            quantity += 1;  // Increment the quantity
+            quantityInput.value = quantity.toString();  // Update the quantity input field
+
+            let price = parseFloat(document.getElementById('productPrice').dataset.price);
+            let totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
+
+            // Format the total price with two decimal places
+            let formattedTotalPrice = totalPrice.toFixed(2);
+
+            // Update the subtotal
+            document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
+        });
+
 
     // Get the quantity input field
         let quantityInput = document.getElementById('quantity');
@@ -83,16 +161,16 @@
 
         // Decrement Amount
         document.getElementById('decrementButton').addEventListener('click', function () {
-            var quantity = parseInt(quantityInput.value);
+            let quantity = parseInt(quantityInput.value);
             if (quantity > 1) {  // Ensure quantity does not go below 1
                 quantity -= 1;  // Decrement the quantity
                 quantityInput.value = quantity.toString();  // Update the quantity input field
 
-                var price = parseFloat(document.getElementById('productPrice').dataset.price);
-                var totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
+                let price = parseFloat(document.getElementById('productPrice').dataset.price);
+                let totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
 
                 // Format the total price with two decimal places
-                var formattedTotalPrice = totalPrice.toFixed(2);
+                let formattedTotalPrice = totalPrice.toFixed(2);
 
                 // Update the subtotal
                 document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
@@ -133,7 +211,7 @@
 
 // adding product to cart page
     document.getElementById('view-cart').addEventListener('click', function () {
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open('POST', '/cart/add.js', true);
         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         xhr.onreadystatechange = function () {
@@ -142,7 +220,7 @@
             }
         };
         let quantity = document.getElementById('quantity').value;
-        var data = {
+        let data = {
             id: '{{ all_products["cameron"].variants.first.id }}',
             quantity: quantity
         };
