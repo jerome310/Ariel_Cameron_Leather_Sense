@@ -5,7 +5,7 @@ let closeButton = document.getElementById("closeButton");
 
 slideButton.addEventListener("click", function () {
   productFeature.style.transform = "translateX(0)";
-  console.log('working')
+  console.log("working");
 });
 
 closeButton.addEventListener("click", function () {
@@ -22,7 +22,6 @@ window.addEventListener("click", function (event) {
   }
   productFeature.style.transform = "translateX(100%)";
 });
-
 
 // Confetti Feature
 var confetti = {
