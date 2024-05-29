@@ -1,5 +1,5 @@
 {% comment %} View Cart Button Styles {% endcomment %}
-{% comment %} <style>
+<style>
     @media only screen and (max-width: 600px) {
 
         /* Your CSS rules for screens up to 600px wide go here */
@@ -16,9 +16,9 @@
         margin-top: 7%;
     }
 
-    .button {
+    .cart-button {
         display: block;
-        width: 40%;
+        width: 75%;
         height: 40px;
         line-height: 40px;
         font-size: 18px;
@@ -31,15 +31,14 @@
         position: relative;
         transition: all .35s;
         border: 1px solid black;
-        border-radius: 6px;
     }
 
-    .button span {
+    .cart-button span {
         position: relative;
         z-index: 2;
     }
 
-    .button:after {
+    .cart-button:after {
         position: absolute;
         content: "";
         top: 0;
@@ -50,14 +49,14 @@
         transition: all .35s;
     }
 
-    .button:hover {
+    .cart-button:hover {
         color: #fff;
     }
 
-    .button:hover:after {
+    .cart-button:hover:after {
         width: 100%;
     }
-</style> {% endcomment %}
+</style>
 
 <body class="bg-gray-200 flex items-center justify-center h-screen">
     <div id="productFeature"
@@ -78,12 +77,14 @@
         <div id="productDiv" class="flex justify-around mt-6">
             <div class="flex flex-row items-center justify-center">
                 <a href="{{ 'products/cameron' | url }}">
-                    <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}" alt="Cameron Product Image"
-                        class="w-24 h-16 object-cover rounded-lg">
+                    <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}"
+                        alt="Cameron Product Image" class="w-24 h-16 object-cover rounded-lg">
                 </a>
                 <div class="flex flex-col">
-                    <p class="text-xl pl-6"><a href="{{ 'products/cameron' | url }}">{{ all_products['cameron'].title }}</p></a>
-                    <p id="productPrice" data-price="{{ all_products['cameron'].price }}" class="text-lg text-left pl-6">{{
+                    <p class="text-xl pl-6"><a href="{{ 'products/cameron' | url }}">{{ all_products['cameron'].title }}
+                    </p></a>
+                    <p id="productPrice" data-price="{{ all_products['cameron'].price }}"
+                        class="text-lg text-left pl-6">{{
                         all_products['cameron'].price | money }}</p>
                 </div>
             </div>
@@ -99,23 +100,70 @@
                     </div>
                     <button id="removeProduct" class="text-sm font-medium text-red-500 my-1 pl-4">remove</button>
                 </div>
-                <h3 id="subtotal" class="text-xl text-left pl-2">Subtotal: {{ all_products['cameron'].price | money }}</h3>
+                <h3 id="subtotal" class="text-xl text-left pl-2">Subtotal: {{ all_products['cameron'].price | money }}
+                </h3>
             </div>
         </div>
-        <button id="view-cart" class="button !h-12 !text-sm !mx-auto !my-16"><span class="text">View Cart</span></button>
+        <button id="view-cart" class="cart-button !h-12 !text-sm !mx-auto !my-16"><span class="text">View Cart</span></button>
         <div id="emptyCart" class="">YOUR CART IS EMPTY</div>
     </div>
-    <button id="slideButton" class="addProduct py-2 border-solid border-2 border-black px-4 rounded-full">Add to
-        cart</button>
 </body>
 
 <script>
     // Rendering total amount for the subTotal amount within the product slider
 
     // Increment Amount
-        document.getElementById('incrementButton').addEventListener('click', function () {
-            let quantity = parseInt(quantityInput.value);
-            quantity += 1;  // Increment the quantity
+    document.getElementById('incrementButton').addEventListener('click', function () {
+        let quantity = parseInt(quantityInput.value);
+        quantity += 1;  // Increment the quantity
+        quantityInput.value = quantity.toString();  // Update the quantity input field
+
+        let price = parseFloat(document.getElementById('productPrice').dataset.price);
+        let totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
+
+        // Format the total price with two decimal places
+        let formattedTotalPrice = totalPrice.toFixed(2);
+
+        // Update the subtotal
+        document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
+    });
+
+
+    // Get the quantity input field
+    let quantityInput = document.getElementById('quantity');
+
+    // Add an event listener for the 'keydown' event
+    quantityInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            updateCart();
+        }
+    });
+
+    function updateCart() {
+        let quantity = parseInt(quantityInput.value);
+
+        // Ensure quantity does not go below 1
+        if (quantity < 1) {
+            quantity = 1;
+            quantityInput.value = quantity.toString();  // Update the quantity input field
+        }
+
+        let price = parseFloat(document.getElementById('productPrice').dataset.price);
+        let totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
+
+        // Format the total price with two decimal places
+        let formattedTotalPrice = totalPrice.toFixed(2);
+
+        // Update the subtotal
+        document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
+    }
+
+    // Decrement Amount
+    document.getElementById('decrementButton').addEventListener('click', function () {
+        let quantity = parseInt(quantityInput.value);
+        if (quantity > 1) {  // Ensure quantity does not go below 1
+            quantity -= 1;  // Decrement the quantity
             quantityInput.value = quantity.toString();  // Update the quantity input field
 
             let price = parseFloat(document.getElementById('productPrice').dataset.price);
@@ -126,56 +174,8 @@
 
             // Update the subtotal
             document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
-        });
-
-
-    // Get the quantity input field
-        let quantityInput = document.getElementById('quantity');
-
-        // Add an event listener for the 'keydown' event
-        quantityInput.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                updateCart();
-            }
-        });
-
-        function updateCart() {
-                let quantity = parseInt(quantityInput.value);
-
-                // Ensure quantity does not go below 1
-                if (quantity < 1) {
-                    quantity = 1;
-                    quantityInput.value = quantity.toString();  // Update the quantity input field
-                }
-
-                let price = parseFloat(document.getElementById('productPrice').dataset.price);
-                let totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
-
-                // Format the total price with two decimal places
-                let formattedTotalPrice = totalPrice.toFixed(2);
-
-                // Update the subtotal
-                document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
-            }
-
-        // Decrement Amount
-        document.getElementById('decrementButton').addEventListener('click', function () {
-            let quantity = parseInt(quantityInput.value);
-            if (quantity > 1) {  // Ensure quantity does not go below 1
-                quantity -= 1;  // Decrement the quantity
-                quantityInput.value = quantity.toString();  // Update the quantity input field
-
-                let price = parseFloat(document.getElementById('productPrice').dataset.price);
-                let totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
-
-                // Format the total price with two decimal places
-                let formattedTotalPrice = totalPrice.toFixed(2);
-
-                // Update the subtotal
-                document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
-            }
-        });
+        }
+    });
 
 
 
@@ -209,7 +209,7 @@
         emptyCart.style.display = 'none'; // Hide the empty cart div
     })
 
-// adding product to cart page
+    // adding product to cart page
     document.getElementById('view-cart').addEventListener('click', function () {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', '/cart/add.js', true);
