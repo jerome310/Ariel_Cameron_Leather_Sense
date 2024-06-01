@@ -75,39 +75,43 @@
 
         </div>
 
-        {% comment %} productSliderData the container that holds all the code that displays, products, view cart button and subtotal with{% endcomment %}
+        {% comment %} productSliderData the container that holds all the code that displays, products, view cart button
+        and subtotal with{% endcomment %}
         <div class="productSliderData">
-        <div id="productDiv" class="flex justify-around mt-6">
-            <div class="flex flex-row items-center justify-center">
-                <a href="{{ 'products/cameron' | url }}">
-                    <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}"
-                        alt="Cameron Product Image" class="w-24 h-16 object-cover rounded-lg">
-                </a>
-                <div class="flex flex-col">
-                    <p class="text-xl pl-6"><a href="{{ 'products/cameron' | url }}">{{ all_products['cameron'].title }}
-                    </p></a>
-                    <p id="productPrice" data-price="{{ all_products['cameron'].price }}"
-                        class="text-lg text-left pl-6">{{
-                        all_products['cameron'].price | money }}</p>
-                </div>
-            </div>
-            <div class="flex flex-col mx-2">
-                <div class="flex justify-between my-8">
-                    <div class="flex items-center">
-                        <button id="decrementButton" type="button"
-                            class="relative left-6 text-gray-500 text-2xl">-</button>
-                        <input id="quantity" name="quantity" value="1" min="1"
-                            class="w-24 py-1 border rounded-md text-center border-black text-xl">
-                        <button id="incrementButton" type="button"
-                            class="relative right-6 text-gray-500 text-2xl">+</button>
+            {% comment %} 1st Card Product {% endcomment %}
+            <div id="productDiv" class="flex justify-around mt-6">
+                <div class="flex flex-row items-center justify-center">
+                    <a href="{{ 'products/cameron' | url }}">
+                        <img src="{{ all_products['cameron'].featured_image.src | img_url: 'large' }}"
+                            alt="Cameron Product Image" class="w-24 h-16 object-cover rounded-lg">
+                    </a>
+                    <div class="flex flex-col">
+                        <p class="text-xl pl-6"><a href="{{ 'products/cameron' | url }}">{{
+                                all_products['cameron'].title }}
+                        </p></a>
+                        <p id="productPrice" data-price="{{ all_products['cameron'].price }}"
+                            class="text-lg text-left pl-6">{{
+                            all_products['cameron'].price | money }}</p>
                     </div>
-                    <button id="removeProduct" class="text-sm font-medium text-red-500 my-1 pl-4">remove</button>
+                </div>
+                <div class="flex flex-col mx-2">
+                    <div class="flex justify-between my-8">
+                        <div class="flex items-center">
+                            <button id="decrementButton" type="button"
+                                class="relative left-6 text-gray-500 text-2xl">-</button>
+                            <input id="quantity" name="quantity" value="1" min="1"
+                                class="w-24 py-1 border rounded-md text-center border-black text-xl">
+                            <button id="incrementButton" type="button"
+                                class="relative right-6 text-gray-500 text-2xl">+</button>
+                        </div>
+                        <button id="removeProduct" class="text-sm font-medium text-red-500 my-1 pl-4">remove</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <h3 id="subtotal" class="text-xl text-left pl-2">Subtotal: {{ all_products['cameron'].price | money }}
-        </h3>
-        <button id="view-cart" class="cart-button !h-12 !text-sm !mx-auto !my-16"><span class="text">View Cart</span></button>
+            <h3 id="subtotal" class="text-xl text-left pl-2">Subtotal: {{ all_products['cameron'].price | money }}
+            </h3>
+            <button id="view-cart" class="cart-button !h-12 !text-sm !mx-auto !my-16"><span class="text">View
+                    Cart</span></button>
         </div>
         <div id="emptyCart" class="">YOUR CART IS EMPTY</div>
     </div>
@@ -198,7 +202,7 @@
     let emptyCart = document.getElementById('emptyCart');
 
     // Store the original subtotal
-        let originalSubtotal = subtotal.innerHTML;
+    let originalSubtotal = subtotal.innerHTML;
 
     removeProduct.addEventListener('click', () => {
         if (productDiv) {
@@ -222,7 +226,7 @@
     })
 
     // Get the price of the product
-        let price = parseFloat(subtotal.textContent.replace('Subtotal: ', '').replace('$', ''));
+    let price = parseFloat(subtotal.textContent.replace('Subtotal: ', '').replace('$', ''));
 
     // adding product to cart page
     document.getElementById('view-cart').addEventListener('click', function () {
