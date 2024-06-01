@@ -108,12 +108,42 @@
                     </div>
                 </div>
             </div>
+            {% comment %} 2nd Card Product {% endcomment %}
+            <div id="productDivTwo" class="flex justify-around mt-6">
+                <div class="flex flex-row items-center justify-center">
+                    <a href="{{ 'products/diana' | url }}">
+                        <img src="{{ all_products['diana'].featured_image.src | img_url: 'large' }}"
+                            alt="Diana Product Image" class="w-24 h-16 object-cover rounded-lg">
+                    </a>
+                    <div class="flex flex-col">
+                        <p class="text-xl pl-6"><a href="{{ 'products/diana' | url }}">{{
+                                all_products['diana'].title }}
+                        </p></a>
+                        <p id="productPrice" data-price="{{ all_products['diana'].price }}"
+                            class="text-lg text-left pl-6">{{
+                            all_products['diana'].price | money }}</p>
+                    </div>
+                </div>
+                <div class="flex flex-col mx-2">
+                    <div class="flex justify-between my-8">
+                        <div class="flex items-center">
+                            <button id="decrementButton" type="button"
+                                class="relative left-6 text-gray-500 text-2xl">-</button>
+                            <input id="quantity" name="quantity" value="1" min="1"
+                                class="w-24 py-1 border rounded-md text-center border-black text-xl">
+                            <button id="incrementButton" type="button"
+                                class="relative right-6 text-gray-500 text-2xl">+</button>
+                        </div>
+                        <button id="removeProduct" class="text-sm font-medium text-red-500 my-1 pl-4">remove</button>
+                    </div>
+                </div>
+            </div>
             <h3 id="subtotal" class="text-xl text-left pl-2">Subtotal: {{ all_products['cameron'].price | money }}
             </h3>
             <button id="view-cart" class="cart-button !h-12 !text-sm !mx-auto !my-16"><span class="text">View
                     Cart</span></button>
         </div>
-        <div id="emptyCart" class="">YOUR CART IS EMPTY</div>
+        <div id="emptyCart">YOUR CART IS EMPTY</div>
     </div>
 </body>
 
@@ -197,17 +227,24 @@
     let productSliderData = document.querySelector('.productSliderData');
     let addProduct = document.getElementById('slideButton');
     let productDiv = document.getElementById('productDiv');
+    let productDivTwo = document.getElementById('productDivTwo');
     let quantity = document.getElementById('quantity');
     let subtotal = document.getElementById('subtotal');
     let emptyCart = document.getElementById('emptyCart');
 
+    let addProductTwoClicked = false;
+    
+    // Initially hide both product divs
+    productDiv.style.display = 'none';
+    //productDivTwo.style.display = 'none';
+    
     // Store the original subtotal
     let originalSubtotal = subtotal.innerHTML;
-
+    
     removeProduct.addEventListener('click', () => {
         if (productDiv) {
             productDiv.style.display = 'none' // Remove the content inside the productDiv
-            productSliderData.style.display = 'none';
+            //productSliderData.style.display = 'none';
         }
         emptyCart.style.display = 'flex';
         emptyCart.style.justifyContent = 'center';
@@ -216,17 +253,33 @@
         quantity.value = 1; // Set the quantity value to 1
         subtotal.innerHTML = originalSubtotal; // Reset the subtotal to the original value
     })
-
+    
     addProduct.addEventListener('click', () => {
-        if (productSliderData.style.display = 'none') {
-            productSliderData.style.display = 'block';
-            productDiv.style.display = 'block'; // Show the div
-        }
-        emptyCart.style.display = 'none'; // Hide the empty cart div
-    })
+            if (productDiv) {
+                productSliderData.style.display = 'block';
+                productDiv.style.display = 'block'; // Show the div
+                if (!addProductTwoClicked) {
+                    productDivTwo.style.display = 'none'; // Hide the div
+                }
+            }
+            emptyCart.style.display = 'none'; // Hide the empty cart div
+    });
 
-    // Get the price of the product
-    let price = parseFloat(subtotal.textContent.replace('Subtotal: ', '').replace('$', ''));
+    
+    window.onload = function () {
+        let addProductTwo = document.getElementById('slideButtonTwo');
+        addProductTwo.addEventListener('click', () => {
+            if (productDivTwo) {
+                productSliderData.style.display = 'block';
+                productDivTwo.style.display = 'block'; // Show the div
+                addProductTwoClicked = true; // Set the flag
+            }
+            emptyCart.style.display = 'none'; // Hide the empty cart div
+        });
+        }
+        
+        // Get the price of the product
+        let price = parseFloat(subtotal.textContent.replace('Subtotal: ', '').replace('$', ''));
 
     // adding product to cart page
     document.getElementById('view-cart').addEventListener('click', function () {
@@ -241,6 +294,7 @@
         let quantity = document.getElementById('quantity').value;
         let data = {
             id: '{{ all_products["cameron"].variants.first.id }}',
+            id: '{{ all_products["diana"].variants.first.id }}',
             quantity: quantity
         };
         xhr.send(JSON.stringify(data));
