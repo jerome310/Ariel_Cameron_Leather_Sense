@@ -134,7 +134,7 @@
                             <button id="incrementButton" type="button"
                                 class="relative right-6 text-gray-500 text-2xl">+</button>
                         </div>
-                        <button id="removeProduct" class="text-sm font-medium text-red-500 my-1 pl-4">remove</button>
+                        <button id="removeProductTwo" class="text-sm font-medium text-red-500 my-1 pl-4">remove</button>
                     </div>
                 </div>
             </div>
@@ -224,6 +224,7 @@
 
     //  WORKING ON displaying a message when the cart is empty
     let removeProduct = document.getElementById('removeProduct');
+    let removeProductTwo = document.getElementById('removeProductTwo');
     let productSliderData = document.querySelector('.productSliderData');
     let addProduct = document.getElementById('slideButton');
     let productDiv = document.getElementById('productDiv');
@@ -255,10 +256,10 @@
     })
     
     addProduct.addEventListener('click', () => {
-            if (productDiv) {
-                productSliderData.style.display = 'block';
-                productDiv.style.display = 'block'; // Show the div
-                if (!addProductTwoClicked) {
+        if (productDiv) {
+            productSliderData.style.display = 'block';
+            productDiv.style.display = 'block'; // Show the div
+            if (!addProductTwoClicked) {
                     productDivTwo.style.display = 'none'; // Hide the div
                 }
             }
@@ -276,6 +277,19 @@
             }
             emptyCart.style.display = 'none'; // Hide the empty cart div
         });
+
+        removeProductTwo.addEventListener('click', () => {
+            if (productDivTwo) {
+                productDivTwo.style.display = 'none' // Remove the content inside the productDiv
+                //productSliderData.style.display = 'none';
+            }
+            emptyCart.style.display = 'flex';
+            emptyCart.style.justifyContent = 'center';
+            emptyCart.style.alignItems = 'center';
+            emptyCart.style.height = '100vh';
+            quantity.value = 1; // Set the quantity value to 1
+            subtotal.innerHTML = originalSubtotal; // Reset the subtotal to the original value
+        })
         }
         
         // Get the price of the product
