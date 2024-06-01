@@ -1,9 +1,15 @@
 // Product Slider Navbar
 let productFeature = document.getElementById("productFeature");
 let slideButton = document.getElementById("slideButton");
+let slideButtonTwo = document.getElementById("slideButtonTwo");
 let closeButton = document.getElementById("closeButton");
 
 slideButton.addEventListener("click", function () {
+  productFeature.style.transform = "translateX(0)";
+  console.log("working");
+});
+
+slideButtonTwo.addEventListener("click", function () {
   productFeature.style.transform = "translateX(0)";
   console.log("working");
 });
@@ -15,6 +21,7 @@ closeButton.addEventListener("click", function () {
 window.addEventListener("click", function (event) {
   if (
     event.target == slideButton ||
+    event.target == slideButtonTwo ||
     event.target == productFeature ||
     productFeature.contains(event.target)
   ) {
