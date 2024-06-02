@@ -6,12 +6,10 @@ let closeButton = document.getElementById("closeButton");
 
 slideButton.addEventListener("click", function () {
   productFeature.style.transform = "translateX(0)";
-  console.log("working");
 });
 
 slideButtonTwo.addEventListener("click", function () {
   productFeature.style.transform = "translateX(0)";
-  console.log("working");
 });
 
 closeButton.addEventListener("click", function () {
