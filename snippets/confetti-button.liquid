@@ -217,16 +217,33 @@
 
     // Second Input Product Amount
     // Get the quantity input field for the second product
-        let quantityInputTwo = document.getElementById('quantityTwo');
-        let incrementButtonTwo = document.getElementById('incrementButtonTwo');
-        console.log(incrementButtonTwo, 'showing')
-        let decrementButtonTwo = document.getElementById('decrementButtonTwo');
-        console.log(decrementButtonTwo, 'showing')
-        
-        // Increment Product Amount for the second product
-        document.getElementById('incrementButtonTwo').addEventListener('click', function () {
-            let quantity = parseInt(quantityInputTwo.value);
-            quantity += 1;  // Increment the quantity
+    let quantityInputTwo = document.getElementById('quantityTwo');
+    let incrementButtonTwo = document.getElementById('incrementButtonTwo');
+    let decrementButtonTwo = document.getElementById('decrementButtonTwo');
+
+    // Increment Product Amount for the second product
+    document.getElementById('incrementButtonTwo').addEventListener('click', function () {
+        let quantity = parseInt(quantityInputTwo.value);
+        quantity += 1;  // Increment the quantity
+        quantityInputTwo.value = quantity.toString();  // Update the quantity input field
+
+        let price = parseFloat(document.getElementById('productPriceTwo').dataset.price);
+        let totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
+
+        // Format the total price with two decimal places
+        let formattedTotalPrice = totalPrice.toFixed(2);
+
+        // Update the subtotal
+        document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
+    });
+
+    // ... rest of your code ...
+
+    // Decrement Amount for the second product
+    document.getElementById('decrementButtonTwo').addEventListener('click', function () {
+        let quantity = parseInt(quantityInputTwo.value);
+        if (quantity > 1) {  // Ensure quantity does not go below 1
+            quantity -= 1;  // Decrement the quantity
             quantityInputTwo.value = quantity.toString();  // Update the quantity input field
 
             let price = parseFloat(document.getElementById('productPriceTwo').dataset.price);
@@ -237,17 +254,16 @@
 
             // Update the subtotal
             document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
-        });
+        }
+    });
 
-        // ... rest of your code ...
+    // Add an event listener for the 'keydown' event
+    quantityInputTwo.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();  // Prevent the default action
 
-        // Decrement Amount for the second product
-        document.getElementById('decrementButtonTwo').addEventListener('click', function () {
             let quantity = parseInt(quantityInputTwo.value);
-            if (quantity > 1) {  // Ensure quantity does not go below 1
-                quantity -= 1;  // Decrement the quantity
-                quantityInputTwo.value = quantity.toString();  // Update the quantity input field
-
+            if (quantity >= 1) {  // Ensure quantity does not go below 1
                 let price = parseFloat(document.getElementById('productPriceTwo').dataset.price);
                 let totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
 
@@ -257,26 +273,55 @@
                 // Update the subtotal
                 document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
             }
-        });
+        }
+    });
 
-        // Add an event listener for the 'keydown' event
-            quantityInputTwo.addEventListener('keydown', function (event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();  // Prevent the default action
 
-                    let quantity = parseInt(quantityInputTwo.value);
-                    if (quantity >= 1) {  // Ensure quantity does not go below 1
-                        let price = parseFloat(document.getElementById('productPriceTwo').dataset.price);
-                        let totalPrice = (quantity * price) / 100;  // Adjusted for unit discrepancy
+    // Function to update the total quantity and total price for both products
+    function updateTotal() {
+        // Check if both product divs are displayed
+        if (productDiv.style.display === 'block' && productDivTwo.style.display === 'block') {
+            let quantityOne = parseInt(document.getElementById('quantity').value);
+            let priceOne = parseFloat(document.getElementById('productPrice').dataset.price);
 
-                        // Format the total price with two decimal places
-                        let formattedTotalPrice = totalPrice.toFixed(2);
+            let quantityTwo = parseInt(document.getElementById('quantityTwo').value);
+            let priceTwo = parseFloat(document.getElementById('productPriceTwo').dataset.price);
 
-                        // Update the subtotal
-                        document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
-                    }
-                }
-            });
+            totalQuantity = quantityOne + quantityTwo;
+            totalPrice = ((quantityOne * priceOne) + (quantityTwo * priceTwo)) / 100;
+
+            // Format the total price with two decimal places
+            let formattedTotalPrice = totalPrice.toFixed(2);
+
+            // Update the subtotal
+            document.getElementById('subtotal').innerText = 'Subtotal: $' + formattedTotalPrice;
+        }
+    }
+
+
+    // Add event listeners for the 'click' event on the increment and decrement buttons for both products
+    incrementButton.addEventListener('click', updateTotal);
+    decrementButton.addEventListener('click', updateTotal);
+    incrementButtonTwo.addEventListener('click', updateTotal);
+    decrementButtonTwo.addEventListener('click', updateTotal);
+
+    // Get the quantity input fields for both products
+
+    // Add an event listener for the 'keydown' event
+    quantityInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            updateTotal();
+        }
+    });
+
+    quantityInputTwo.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            updateTotal();
+        }
+    });
+
 
 
     // Removing a product and adding a product inside the product slider
@@ -322,6 +367,8 @@
             }
         }
         emptyCart.style.display = 'none'; // Hide the empty cart div
+        // Call the function to update the total
+        updateTotal();
     });
 
 
@@ -334,6 +381,8 @@
                 addProductTwoClicked = true; // Set the flag
             }
             emptyCart.style.display = 'none'; // Hide the empty cart div
+            // Call the function to update the total
+            updateTotal();
         });
 
         removeProductTwo.addEventListener('click', () => {
@@ -368,20 +417,32 @@
 
     // adding product to cart page
     document.getElementById('view-cart').addEventListener('click', function () {
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', '/cart/add.js', true);
-        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                window.location.href = '/cart'; // Redirect to the cart page
-            }
-        };
-        let quantity = document.getElementById('quantity').value;
-        let data = {
-            id: '{{ all_products["cameron"].variants.first.id }}',
-            id: '{{ all_products["diana"].variants.first.id }}',
-            quantity: quantity
-        };
-        xhr.send(JSON.stringify(data));
-    });
+            let xhr1 = new XMLHttpRequest();
+            xhr1.open('POST', '/cart/add.js', true);
+            xhr1.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr1.onreadystatechange = function () {
+                if (xhr1.readyState === 4 && xhr1.status === 200) {
+                    let xhr2 = new XMLHttpRequest();
+                    xhr2.open('POST', '/cart/add.js', true);
+                    xhr2.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+                    xhr2.onreadystatechange = function () {
+                        if (xhr2.readyState === 4 && xhr2.status === 200) {
+                            window.location.href = '/cart'; // Redirect to the cart page
+                        }
+                    };
+                    let quantityTwo = document.getElementById('quantityTwo').value;
+                    let dataTwo = {
+                        id: '{{ all_products["diana"].variants.first.id }}',
+                        quantity: quantityTwo
+                    };
+                    xhr2.send(JSON.stringify(dataTwo));
+                }
+            };
+            let quantityOne = document.getElementById('quantity').value;
+            let dataOne = {
+                id: '{{ all_products["cameron"].variants.first.id }}',
+                quantity: quantityOne
+            };
+            xhr1.send(JSON.stringify(dataOne));
+        });
 </script>
