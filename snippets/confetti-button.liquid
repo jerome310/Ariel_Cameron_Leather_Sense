@@ -416,30 +416,95 @@
     let price = parseFloat(subtotal.textContent.replace('Subtotal: ', '').replace('$', ''));
 
     // adding product to cart page
-    document.getElementById('view-cart').addEventListener('click', function () {
-            let productDiv = document.getElementById('productDiv');
-            let productDivTwo = document.getElementById('productDivTwo');
 
-            // Determine which product is currently displayed
-            let currentProductDiv = productDiv.style.display !== 'none' ? productDiv : productDivTwo;
 
-            // Corresponding quantity element and product id
-            let quantityElement = currentProductDiv === productDiv ? document.getElementById('quantity') : document.getElementById('quantityTwo');
-            let productId = currentProductDiv === productDiv ? '{{ all_products["cameron"].variants.first.id }}' : '{{ all_products["diana"].variants.first.id }}';
 
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', '/cart/add.js', true);
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    window.location.href = '/cart'; // Redirect to the cart page
-                }
-            };
-            let quantity = quantityElement.value;
-            let data = {
-                id: productId,
-                quantity: quantity
-            };
-            xhr.send(JSON.stringify(data));
-        });
+    // Logic that combines adding 1 product at a time and also displaying both at the same time
+    // if (productDiv.style.display !== 'none' && productDivTwo.style.display !== 'none') {
+    //         // Both products are displayed
+    //         let quantityElementOne = document.getElementById('quantity');
+    //         let quantityElementTwo = document.getElementById('quantityTwo');
+    //         let productIdOne = '{{ all_products["cameron"].variants.first.id }}';
+    //         let productIdTwo = '{{ all_products["diana"].variants.first.id }}';
+    //     } else {
+    //         // Only one product is displayed
+    //         let currentProductDiv = productDiv.style.display !== 'none' ? productDiv : productDivTwo;
+    //         let quantityElement = document.getElementById(currentProductDiv === productDiv ? 'quantity' : 'quantityTwo');
+    //         let productId = currentProductDiv === productDiv ? '{{ all_products["cameron"].variants.first.id }}' : '{{ all_products["diana"].variants.first.id }}';
+    //     }
+
+
+
+    // This code display both product when they're both in the product slider
+    // document.getElementById('view-cart').addEventListener('click', function () {
+    //         let productDiv = document.getElementById('productDiv');
+    //         let productDivTwo = document.getElementById('productDivTwo');
+
+    //         // Check if both products are currently displayed
+    //         if (productDiv.style.display !== 'none' && productDivTwo.style.display !== 'none') {
+    //             // Corresponding quantity elements and product ids
+    //             let quantityElementOne = document.getElementById('quantity');
+    //             let quantityElementTwo = document.getElementById('quantityTwo');
+    //             let productIdOne = '{{ all_products["cameron"].variants.first.id }}';
+    //             let productIdTwo = '{{ all_products["diana"].variants.first.id }}';
+
+    //             // Add first product to the cart
+    //             let xhrOne = new XMLHttpRequest();
+    //             xhrOne.open('POST', '/cart/add.js', true);
+    //             xhrOne.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    //             xhrOne.onreadystatechange = function () {
+    //                 if (xhrOne.readyState === 4 && xhrOne.status === 200) {
+    //                     // Add second product to the cart
+    //                     let xhrTwo = new XMLHttpRequest();
+    //                     xhrTwo.open('POST', '/cart/add.js', true);
+    //                     xhrTwo.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    //                     xhrTwo.onreadystatechange = function () {
+    //                         if (xhrTwo.readyState === 4 && xhrTwo.status === 200) {
+    //                             window.location.href = '/cart'; // Redirect to the cart page
+    //                         }
+    //                     };
+    //                     let dataTwo = {
+    //                         id: productIdTwo,
+    //                         quantity: quantityElementTwo.value
+    //                     };
+    //                     xhrTwo.send(JSON.stringify(dataTwo));
+    //                 }
+    //             };
+    //             let dataOne = {
+    //                 id: productIdOne,
+    //                 quantity: quantityElementOne.value
+    //             };
+    //             xhrOne.send(JSON.stringify(dataOne));
+    //         }
+    //     });
+
+
+
+    // This code is perfect on displaying 1 product at a time
+    // document.getElementById('view-cart').addEventListener('click', function () {
+    //         let productDiv = document.getElementById('productDiv');
+    //         let productDivTwo = document.getElementById('productDivTwo');
+
+    //         // Determine which product is currently displayed
+    //         let currentProductDiv = productDiv.style.display !== 'none' ? productDiv : productDivTwo;
+
+    //         // Corresponding quantity element and product id
+    //         let quantityElement = currentProductDiv === productDiv ? document.getElementById('quantity') : document.getElementById('quantityTwo');
+    //         let productId = currentProductDiv === productDiv ? '{{ all_products["cameron"].variants.first.id }}' : '{{ all_products["diana"].variants.first.id }}';
+
+    //         let xhr = new XMLHttpRequest();
+    //         xhr.open('POST', '/cart/add.js', true);
+    //         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    //         xhr.onreadystatechange = function () {
+    //             if (xhr.readyState === 4 && xhr.status === 200) {
+    //                 window.location.href = '/cart'; // Redirect to the cart page
+    //             }
+    //         };
+    //         let quantity = quantityElement.value;
+    //         let data = {
+    //             id: productId,
+    //             quantity: quantity
+    //         };
+    //         xhr.send(JSON.stringify(data));
+    //     });
 </script>
