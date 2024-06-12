@@ -1,1 +1,17 @@
-hello world
+<div class="w-full flex flex-col md:flex-row justify-center min-h-screen" style="margin: 0; padding: 0;">
+    <div class="" style="margin: 0; padding: 0;">
+        <img class="w-full h-full" src="{{ 'acl_product_image.jpeg' |  asset_url }}" alt="acl product image">
+    </div>
+    <div style="background: linear-gradient(180deg, #E561A1 0%, #FEB82B 22%, #2387FF 49%, #E561A1 76%, #FEB82B 100%); padding: 0;" class="w-5/6 md:w-[30%]">
+        <img class="w-[125px] h-[125px] mx-auto" src="{{ 'acl_logo.png' |  asset_url }}" alt="acl product image">
+        <h1 class="text-center font-semibold py-6 text-xl text-white">Welcome to our website!</h1>
+        <p class="text-lg font-semibold text-center px-8 text-white">We're glad you're here. Sign up for our email list to get updates, exclusive offers, and more.</p>
+        <form action="" class="flex mt-4 flex-col justify-center items-center">
+        <input type="email" placeholder="Email" class="outline-none py-3 font-semibold pl-4 text-black px-40 my-3 rounded-full placeholder-black">
+        <input type="tel" placeholder="Phone Number" class="outline-none py-3 font-semibold pl-4 text-black px-40 my-3 rounded-full placeholder-black">
+        <div class="bg-white px-[150px] py-3 font-semibold text-black my-3 rounded-full placeholder-black">
+            <button type="submit" class="text-center">Submit</button>
+        </div>
+        </form>
+    </div>
+</div>
