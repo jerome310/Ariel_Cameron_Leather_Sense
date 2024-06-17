@@ -1,62 +1,170 @@
-<div id="container" class="fixed inset-0 z-50 flex flex-col md:flex-row justify-center items-center" style="margin: 0; padding: 0;">
+<div id="container" class="fixed inset-0 z-50 flex flex-col md:flex-row md:justify-center items-center overflow-auto"
+    style="margin: 0; padding: 0;">
     <div class="flex" style="margin: 0; padding: 0;">
-        <img class="w-11/12 mx-auto md:mx-0 md:w-full md:h-full rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none" src="{{ 'acl_product_image.jpeg' |  asset_url }}" alt="acl product image">
-       <div class="z-auto absolute right-8 pt-4 pr-4 md:hidden">
-        <svg id="mobile-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-            class="size-8 cursor-pointer">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-       </div>
+        <img class="w-[400px] h-[400px] mx-auto md:mx-0 md:w-full md:h-full rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
+            src="{{ 'acl_product_image.jpeg' |  asset_url }}" alt="acl product image">
+        <div class="z-auto absolute right-8 pt-4 pr-4 md:hidden">
+            <svg id="mobile-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="currentColor" class="size-8 cursor-pointer">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </div>
     </div>
-    <div style="background: linear-gradient(180deg, #E561A1 0%, #FEB82B 22%, #2387FF 49%, #E561A1 76%, #FEB82B 100%);" class="w-11/12 mx-auto md:mx-0 md:w-[30%] md:h-[92%] py-8 md:py-0 rounded-b-2xl md:rounded-e-2xl md:rounded-bl-none">
-    <div class="z-auto relative left-0 pt-4 hidden md:block">
-        <svg id="desktop-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-            class="size-8 absolute right-4 cursor-pointer">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-    </div>
+    <div style="background: linear-gradient(180deg, #E561A1 0%, #FEB82B 22%, #2387FF 49%, #E561A1 76%, #FEB82B 100%);"
+        class="w-[85.2%] h-2/3 mx-auto md:mx-0 md:w-[30%] md:h-[92%] md:py-0 rounded-b-2xl md:rounded-e-2xl md:rounded-bl-none">
+        <div class="z-auto relative left-0 pt-4 hidden md:block">
+            <svg id="desktop-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="currentColor" class="size-8 absolute right-4 cursor-pointer">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </div>
         <img class="w-[125px] h-[125px] mx-auto" src="{{ 'acl_logo.png' |  asset_url }}" alt="acl product image">
-        <h1 class="text-center font-semibold py-6 text-xl text-white">Welcome to our website!</h1>
-        <p class="text-lg font-semibold text-center px-8 text-white">We're glad you're here. Sign up for our email list to get updates, exclusive offers, and more.</p>
+        <h1 class="text-center font-semibold py-0 md:py-6 text-xl text-white">Welcome to our website!</h1>
+        <p class="py-2 text-lg font-semibold text-center px-8 text-white">We're glad you're here. Sign up for our email list
+            to get updates, exclusive offers, and more.</p>
         {% form 'customer' %}
         <div class="flex mt-4 flex-col justify-center items-center">
-        <input type="email" name="contact[email]" placeholder="Email Address" class="outline-none py-3 font-semibold pl-4 text-black px-40 md:px-6 lg:pr-36 my-3 rounded-full placeholder-black">
-        {% comment %} <input type="tel" name="contact[phone]" placeholder="Phone Number" class="outline-none py-3 font-semibold pl-4 text-black px-40 my-3 rounded-full placeholder-black"> {% endcomment %}
-        <div class="bg-white px-[150px] lg:px-36 md:px-[90px] py-3 font-semibold text-black my-3 rounded-full placeholder-black">
-            <button type="Submit" class="text-center">Submit</button>
-        </div>
+            <input type="email" name="contact[email]" placeholder="Email Address"
+                class="outline-none py-3 font-semibold pl-4 text-black px-40 md:px-6 lg:pr-36 my-3 rounded-full placeholder-black">
+            {% comment %} <input type="tel" name="contact[phone]" placeholder="Phone Number"
+                class="outline-none py-3 font-semibold pl-4 text-black px-40 my-3 rounded-full placeholder-black"> {% endcomment %}
+            <div
+                class="bg-white px-[150px] lg:px-36 md:px-[90px] py-3 font-semibold text-black my-3 rounded-full placeholder-black">
+                <button type="Submit" class="text-center">Submit</button>
+            </div>
         </div>
         {% endform %}
     </div>
 </div>
 
 
+
+
 <script>
     // Initially hide the container
     document.getElementById('container').style.opacity = '0';
 
+    // This is the mobile close button
     document.getElementById('mobile-button').addEventListener('click', () => {
         document.getElementById('container').style.opacity = '0';
     })
 
+    // // This is the desktop close button
     document.getElementById('desktop-button').addEventListener('click', () => {
         document.getElementById('container').style.opacity = '0';
     })
 
     // After 3 seconds, display the container with an ease-in effect
     setTimeout(function () {
-        var container = document.getElementById('container');
+        let container = document.getElementById('container');
         container.style.transition = 'opacity 0.5s ease-in';
         container.style.opacity = '1';
     }, 3000);
 
     // Hide the container when you click outside of it
     document.addEventListener('click', function (event) {
-        var container = document.getElementById('container');
-        var isClickInside = container.contains(event.target);
+        let container = document.getElementById('container');
+        let isClickInside = container.contains(event.target);
 
         if (!isClickInside) {
             container.style.opacity = '0';
         }
     });
+
+    // Logic for the email input
+    document.addEventListener("DOMContentLoaded", function () {
+            // Check if the form has been filled out before
+            let formFilled = localStorage.getItem('formFilled');
+
+            // If the form has been filled out before, hide the element
+            if (formFilled) {
+                let element = document.getElementById("container");
+                if (element) {
+                    element.style.display = "none";
+                }
+            }
+
+            document.querySelector('button[type="submit"]').addEventListener("click", function (event) {
+                // Get the email input field and its value
+                let emailInput = document.querySelector('input[type="email"]');
+                let email = emailInput.value;
+
+                // Check if the email input field is empty
+                if (!email) {
+                    // If the email input field is empty, update the placeholder and stop the function
+                    emailInput.style.color = "red";
+                    emailInput.placeholder = "";
+                    emailInput.value = "Email address is required";
+
+                    // When the input field is clicked on, clear the value
+                    emailInput.onfocus = function () {
+                        this.value = "";
+                    };
+
+                    // When the input field is clicked away from, if it's empty, show the placeholder text again
+                    emailInput.onblur = function () {
+                        if (!this.value) {
+                            this.value = "Email address is required";
+                        }
+                    };
+
+                    // When the user types into the input field, change the text color back to black
+                    emailInput.oninput = function () {
+                        this.style.color = "black";
+                    };
+
+                    // Prevent the form from submitting normally
+                    event.preventDefault();
+                    return;
+                }
+
+                // Define the regex for a valid email address
+                let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                // Check if the email is valid
+                if (!emailRegex.test(email)) {
+                    // If the email is invalid, clear the input field, update the placeholder, and stop the function
+                    emailInput.value = "";
+                    emailInput.placeholder = "";
+                    emailInput.style.color = "red";
+                    emailInput.value = "Invalid email address";
+
+                    // When the input field is clicked on, clear the value
+                    emailInput.onfocus = function () {
+                        this.value = "";
+                    };
+
+                    // When the input field is clicked away from, if it's empty, show the placeholder text again
+                    emailInput.onblur = function () {
+                        if (!this.value) {
+                            this.value = "Email address is required";
+                        }
+                    };
+
+                    // When the user types into the input field, change the text color back to black
+                    emailInput.oninput = function () {
+                        this.style.color = "black";
+                    };
+
+                    // Prevent the form from submitting normally
+                    event.preventDefault();
+                    return;
+                }
+
+                // Your logic here
+                console.log("Form submitted with a valid email!");
+
+                // Set the formFilled item in local storage to remember that the form has been filled out
+                localStorage.setItem('formFilled', 'true');
+
+                // Hide the element with the specific id
+                let element = document.getElementById("container");
+                if (element) {
+                    element.style.display = "none";
+                }
+
+                // If you want to submit the form after your logic
+                // event.target.form.submit();
+            });
+        });
 </script>
