@@ -1,7 +1,18 @@
 <style>
     @media screen and (max-width: 415px){
      #email-popup-product {
-        width: 301px !important;
+        width: 310px !important;
+        }
+    #email-popup-color {
+        width: 310px !important;        
+     }
+
+     #email-input {
+        padding: 12px 40px !important;
+     }
+
+     #email-submit {
+        padding: 12px 100px !important;
      }
     }
 
@@ -20,8 +31,8 @@
             </svg>
         </div>
     </div>
-    <div style="background: linear-gradient(180deg, #E561A1 0%, #FEB82B 22%, #2387FF 49%, #E561A1 76%, #FEB82B 100%);"
-        class="w-10/12 h-2/3 mx-auto md:mx-0 md:w-[30%] md:h-[92%] md:py-0 rounded-b-2xl md:rounded-e-2xl md:rounded-bl-none">
+    <div id="email-popup-color" style="background: linear-gradient(180deg, #E561A1 0%, #FEB82B 22%, #2387FF 49%, #E561A1 76%, #FEB82B 100%);"
+        class="w-11/12 h-2/3 mx-auto md:mx-0 md:w-[30%] md:h-[92%] md:py-0 rounded-b-2xl md:rounded-e-2xl md:rounded-bl-none">
         <div class="z-auto relative left-0 pt-4 hidden md:block">
             <svg id="desktop-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="size-8 absolute right-4 cursor-pointer">
@@ -34,11 +45,11 @@
             to get updates, exclusive offers, and more.</p>
         {% form 'customer' %}
         <div class="flex mt-4 flex-col justify-center items-center">
-            <input type="email" name="contact[email]" placeholder="Email Address"
+            <input id="email-input" type="email" name="contact[email]" placeholder="Email Address"
                 class="outline-none py-3 font-semibold pl-4 text-black px-40 md:px-6 lg:pr-36 my-3 rounded-full placeholder-black">
             {% comment %} <input type="tel" name="contact[phone]" placeholder="Phone Number"
                 class="outline-none py-3 font-semibold pl-4 text-black px-40 my-3 rounded-full placeholder-black"> {% endcomment %}
-            <div
+            <div id="email-submit"
                 class="bg-white px-[150px] lg:px-36 md:px-[90px] py-3 font-semibold text-black my-3 rounded-full placeholder-black">
                 <button type="Submit" class="text-center">Submit</button>
             </div>
