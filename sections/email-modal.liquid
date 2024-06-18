@@ -1,7 +1,17 @@
+<style>
+    @media screen and (max-width: 415px){
+     #email-popup-product {
+        width: 301px !important;
+     }
+    }
+
+    /* md:h-[638px] */
+</style>
+
 <div id="container" class="fixed inset-0 z-50 flex flex-col md:flex-row md:justify-center items-center overflow-auto"
     style="margin: 0; padding: 0;">
     <div class="flex" style="margin: 0; padding: 0;">
-        <img class="w-[400px] h-[400px] mx-auto md:mx-0 md:w-full md:h-full rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
+        <img id="email-popup-product" class="w-11/12 md:w-full lg:w-full lg:h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
             src="{{ 'acl_product_image.jpeg' |  asset_url }}" alt="acl product image">
         <div class="z-auto absolute right-8 pt-4 pr-4 md:hidden">
             <svg id="mobile-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -11,7 +21,7 @@
         </div>
     </div>
     <div style="background: linear-gradient(180deg, #E561A1 0%, #FEB82B 22%, #2387FF 49%, #E561A1 76%, #FEB82B 100%);"
-        class="w-[85.2%] h-2/3 mx-auto md:mx-0 md:w-[30%] md:h-[92%] md:py-0 rounded-b-2xl md:rounded-e-2xl md:rounded-bl-none">
+        class="w-11/12 h-2/3 mx-auto md:mx-0 md:w-[30%] md:h-[92%] md:py-0 rounded-b-2xl md:rounded-e-2xl md:rounded-bl-none">
         <div class="z-auto relative left-0 pt-4 hidden md:block">
             <svg id="desktop-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="size-8 absolute right-4 cursor-pointer">
