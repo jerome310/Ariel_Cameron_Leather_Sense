@@ -859,16 +859,16 @@ video {
   height: 3rem !important;
 }
 
-.h-1\/2 {
-  height: 50%;
-}
-
 .h-10 {
   height: 2.5rem;
 }
 
 .h-16 {
   height: 4rem;
+}
+
+.h-2\/3 {
+  height: 66.666667%;
 }
 
 .h-20 {
@@ -933,10 +933,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-2\/3 {
-  height: 66.666667%;
 }
 
 .w-11\/12 {
@@ -1011,64 +1007,60 @@ video {
   width: 80px;
 }
 
+.w-\[85\.2\%\] {
+  width: 85.2%;
+}
+
 .w-full {
   width: 100%;
 }
 
-.w-\[30\%\] {
-  width: 30%;
+.w-\[40px\] {
+  width: 40px;
 }
 
-.w-\[3\%\] {
-  width: 3%;
+.w-\[4px\] {
+  width: 4px;
 }
 
-.w-\[\%\] {
-  width: %;
+.w-\[px\] {
+  width: px;
 }
 
-.w-\[2\%\] {
-  width: 2%;
+.w-\[3px\] {
+  width: 3px;
 }
 
-.w-\[28\%\] {
-  width: 28%;
+.w-\[310px\] {
+  width: 310px;
 }
 
-.w-\[\] {
-  width: ;
+.w-\[31px\] {
+  width: 31px;
 }
 
-.w-\[28\] {
-  width: 28;
+.w-\[39px\] {
+  width: 39px;
 }
 
-.w-10 {
-  width: 2.5rem;
+.w-\[398px\] {
+  width: 398px;
+}
+
+.w-3 {
+  width: 0.75rem;
+}
+
+.w-3\/5 {
+  width: 60%;
+}
+
+.w-11 {
+  width: 2.75rem;
 }
 
 .w-10\/12 {
   width: 83.333333%;
-}
-
-.w-\[85\] {
-  width: 85;
-}
-
-.w-\[85\%\] {
-  width: 85%;
-}
-
-.w-\[86\%\] {
-  width: 86%;
-}
-
-.w-\[85\.5\%\] {
-  width: 85.5%;
-}
-
-.w-\[85\.2\%\] {
-  width: 85.2%;
 }
 
 .max-w-6xl {
@@ -1924,11 +1916,13 @@ video {
   opacity: 1;
 }
 
-@media (min-width: 768px) {
-  .md\:relative {
-    position: relative;
+@media (max-width: 415px) {
+  .max-\[415px\]\:w-\[333px\] {
+    width: 333px;
   }
+}
 
+@media (min-width: 768px) {
   .md\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
@@ -1999,6 +1993,10 @@ video {
     height: 175px;
   }
 
+  .md\:h-\[638px\] {
+    height: 638px;
+  }
+
   .md\:h-\[800px\] {
     height: 800px;
   }
@@ -2009,10 +2007,6 @@ video {
 
   .md\:h-full {
     height: 100%;
-  }
-
-  .md\:h-\[400px\] {
-    height: 400px;
   }
 
   .md\:w-1\/2 {
@@ -2049,10 +2043,6 @@ video {
 
   .md\:w-full {
     width: 100%;
-  }
-
-  .md\:w-\[400px\] {
-    width: 400px;
   }
 
   .md\:max-w-lg {
@@ -2135,11 +2125,6 @@ video {
     padding-bottom: 0.5rem;
   }
 
-  .md\:py-8 {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-
   .md\:py-6 {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
@@ -2174,6 +2159,22 @@ video {
 }
 
 @media (min-width: 1024px) {
+  .lg\:h-2\/3 {
+    height: 66.666667%;
+  }
+
+  .lg\:h-full {
+    height: 100%;
+  }
+
+  .lg\:w-\[400px\] {
+    width: 400px;
+  }
+
+  .lg\:w-full {
+    width: 100%;
+  }
+
   .lg\:px-36 {
     padding-left: 9rem;
     padding-right: 9rem;
