@@ -271,16 +271,16 @@
                     // Start the confetti after 1 second
                     setTimeout(function () {
                         confetti.start();
-                    }, 1000);
+                    }, 0);
 
                     // Stop the confetti after 5 seconds
                     setTimeout(function () {
                         confetti.stop();
-                    }, 4500);
+                    }, 1000);
 
                     // After all animations have completed, redirect to the checkout page
                     setTimeout(function () {
                         window.location.href = '/checkout'; // Redirect to the checkout page
-                    }, 5000); // Adjust this time as needed
+                    }, 3000); // Adjust this time as needed
                 });
             };
