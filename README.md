@@ -1,6 +1,6 @@
 # Shopify Clone Steps
-1) Create a blank repo (Do not clone bernard repo into your create folder for that made repo yet)
-2) Create all the FOLDERS that's needed for Shopify that bernard has inside his repo inside your created project made for your repo NOT THE FILES YET! 
+1) Create a blank repo and connect your new project to that repo (Do not clone bernard repo into your created shopify project it pop up with errors)
+2) Create all the FOLDERS that's needed for a Shopify theme using the project named "Elizabeth_Clean" zip file that you have in your desktop and just grab the FOLDERS NOT THE FILES INSIDE
 2) Copy the FILES now and move them inside the folders that they're suppose to be located
 3) Use these commands: git init, git add ., git commit -m 'put a description', git push
 4) FINALLY you're done with creating your shopify github repo
