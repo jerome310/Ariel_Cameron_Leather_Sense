@@ -34,14 +34,29 @@ input[type="number"]::-webkit-inner-spin-button{
     margin: 0;
 }
 
-.par,.par-two,.par-three,.par-four {
-    margin: 35px 10px 24px 0;
-    border: 2px solid black;
-    background-color: none;
-    transition: background-color 0.5s ease; /* Add transition effect */
+.belt-container {
+    margin-top: 20px;
 }
 
-.par:hover,.par-two:hover,.par-three:hover,.par-four:hover {
+.belt-container h1 {
+    font-size: 30px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.par-five {
+    width: 30%;
+}
+
+.par,.par-two,.par-three,.par-four,.par-five {
+    margin: 0px 10px 24px 0;
+    border: 2px solid black;
+    transition: 0.5s ease;
+    cursor: pointer;
+    padding: 12px 0;
+}
+
+.par:hover,.par-two:hover,.par-three:hover,.par-four:hover,.par-five:hover {
     background-color: black;
     color: white;
 }
@@ -50,7 +65,7 @@ input[type="number"]::-webkit-inner-spin-button{
 </style>
 
 {% comment %} Start Belt Bag Individual Code {% endcomment %}
-{% if request.path contains 'belt-bag-collection/products' %}
+{% if request.path contains 'belt-bag-collection/products' or request.path contains '/products/beatrice-belt-bag' or request.path contains '/products/lloyd-belt-bag' or request.path contains '/products/yvette-belt-bag' %}
 <div class="max-w-6xl mx-auto my-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20">
         <div class="product--medias">
@@ -101,29 +116,57 @@ input[type="number"]::-webkit-inner-spin-button{
             <h3 class="text-5xl font-bold pt-2">{{ product.title }}</h3>
             <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
 
-            <form action="/cart/add" method="post">
-                <div class="flex">
-                    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-                    <div class="relative bg-red">
-                        <p>Quantity</p>
-                        <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
-                            onclick="decrementQuantity()">-</button>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1"
-                            class="w-32 px-5 py-2 border rounded-md text-center border-black bg-[#FEF0D4]">
-                        <button type="button" class="absolute top-4 right-0 p-2 text-gray-500 text-3xl"
-                            onclick="incrementQuantity()">+</button>
-                    </div>
+        <form id="cartForm" action="/cart/add" method="post">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        
+        <!-- Hidden input to store selected size -->
+        <input type="hidden" id="selectedOption" name="properties[Size]" value="">
+            <div class="flex">
+                <div class="relative bg-red">
+                    <p>Quantity</p>
+                    <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
+                        onclick="decrementQuantity()">-</button>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1"
+                        class="w-32 px-5 py-2 border rounded-md text-center border-black bg-[#FEF0D4]">
+                    <button type="button" class="absolute top-4 right-0 p-2 text-gray-500 text-3xl"
+                        onclick="incrementQuantity()">+</button>
                 </div>
-
-                <div class="flex">
-                  <p class="par w-20 py-3 text-center text-xl font-bold">S</p>
-                  <p class="par-two w-20 py-3 text-center text-xl font-bold">M</p>
-                  <p class="par-three w-20 py-3 text-center text-xl font-bold">L</p>
-                  <p class="par-four w-20 py-3 text-center text-xl font-bold">XL</p>
+            </div>
+        
+            <div class="belt-container flex flex-col font-bold text-xl">
+                <div>
+                    <h1>Belt Size</h1>
                 </div>
+                <div class="flex">
+                    <!-- Loop through options and find "Size" -->
+                    {% for option in product.options_with_values %}
+                    {% if option.name == 'Size' %}
+                    <!-- Loop through each size value individually and display them -->
+                    {% for value in option.values %}
+                    {% if value == 'S' %}
+                    <p class="par w-20 text-center">S</p>
+                    {% endif %}
+                    {% if value == 'M' %}
+                    <p class="par-two w-20 text-center">M</p>
+                    {% endif %}
+                    {% if value == 'L' %}
+                    <p class="par-three w-20 text-center">L</p>
+                    {% endif %}
+                    {% if value == 'XL' %}
+                    <p class="par-four w-20 text-center">XL</p>
+                    {% endif %}
+                    {% if value == 'Custom Size' %}
+                    <p class="par-five px-5 text-center">Custom Size</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
 
-                {% render 'add-to-cart-button' %}
-            </form>
+        
+            {% render 'add-to-cart-button' %}
+        </form>
 
             <div class="description-par">
                 <p class="text-left pr-28">{{ product.description }}</p>
@@ -211,6 +254,27 @@ input[type="number"]::-webkit-inner-spin-button{
 
 
 <script>
+    // Feature that forces the customer to pick a button before going to the cart page
+    let pClicked = false;
+        const pElements = document.querySelectorAll('.par, .par-two, .par-three, .par-four, .par-five');
+        const selectedOptionInput = document.getElementById('selectedOption');
+
+    pElements.forEach(p => {
+        p.addEventListener('click', function () {
+          pClicked = true;
+          selectedOptionInput.value = p.textContent; // Set the value of the hidden input
+        });
+    });
+
+    document.getElementById('cartForm').addEventListener('submit', function (e) {
+            if (!pClicked) {
+                e.preventDefault();
+                alert("Please select a size option before adding to cart.");
+            }
+    });
+    
+
+    // Mobile Responsive Scroll Feature
     const swiper = new Swiper('.swiper', {
         direction: 'horizontal',
 
@@ -223,9 +287,6 @@ input[type="number"]::-webkit-inner-spin-button{
             nextEl: '.swiper-button-next'
         }
     })
-
-    
-
 </script>
 
 {% render 'multi-product-selector' %}
