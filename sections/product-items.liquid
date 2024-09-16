@@ -251,6 +251,8 @@ input[type="number"]::-webkit-inner-spin-button{
 </div>
 {% endif %}
 
+{% render 'multi-product-selector' %}
+
 
 
 <script>
@@ -272,6 +274,23 @@ input[type="number"]::-webkit-inner-spin-button{
                 alert("Please select a size option before adding to cart.");
             }
     });
+
+    // Quantity Amount Feature
+    function incrementQuantity() {
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value);
+        if (!isNaN(currentValue)) {
+            quantityInput.value = currentValue + 1;
+        }
+    }
+
+    function decrementQuantity() {
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value);
+        if (!isNaN(currentValue) && currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    }
     
 
     // Mobile Responsive Scroll Feature
@@ -288,5 +307,3 @@ input[type="number"]::-webkit-inner-spin-button{
         }
     })
 </script>
-
-{% render 'multi-product-selector' %}
