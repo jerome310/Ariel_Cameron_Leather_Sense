@@ -35,7 +35,7 @@
                             {% if item.product.handle == 'beatrice-belt-bag' or item.product.handle == 'lloyd-belt-bag'
                             or item.product.handle == 'yvette-belt-bag' or item.product.handle contains
                             'belt-bag-collection' %}
-                            <p>Belt Size: {{ item.properties.Size }}</p>
+                            <p>Belt Length: {{ item.properties.Size }}</p>
                             {% endif %}
                             <a href="{{ item.url }}" class="my-1">{{ item.product.title | truncatewords: 5}}</a>
                             <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
