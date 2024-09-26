@@ -200,7 +200,27 @@ input[type="number"]::-webkit-inner-spin-button{
             </div>
         </div>
     </div>
+
+    {% if request.path == '/collections/belt-bag-collection/products/beatrice-belt-bag' or request.path == '/products/beatrice-belt-bag' %}
+      <div class="mt-16">
+        <h2 class="text-3xl font-bold mb-8 text-center">Complete The Beatrice Collection</h2>
+        <div class="flex justify-around">
+          {% for product in collections['beatrice-collection'].products limit: 8 %}
+            {% unless product.handle == 'beatrice-belt-bag' %}
+              <div class="beatrice-product">
+                <a href="{{ product.url }}">
+                  <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
+                  <p class="mt-2 text-base font-medium">{{ product.title }}</p>
+                  <p class="text-base text-gray-600">{{ product.price | money }}</p>
+                </a>
+              </div>
+            {% endunless %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
 </div>
+
 {% comment %} End Belt Bag Individual Code {% endcomment %}
 {% else %}
 <div class="max-w-6xl mx-auto my-8">
