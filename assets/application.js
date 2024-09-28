@@ -263,8 +263,8 @@
         })();
 
         window.onload = function () {
-                let celebrateButton = document.getElementById("celebrate");
-
+            let celebrateButton = document.getElementById("celebrate");
+            if (celebrateButton) {
                 celebrateButton.addEventListener("click", function (event) {
                     event.preventDefault(); // Prevent the form from submitting immediately
 
@@ -283,4 +283,5 @@
                         window.location.href = '/checkout'; // Redirect to the checkout page
                     }, 3000); // Adjust this time as needed
                 });
-            };
+            }
+        };
