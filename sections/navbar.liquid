@@ -99,16 +99,16 @@
 
     {% comment %} Mobile White border box {% endcomment %}
 
-    <div x-show="searchBarButtonOpenMobile" class="relative flex items-center justify-center left-[50px]">
+    <div x-show="searchBarButtonOpenMobile" class="relative flex items-center justify-center">
         <button type="button" x-on:click="searchBarButtonOpenMobile = false"
-            class="absolute top-0 right-[50px] mr-5 mt-4 text-gray-500">
+            class="absolute top-0 right-0 mr-5 mt-4 text-gray-500">
             {% render 'icon-close' %}
         </button>
         <div class="w-full h-28 flex justify-center items-center">
             <form action="{{ routes.search_url }}" method="get" class="flex-auto">
                 <div class="relative w-full mx-auto text-gray-500 px-2.5">
                     <input type="search" name="q" placeholder="Search"
-                        class="w-[90%] bg-white h-10 px-5 pr-5 text-sm focus:outline-none border-2 border-[#E561A1]">
+                        class="w-[90%] bg-white h-10 mx-3 px-3 md:px-5 md:pr-5 text-sm focus:outline-none border-2 border-[#E561A1]">
                 </div>
             </form>
         </div>
