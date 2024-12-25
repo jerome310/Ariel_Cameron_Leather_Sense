@@ -3,7 +3,7 @@
 </div>
 
 <!-- Create a navbar slider with a hamburger icon -->
-<div class="flex flex-col max-w-screen-lg mx-auto pt-5" x-data="{open: false, searchBarButtonOpen: false}">
+<div class="flex flex-col max-w-screen-lg mx-auto pt-5" x-data="{open: false, searchBarButtonOpen: false, searchBarButtonOpenMobile: false}">
     <!-- Navbar -->
     <div class="flex items-center justify-between px-4 py-3">
         <!-- Hamburger icon -->
@@ -39,9 +39,13 @@
         </div>
         <div class="flex md:block text-[#2E2D34] md:hidden">
             <!-- Mobile Search icon -->
-            <div class="pr-4">
-                {% render 'icon-search' %}
+            <div class="text-[#2E2D34] block md:hidden pr-4">
+                <button x-on:click="searchBarButtonOpenMobile = true" type="button"
+                    class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
+                    {% render 'icon-search' %}
+                </button>
             </div>
+
             <div>
                 <!-- Shopping icon -->
                 {% render 'icon-cart' %}
@@ -77,10 +81,27 @@
             href="{{ link.url }}">{{ link.title }}</a>
         {% endfor %}
     </div>
-    <!-- White border box -->
+    <!-- Desktop White border box -->
     
     <div x-show="searchBarButtonOpen" class="relative flex items-center justify-center left-[50px]">
         <button type="button" x-on:click="searchBarButtonOpen = false" class="absolute top-0 right-[50px] mr-5 mt-4 text-gray-500">
+            {% render 'icon-close' %}
+        </button>
+        <div class="w-full h-28 flex justify-center items-center">
+            <form action="{{ routes.search_url }}" method="get" class="flex-auto">
+                <div class="relative w-full mx-auto text-gray-500 px-2.5">
+                    <input type="search" name="q" placeholder="Search"
+                        class="w-[90%] bg-white h-10 px-5 pr-5 text-sm focus:outline-none border-2 border-[#E561A1]">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% comment %} Mobile White border box {% endcomment %}
+
+    <div x-show="searchBarButtonOpenMobile" class="relative flex items-center justify-center left-[50px]">
+        <button type="button" x-on:click="searchBarButtonOpenMobile = false"
+            class="absolute top-0 right-[50px] mr-5 mt-4 text-gray-500">
             {% render 'icon-close' %}
         </button>
         <div class="w-full h-28 flex justify-center items-center">
