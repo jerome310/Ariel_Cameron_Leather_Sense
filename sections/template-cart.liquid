@@ -65,14 +65,12 @@
                 </div>
 
                 <div class="w-full my-4 md:w-80">
-                    <h3 class="text-xl">Subtotal: {{ cart.total_price | money }}</h3>
+                    {% render 'subtotal' %}
                     <div class="my-2">
-                        <button type="submit" name="update"
-                            class="w-full p-3 border border-gray-600 text-gray-600 font-medium hover:bg-gray-600 hover:text-white">Update</button>
+                        {% render 'update-button' %}
                     </div>
                     <div class="my-2">
-                        <button id="celebrate" type="submit" name="checkout"
-                            class="w-full p-3 border border-gray-600 font-medium bg-gray-600 text-white">Checkout</button>
+                        {% render 'checkout-button' %}
                     </div>
                 </div>
             </div>
