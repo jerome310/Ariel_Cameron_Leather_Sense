@@ -207,14 +207,14 @@ input[type="number"]::-webkit-inner-spin-button{
     {% if request.path == '/collections/belt-bag-collection/products/beatrice-belt-bag' or request.path == '/products/beatrice-belt-bag' %}
       <div class="my-16">
         <h2 class="text-3xl font-bold mb-8 text-center">Complete The Beatrice Collection</h2>
-        <div class="flex justify-around">
+        <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
           {% for product in collections['beatrice-collection'].products limit: 8 %}
             {% unless product.handle == 'beatrice-belt-bag' %}
-              <div class="beatrice-product">
+              <div class="beatrice-product flex">
                 <a href="{{ product.url }}">
                   <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
-                  <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                  <p class="text-base text-gray-600">{{ product.price | money }}</p>
+                  <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
+                  <p class="text-xl text-gray-600 mb-10">{{ product.price | money }}</p>
                 </a>
               </div>
             {% endunless %}
@@ -227,15 +227,15 @@ input[type="number"]::-webkit-inner-spin-button{
     {% if request.path == '/collections/belt-bag-collection/products/lloyd-belt-bag' or request.path == '/products/lloyd-belt-bag' %}
       <div class="my-16">
         <h2 class="text-3xl font-bold mb-8 text-center">Complete The Lloyd Collection</h2>
-        <div class="flex justify-around">
+        <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
           {% for product in collections['lloyd-collection'].products limit: 8 %}
             {% unless product.handle == 'lloyd-belt-bag' %}
             <div>
                 <a href="{{ product.url }}">
                     <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
                         class="w-full h-auto object-cover rounded-lg">
-                    <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                    <p class="text-base text-gray-600">{{ product.price | money }}</p>
+                    <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
+                    <p class="text-xl text-gray-600 mb-10">{{ product.price | money }}</p>
                 </a>
             </div>
             {% endunless %}
@@ -248,15 +248,15 @@ input[type="number"]::-webkit-inner-spin-button{
             {% if request.path == '/collections/belt-bag-collection/products/yvette-belt-bag' or request.path == '/products/yvette-belt-bag' %}
             <div class="my-16">
         <h2 class="text-3xl font-bold mb-8 text-center">Complete The Lloyd Collection</h2>
-        <div class="flex justify-around">
+        <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
           {% for product in collections['yvette-collection'].products limit: 8 %}
             {% unless product.handle == 'yvette-belt-bag' %}
             <div>
                 <a href="{{ product.url }}">
                     <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
                         class="w-full h-auto object-cover rounded-lg">
-                    <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                    <p class="text-base text-gray-600">{{ product.price | money }}</p>
+                    <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
+                    <p class="text-xl text-gray-600 mb-10">{{ product.price | money }}</p>
                 </a>
             </div>
             {% endunless %}
