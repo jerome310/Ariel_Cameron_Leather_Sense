@@ -1001,10 +1001,6 @@ video {
   width: 20rem;
 }
 
-.w-\[1000\%\] {
-  width: 1000%;
-}
-
 .w-\[125px\] {
   width: 125px;
 }
@@ -1047,18 +1043,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[10\%\] {
-  width: 10%;
-}
-
-.w-\[0\%\] {
-  width: 0%;
-}
-
-.w-\[80\%\] {
-  width: 80%;
 }
 
 .max-w-6xl {
@@ -2048,6 +2032,10 @@ video {
 
   .md\:w-full {
     width: 100%;
+  }
+
+  .md\:w-auto {
+    width: auto;
   }
 
   .md\:max-w-lg {
