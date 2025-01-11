@@ -22,7 +22,7 @@
 <div id="container" class="fixed inset-0 z-50 flex flex-col md:flex-row md:justify-center items-center overflow-auto"
     style="margin: 0; padding: 0;">
     <div class="flex" style="margin: 0; padding: 0;">
-        <img id="email-popup-product" class="w-11/12 md:w-full lg:w-full lg:h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
+        <img id="email-popup-product" class="w-[428px] md:w-full lg:w-full lg:h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
             src="{{ 'acl_product_image.jpeg' |  asset_url }}" alt="acl product image">
         <div class="z-auto absolute right-8 pt-4 pr-4 md:hidden">
             <svg id="mobile-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div id="email-popup-color" style="background: linear-gradient(180deg, #E561A1 0%, #FEB82B 22%, #2387FF 49%, #E561A1 76%, #FEB82B 100%);"
-        class="w-11/12 h-2/3 mx-auto md:mx-0 md:w-[30%] md:h-[92%] md:py-0 rounded-b-2xl md:rounded-e-2xl md:rounded-bl-none">
+        class="w-[428px] h-[500px] mx-auto md:mx-0 rounded-b-2xl md:rounded-e-2xl md:rounded-bl-none">
         <div class="z-auto relative left-0 pt-4 hidden md:block">
             <svg id="desktop-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="size-8 absolute right-4 cursor-pointer">
@@ -47,8 +47,8 @@
         <div class="flex mt-4 flex-col justify-center items-center">
             <input id="email-input" type="email" name="contact[email]" placeholder="Email Address"
                 class="outline-none py-3 font-semibold pl-4 text-black px-40 md:px-6 lg:pr-36 my-3 rounded-full placeholder-black">
-            {% comment %} <input type="tel" name="contact[phone]" placeholder="Phone Number"
-                class="outline-none py-3 font-semibold pl-4 text-black px-40 my-3 rounded-full placeholder-black"> {% endcomment %}
+            <input type="tel" name="contact[phone]" placeholder="Phone Number"
+                class="outline-none py-3 font-semibold pl-4 text-black px-40 my-3 rounded-full placeholder-black">
             <div id="email-submit"
                 class="bg-white px-[150px] lg:px-36 md:px-[90px] py-3 font-semibold text-black my-3 rounded-full placeholder-black">
                 <button type="Submit" class="text-center">Submit</button>
