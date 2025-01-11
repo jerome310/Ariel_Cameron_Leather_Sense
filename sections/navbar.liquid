@@ -1,32 +1,40 @@
 <div class="py-4 px-10 md:px-0 bg-gradient-to-r from-[#feb82b]/50 via-[#e561a1]/50 to-[#feb82b]/50">
-    <p class="text-center">&#128075;Welcome to Ariel Cameron Leather, the home of handmade leather goods &#128512;</p>
+    <p class="text-center" aria-label="Welcome message">&#128075;Welcome to Ariel Cameron Leather, the home of handmade
+        leather goods &#128512;</p>
 </div>
 
 <!-- Create a navbar slider with a hamburger icon -->
-<div class="flex flex-col max-w-screen-lg mx-auto pt-5" x-data="{open: false, searchBarButtonOpen: false, searchBarButtonOpenMobile: false}">
+<div class="flex flex-col max-w-screen-lg mx-auto pt-5"
+    x-data="{open: false, searchBarButtonOpen: false, searchBarButtonOpenMobile: false}">
     <!-- Navbar -->
     <div class="flex items-center justify-between px-4 py-3">
         <!-- Hamburger icon -->
-        <button class="text-[#2E2D34] focus:outline-none md:hidden" x-on:click="open = !open">
-            <svg class="h-6 w-6" x-show="!open" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button class="text-[#2E2D34] focus:outline-none md:hidden" x-on:click="open = !open"
+            :aria-expanded="open.toString()">
+            <svg class="h-6 w-6" x-show="!open" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                aria-label="Open menu">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-            <svg class="h-6 w-6" x-show="open" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="h-6 w-6" x-show="open" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                aria-label="Close menu">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
         <!-- Desktop Search icon -->
         <div class="text-[#2E2D34] hidden md:block">
-            <button x-on:click="searchBarButtonOpen = true; $nextTick(() => { document.body.style.overflow = 'hidden'; })" type="button" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
+            <button
+                x-on:click="searchBarButtonOpen = true; $nextTick(() => { document.body.style.overflow = 'hidden'; })"
+                type="button" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900"
+                aria-label="Open search bar">
                 {% render 'icon-search' %}
             </button>
         </div>
         <!-- Desktop Logo -->
         <div class="text-center">
-            <a href="{{ shop.url }}">
+            <a href="{{ shop.url }}" title="Homepage">
                 {% if section.settings.image == blank %}
-                <img class="ml-[25px] md:ml-0 w-[150px] h-[150px] md:w-[175px] md:h-[175px]"
-                    src="{{ 'logo.png' |  asset_url }}" alt="My company logo">
+                <img class="mx-auto w-[150px] h-[150px] md:w-[175px] md:h-[175px]" src="{{ 'logo.png' | asset_url }}"
+                    alt="My company logo">
                 {% else %}
                 <img class="w-[150px] h-[150px] md:w-[175px] md:h-[175px]"
                     src="{{ section.settings.image | img_url: 'master' }}" alt="My company logo">
@@ -37,36 +45,36 @@
         <div class="text-[#2E2D34] hidden md:block">
             {% render 'icon-cart' %}
         </div>
+        <!-- Mobile Search and Cart -->
         <div class="flex md:block text-[#2E2D34] md:hidden">
-            <!-- Mobile Search icon -->
-            <div class="text-[#2E2D34] block md:hidden pr-4">
-                <button x-on:click="searchBarButtonOpenMobile = true; $nextTick(() => { document.body.style.overflow = 'hidden'; })"
-                    type="button"
-                    class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
+            <div class="pr-4">
+                <button
+                    x-on:click="searchBarButtonOpenMobile = true; $nextTick(() => { document.body.style.overflow = 'hidden'; })"
+                    type="button" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900"
+                    aria-label="Open mobile search bar">
                     {% render 'icon-search' %}
                 </button>
             </div>
-
             <div>
-                <!-- Shopping icon -->
                 {% render 'icon-cart' %}
             </div>
         </div>
-
     </div>
     <!-- Slider -->
     <div class="bg-[#FEB82B]/20 md:hidden" x-show="open" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="transform -translate-x-full" x-transition:enter-end="transform translate-x-0"
         x-transition:leave="transition ease-in duration-300" x-transition:leave-start="transform translate-x-0"
         x-transition:leave-end="transform -translate-x-full">
-        <!-- Links -->
         <div class="flex flex-col px-4 pt-6 md:pt-0 md:py-2 space-y-2">
+            {% if linklists.main-menu.links.size > 0 %}
             {% for link in linklists.main-menu.links %}
             <a class="font-normal text-black hover:underline underline-offset-4 decoration-1 block px-3 py-2 rounded-md text-base"
-                href="{{ link.url }}">{{ link.title }}</a>
+                href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
             {% endfor %}
+            {% else %}
+            <p class="text-black px-3 py-2">No menu links available.</p>
+            {% endif %}
         </div>
-        <!-- Social Media Icons -->
         <div class="flex px-6 pt-8 pb-6">
             {% render 'social-media-twitter' %}
             {% render 'social-media-facebook' %}
@@ -75,45 +83,17 @@
             {% render 'social-media-tiktok' %}
         </div>
     </div>
-    <!-- Desktop Navabar -->
+    <!-- Desktop Navbar -->
     <div class="hidden md:flex items-center justify-around max-w-screen-md mx-auto mt-4">
+        {% if linklists.main-menu.links.size > 0 %}
         {% for link in linklists.main-menu.links %}
         <a class="font-normal text-[#5E5C66] hover:underline underline-offset-4 decoration-1 block px-3 py-2 rounded-md text-base"
-            href="{{ link.url }}">{{ link.title }}</a>
+            href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
         {% endfor %}
+        {% endif %}
     </div>
-    <!-- Desktop White border box -->
-    
-    <div x-show="searchBarButtonOpen" class="relative flex items-center justify-center md:left-[50px]">
-        <button type="button" x-on:click="searchBarButtonOpen = false; $nextTick(() => { document.body.style.overflow = 'auto'; })" class="absolute top-0 right-[50px] mr-5 mt-4 text-gray-500">
-            {% render 'icon-close' %}
-        </button>
-        <div class="w-full h-28 flex justify-center items-center">
-            <form action="{{ routes.search_url }}" method="get" class="flex-auto">
-                <div class="relative w-full mx-auto text-gray-500 px-2.5">
-                    <input type="search" name="q" placeholder="Search"
-                        class="w-[90%] bg-white h-10 px-5 pr-5 text-sm focus:outline-none border-2 border-[#E561A1]">
-                </div>
-            </form>
-        </div>
-    </div>
+</div>
 
-    {% comment %} Mobile White border box {% endcomment %}
-
-    <div x-show="searchBarButtonOpenMobile" class="relative flex items-center justify-center">
-        <button type="button" x-on:click="searchBarButtonOpenMobile = false; $nextTick(() => { document.body.style.overflow = 'auto'; })"
-            class="absolute top-0 right-0 mr-0 mt-4 text-gray-500">
-            {% render 'icon-close' %}
-        </button>
-        <div class="w-full h-28 flex justify-center items-center">
-            <form action="{{ routes.search_url }}" method="get" class="flex-auto">
-                <div class="relative w-full mx-auto text-gray-500 px-2.5">
-                    <input type="search" name="q" placeholder="Search"
-                        class="w-[90%] bg-white h-10 mx-3 px-3 md:px-5 md:pr-5 text-sm focus:outline-none border-2 border-[#E561A1]">
-                </div>
-            </form>
-        </div>
-    </div>
 
 
 {% schema %}
