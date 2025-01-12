@@ -15,6 +15,10 @@ module.exports = {
       fontFamily: {
         comic: ['"Comic Neue"', "cursive"],
       },
+      screens: {
+      'smallestDevices': "320px", // Custom breakpoint for 320px
+      'mobileWindowScreen': "499px" // Custom breakpoint for 499px
+      },
     },
   },
   plugins: [],
