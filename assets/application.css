@@ -1897,6 +1897,10 @@ video {
     height: 700px;
   }
 
+  .smallestDevices\:h-\[550px\] {
+    height: 550px;
+  }
+
   .smallestDevices\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
