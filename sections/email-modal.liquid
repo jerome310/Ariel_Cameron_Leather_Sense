@@ -35,7 +35,7 @@
     </div>
     <div id="email-popup-color"
         style="background: linear-gradient(180deg, #E561A1 0%, #FEB82B 22%, #2387FF 49%, #E561A1 76%, #FEB82B 100%);"
-        class="w-[428px] h-[500px] mx-auto md:mx-0 rounded-b-2xl md:rounded-e-2xl md:rounded-bl-none">
+        class="w-[428px] smallestDevices:h-[550px] sm:h-[500px] mx-auto md:mx-0 rounded-b-2xl md:rounded-e-2xl md:rounded-bl-none">
         <div class="z-auto relative left-0 pt-4 hidden md:block">
             <svg id="desktop-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="size-8 absolute right-4 cursor-pointer">
@@ -49,7 +49,7 @@
         {% form 'customer' %}
         <div class="flex mt-4 flex-col justify-center items-center">
             <input id="email-input" type="email" name="contact[email]" placeholder="Email Address"
-                class="outline-none py-3 font-semibold pl-4 text-black px-40 md:px-6 lg:pr-36 my-3 rounded-full placeholder-black">
+                class="outline-none py-3 font-semibold text-black smallestDevices:px-10 mobileWindowScreen:w-4/5 my-3 rounded-full placeholder-black">
             <input type="tel" name="contact[phone]" placeholder="Phone Number"
                 class="outline-none py-3 font-semibold pr-6 text-black smallestDevices:px-10 mobileWindowScreen:w-4/5 my-3 rounded-full placeholder-black">
             <div id="email-submit"
