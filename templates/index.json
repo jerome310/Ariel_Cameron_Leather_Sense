@@ -1,7 +1,7 @@
 {
     "sections": {
-        "email-modal": {
-            "type": "email-modal",
+        "email-modal-new": {
+            "type": "email-modal-new",
             "settings": {}
         },
         "homepage-hero": {
@@ -25,5 +25,5 @@
             "settings": {}
         }
     },
-    "order": ["email-modal","homepage-hero","collection-line","gradient-message", "variety-product-card", "four-column-description"]
+    "order": ["email-modal-new","homepage-hero","collection-line","gradient-message", "variety-product-card", "four-column-description"]
 }
