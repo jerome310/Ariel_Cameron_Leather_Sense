@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Popup Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 80%;
+            max-width: 800px;
+        }
+        .modal-image {
+            flex: 1;
+            background-image: url('https://via.placeholder.com/400'); /* Placeholder image */
+            background-size: cover;
+            background-position: center;
+        }
+        .modal-form {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-form img {
+            width: 100px; /* Company logo size */
+            margin-bottom: 20px;
+        }
+        .modal-form h2 {
+            margin: 0 0 10px;
+        }
+        .modal-form input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .modal-form button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .modal-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="modal" id="emailModal">
+    <div class="modal-content">
+        <div class="modal-image">
+            <img id="email-popup-product"
+                class="w-[428px] lg:h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
+                src="{{ 'acl_product_image.jpeg' |  asset_url }}" alt="acl product image">
+        </div>
+        <div class="modal-form">
+            <img style="width: 150px; height: 125px;" class="mx-auto" src="{{ 'acl_logo.png' |  asset_url }}" alt="acl product image"> <!-- Placeholder logo -->
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest updates and exclusive offers!</p>
+            <input type="email" placeholder="Email Address" required>
+            <input type="tel" placeholder="Phone Number" required>
+            <button type="submit">Subscribe</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Show the modal after 1 second
+    setTimeout(function() {
+        document.getElementById('emailModal').style.display = 'flex';
+    }, 1000);
+</script>
+
+</body>
+</html> 
