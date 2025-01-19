@@ -956,22 +956,6 @@ video {
   height: 100vh;
 }
 
-.h-\[1px\] {
-  height: 1px;
-}
-
-.h-\[5px\] {
-  height: 5px;
-}
-
-.h-\[35px\] {
-  height: 35px;
-}
-
-.h-\[305px\] {
-  height: 305px;
-}
-
 .w-11\/12 {
   width: 91.666667%;
 }
@@ -1046,66 +1030,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[1px\] {
-  width: 1px;
-}
-
-.w-\[17px\] {
-  width: 17px;
-}
-
-.w-\[175px\] {
-  width: 175px;
-}
-
-.w-\[px\] {
-  width: px;
-}
-
-.w-\[20px\] {
-  width: 20px;
-}
-
-.w-\[200px\] {
-  width: 200px;
-}
-
-.w-\[250px\] {
-  width: 250px;
-}
-
-.w-\[0px\] {
-  width: 0px;
-}
-
-.w-\[1000px\] {
-  width: 1000px;
-}
-
-.w-\[3px\] {
-  width: 3px;
-}
-
-.w-\[35px\] {
-  width: 35px;
-}
-
-.w-\[500px\] {
-  width: 500px;
-}
-
-.w-\[\] {
-  width: ;
-}
-
-.w-\[10\%\] {
-  width: 10%;
-}
-
-.w-\[1\%\] {
-  width: 1%;
 }
 
 .max-w-6xl {
@@ -1951,14 +1875,6 @@ video {
     height: 550px;
   }
 
-  .smallestDevices\:h-\[50vh\] {
-    height: 50vh;
-  }
-
-  .smallestDevices\:h-\[68\.75vh\] {
-    height: 68.75vh;
-  }
-
   .smallestDevices\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
@@ -1974,14 +1890,6 @@ video {
 @media (min-width: 640px) {
   .sm\:h-\[500px\] {
     height: 500px;
-  }
-
-  .sm\:h-\[60vh\] {
-    height: 60vh;
-  }
-
-  .sm\:h-\[62\.5vh\] {
-    height: 62.5vh;
   }
 }
 
@@ -2068,22 +1976,6 @@ video {
     height: 100%;
   }
 
-  .md\:h-\[70vh\] {
-    height: 70vh;
-  }
-
-  .md\:h-\[7vh\] {
-    height: 7vh;
-  }
-
-  .md\:h-\[75vh\] {
-    height: 75vh;
-  }
-
-  .md\:h-\[92\%\] {
-    height: 92%;
-  }
-
   .md\:w-1\/2 {
     width: 50%;
   }
@@ -2118,10 +2010,6 @@ video {
 
   .md\:w-full {
     width: 100%;
-  }
-
-  .md\:w-\[30\%\] {
-    width: 30%;
   }
 
   .md\:max-w-lg {
@@ -2194,11 +2082,6 @@ video {
     padding-bottom: 1.5rem;
   }
 
-  .md\:py-0 {
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-
   .md\:pl-0 {
     padding-left: 0px;
   }
@@ -2234,13 +2117,5 @@ video {
 
   .lg\:h-full {
     height: 100%;
-  }
-
-  .lg\:h-\[80vh\] {
-    height: 80vh;
-  }
-
-  .lg\:h-auto {
-    height: auto;
   }
 }
