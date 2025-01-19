@@ -21,6 +21,9 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            opacity: 0; /* Start with opacity 0 */
+            transform: translateY(50px); /* Start further below */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Transition for opacity and transform */
         }
         .modal-content {
             display: flex;
@@ -79,12 +82,12 @@
             <img id="email-popup-product"
                 class="w-full h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
                 src="{{ 'acl_product_image.jpeg' |  asset_url }}" alt="acl product image">
-                <div class="z-auto absolute top-0 ml-4 pt-4 pr-4 md:hidden">
-                    <svg id="mobile-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-8 cursor-pointer">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                    </svg>
-                </div>
+            <div class="z-auto absolute top-0 ml-4 pt-4 pr-4 md:hidden">
+                <svg id="mobile-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-8 cursor-pointer">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </div>
         </div>
         <div class="modal-form text-center">
             <img style="width: 150px; height: 125px;" class="mx-auto" src="{{ 'acl_logo.png' |  asset_url }}" alt="acl product image"> <!-- Placeholder logo -->
@@ -98,10 +101,28 @@
 </div>
 
 <script>
-    // Show the modal after 1 second
-    setTimeout(function() {
-        document.getElementById('emailModal').style.display = 'flex';
-    }, 1000);
+    // Initially hide the modal
+    const emailModal = document.getElementById('emailModal');
+    emailModal.style.opacity = '0';
+    emailModal.style.display = 'flex'; // Set display to flex immediately
+
+    // Show the modal after 3 seconds
+    setTimeout(function () {
+        if (emailModal) { // Check if the modal exists before applying styles
+            emailModal.style.transition = 'opacity 0.5s ease-in';
+            emailModal.style.opacity = '1'; // Fade in effect
+            emailModal.style.transform = 'translateY(0)'; // Slide up effect
+        }
+    }, 3000); // Keep the timeout at 3000 milliseconds
+
+    // Mobile close button functionality
+    document.getElementById('mobile-button').addEventListener('click', () => {
+        emailModal.style.opacity = '0'; // Fade out effect
+        emailModal.style.transform = 'translateY(50px)'; // Slide down effect
+        setTimeout(() => {
+            emailModal.style.display = 'none'; // Hide the modal after fade out
+        }, 500); // Match this timeout with the transition duration
+    });
 </script>
 
 </body>
