@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,10 @@
             margin: 0;
             padding: 0;
         }
+
         .modal {
-            display: none; /* Hidden by default */
+            display: none;
+            /* Hidden by default */
             position: fixed;
             top: 0;
             left: 0;
@@ -21,10 +24,14 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            opacity: 0; /* Start with opacity 0 */
-            transform: translateY(50px); /* Start further below */
-            transition: opacity 0.5s ease, transform 0.5s ease; /* Transition for opacity and transform */
+            opacity: 0;
+            /* Start with opacity 0 */
+            transform: translateY(50px);
+            /* Start further below */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            /* Transition for opacity and transform */
         }
+
         .modal-content {
             display: flex;
             background: white;
@@ -33,12 +40,15 @@
             width: 80%;
             max-width: 800px;
         }
+
         .modal-image {
             flex: 1;
-            background-image: url('https://via.placeholder.com/400'); /* Placeholder image */
+            background-image: url('https://via.placeholder.com/400');
+            /* Placeholder image */
             background-size: cover;
             background-position: center;
         }
+
         .modal-form {
             flex: 1;
             padding: 20px;
@@ -47,13 +57,17 @@
             justify-content: center;
             align-items: center;
         }
+
         .modal-form img {
-            width: 100px; /* Company logo size */
+            width: 100px;
+            /* Company logo size */
             margin-bottom: 20px;
         }
+
         .modal-form h2 {
             margin: 0 0 10px;
         }
+
         .modal-form input {
             width: 80%;
             padding: 10px;
@@ -61,6 +75,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
         .modal-form button {
             padding: 10px 20px;
             background-color: #007BFF;
@@ -69,76 +84,118 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         .modal-form button:hover {
             background-color: #0056b3;
         }
+
+        /* Add this CSS to style the placeholder text color when the input is invalid */
+        .invalid-input::placeholder {
+            color: red; /* Change placeholder text color to red */
+        }
     </style>
 </head>
+
 <body>
 
-<div class="modal" id="emailModal">
-    <div class="modal-content flex flex-col md:flex-row">
-        <div class="modal-image">
-            <img id="email-popup-product"
-                class="w-full h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
-                src="{{ 'acl_product_image.jpeg' |  asset_url }}" alt="acl product image">
-            <div class="z-auto absolute top-0 ml-4 pt-4 pr-4 md:hidden">
-                <svg id="mobile-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-8 cursor-pointer">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
+    <div class="modal" id="emailModal">
+        <div class="modal-content flex flex-col md:flex-row">
+            <div class="modal-image">
+                <img id="email-popup-product"
+                    class="w-full h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
+                    src="{{ 'acl_product_image.jpeg' |  asset_url }}" alt="acl product image">
+                <div class="z-auto absolute top-0 ml-4 pt-4 pr-4 md:hidden">
+                    <svg id="mobile-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-8 cursor-pointer">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </div>
             </div>
-        </div>
-        <div class="modal-form text-center">
-            <div class="z-auto relative left-0 pt-0 hidden md:block">
-                <svg id="desktop-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-8 absolute md:left-[7rem] lg:left-[8rem] lg:bottom-[0px] cursor-pointer">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
+            <div class="modal-form text-center">
+                <div class="z-auto relative left-0 pt-0 hidden md:block">
+                    <svg id="desktop-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor"
+                        class="size-8 absolute md:left-[7rem] lg:left-[8rem] lg:bottom-[0px] cursor-pointer">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </div>
+                <img style="width: 150px; height: 150px;" class="mx-auto" src="{{ 'acl_logo.png' |  asset_url }}"
+                    alt="acl product image"> <!-- Placeholder logo -->
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>Get the latest updates and exclusive offers!</p>
+                <input id="email-input" type="email" name="contact[email]" placeholder="Email Address" required>
+                <input type="tel" name="contact[phone]" placeholder="Phone Number" required>
+                <button id="email-submit" type="submit">Subscribe</button>
             </div>
-            <img style="width: 150px; height: 150px;" class="mx-auto" src="{{ 'acl_logo.png' |  asset_url }}" alt="acl product image"> <!-- Placeholder logo -->
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get the latest updates and exclusive offers!</p>
-            <input type="email" placeholder="Email Address" required>
-            <input type="tel" placeholder="Phone Number" required>
-            <button type="submit">Subscribe</button>
         </div>
     </div>
-</div>
 
-<script>
-    // Initially hide the modal
-    const emailModal = document.getElementById('emailModal');
-    emailModal.style.opacity = '0';
-    emailModal.style.display = 'flex'; // Set display to flex immediately
+    <script>
+        // Initially hide the modal
+        const emailModal = document.getElementById('emailModal');
+        emailModal.style.opacity = '0';
+        emailModal.style.display = 'flex'; // Set display to flex immediately
 
-    // Show the modal after 3 seconds
-    setTimeout(function () {
-        if (emailModal) { // Check if the modal exists before applying styles
-            emailModal.style.transition = 'opacity 0.5s ease-in';
-            emailModal.style.opacity = '1'; // Fade in effect
-            emailModal.style.transform = 'translateY(0)'; // Slide up effect
-        }
-    }, 3000); // Keep the timeout at 3000 milliseconds
+        // Show the modal after 3 seconds
+        setTimeout(function () {
+            if (emailModal) { // Check if the modal exists before applying styles
+                emailModal.style.transition = 'opacity 0.5s ease-in';
+                emailModal.style.opacity = '1'; // Fade in effect
+                emailModal.style.transform = 'translateY(0)'; // Slide up effect
+            }
+        }, 3000); // Keep the timeout at 3000 milliseconds
 
-    // Mobile close button functionality
-    document.getElementById('mobile-button').addEventListener('click', () => {
-        emailModal.style.opacity = '0'; // Fade out effect
-        emailModal.style.transform = 'translateY(50px)'; // Slide down effect
-        setTimeout(() => {
-            emailModal.style.display = 'none'; // Hide the modal after fade out
-        }, 500); // Match this timeout with the transition duration
-    });
+        // Mobile close button functionality
+        document.getElementById('mobile-button').addEventListener('click', () => {
+            emailModal.style.opacity = '0'; // Fade out effect
+            emailModal.style.transform = 'translateY(50px)'; // Slide down effect
+            setTimeout(() => {
+                emailModal.style.display = 'none'; // Hide the modal after fade out
+            }, 500); // Match this timeout with the transition duration
+        });
 
-    // Desktop close button functionality
-    document.getElementById('desktop-button').addEventListener('click', () => {
-        emailModal.style.opacity = '0'; // Fade out effect
-        emailModal.style.transform = 'translateY(50px)'; // Slide down effect
-        setTimeout(() => {
-            emailModal.style.display = 'none'; // Hide the modal after fade out
-        }, 500); // Match this timeout with the transition duration
-    });
-</script>
+        // Desktop close button functionality
+        document.getElementById('desktop-button').addEventListener('click', () => {
+            emailModal.style.opacity = '0'; // Fade out effect
+            emailModal.style.transform = 'translateY(50px)'; // Slide down effect
+            setTimeout(() => {
+                emailModal.style.display = 'none'; // Hide the modal after fade out
+            }, 500); // Match this timeout with the transition duration
+        });
+
+        document.addEventListener('DOMContentLoaded', () => { // Ensure the DOM is fully loaded
+            // Regular expression for validating email addresses
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
+
+            // Function to validate email
+            function validateEmail() {
+                const emailInput = document.getElementById('email-input');
+                const email = emailInput.value;
+
+                // Check if the email is valid
+                if (!emailRegex.test(email)) {
+                    console.log("Invalid email detected"); // Debugging log
+                    // If the email is invalid, clear the input field
+                    emailInput.value = ""; // Clear the input field
+                    emailInput.placeholder = "Invalid Email Address"; // Set placeholder message
+                    emailInput.style.border = "1px solid red"; // Change border color to red
+                    emailInput.classList.add('invalid-input'); // Add class to change placeholder color
+                    return; // Exit the function
+                } else {
+                    emailInput.classList.remove('invalid-input'); // Remove class if email is valid
+                }
+
+                // Continue with form submission or other logic if email is valid
+            }
+
+            // Add event listener to the subscribe button
+            document.getElementById('email-submit').addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default form submission
+                validateEmail(); // Call the email validation function
+            });
+        });
+    </script>
 
 </body>
-</html> 
+
+</html>
