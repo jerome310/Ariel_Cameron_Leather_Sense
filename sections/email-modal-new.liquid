@@ -74,13 +74,19 @@
 <body>
 
 <div class="modal" id="emailModal">
-    <div class="modal-content">
+    <div class="modal-content flex flex-col md:flex-row">
         <div class="modal-image">
             <img id="email-popup-product"
-                class="w-[428px] lg:h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
+                class="w-full h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
                 src="{{ 'acl_product_image.jpeg' |  asset_url }}" alt="acl product image">
+                <div class="z-auto absolute top-0 ml-4 pt-4 pr-4 md:hidden">
+                    <svg id="mobile-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-8 cursor-pointer">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </div>
         </div>
-        <div class="modal-form">
+        <div class="modal-form text-center">
             <img style="width: 150px; height: 125px;" class="mx-auto" src="{{ 'acl_logo.png' |  asset_url }}" alt="acl product image"> <!-- Placeholder logo -->
             <h2>Subscribe to Our Newsletter</h2>
             <p>Get the latest updates and exclusive offers!</p>
