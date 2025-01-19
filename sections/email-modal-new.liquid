@@ -90,7 +90,13 @@
             </div>
         </div>
         <div class="modal-form text-center">
-            <img style="width: 150px; height: 125px;" class="mx-auto" src="{{ 'acl_logo.png' |  asset_url }}" alt="acl product image"> <!-- Placeholder logo -->
+            <div class="z-auto relative left-0 pt-0 hidden md:block">
+                <svg id="desktop-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-8 absolute md:left-[7rem] lg:left-[8rem] lg:bottom-[0px] cursor-pointer">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </div>
+            <img style="width: 150px; height: 150px;" class="mx-auto" src="{{ 'acl_logo.png' |  asset_url }}" alt="acl product image"> <!-- Placeholder logo -->
             <h2>Subscribe to Our Newsletter</h2>
             <p>Get the latest updates and exclusive offers!</p>
             <input type="email" placeholder="Email Address" required>
@@ -117,6 +123,15 @@
 
     // Mobile close button functionality
     document.getElementById('mobile-button').addEventListener('click', () => {
+        emailModal.style.opacity = '0'; // Fade out effect
+        emailModal.style.transform = 'translateY(50px)'; // Slide down effect
+        setTimeout(() => {
+            emailModal.style.display = 'none'; // Hide the modal after fade out
+        }, 500); // Match this timeout with the transition duration
+    });
+
+    // Desktop close button functionality
+    document.getElementById('desktop-button').addEventListener('click', () => {
         emailModal.style.opacity = '0'; // Fade out effect
         emailModal.style.transform = 'translateY(50px)'; // Slide down effect
         setTimeout(() => {
