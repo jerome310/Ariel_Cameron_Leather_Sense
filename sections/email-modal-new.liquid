@@ -88,11 +88,6 @@
         .modal-form button:hover {
             background-color: #0056b3;
         }
-
-        /* Add this CSS to style the placeholder text color when the input is invalid */
-        .invalid-input::placeholder {
-            color: red; /* Change placeholder text color to red */
-        }
     </style>
 </head>
 
@@ -124,7 +119,7 @@
                 <h2>Subscribe to Our Newsletter</h2>
                 <p>Get the latest updates and exclusive offers!</p>
                 <input id="email-input" type="email" name="contact[email]" placeholder="Email Address" required>
-                <input type="tel" name="contact[phone]" placeholder="Phone Number" required>
+                <input type="tel" id="phone-input" name="contact[phone]" placeholder="Phone Number" required>
                 <button id="email-submit" type="submit">Subscribe</button>
             </div>
         </div>
@@ -163,9 +158,12 @@
             }, 500); // Match this timeout with the transition duration
         });
 
+        // Email Address Functionality Code
         document.addEventListener('DOMContentLoaded', () => { // Ensure the DOM is fully loaded
             // Regular expression for validating email addresses
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
+            // Updated regular expression for validating phone numbers
+            const phoneRegex = /^(?:\(\d{3}\)\s?|\d{3}[-\s]?)(\d{3})[-\s]?(\d{4})$/; // Flexible phone number formats
 
             // Function to validate email
             function validateEmail() {
@@ -173,25 +171,41 @@
                 const email = emailInput.value;
 
                 // Check if the email is valid
-                if (!emailRegex.test(email)) {
+                if (!emailRegex.test(email) || email.trim() === "") {
                     console.log("Invalid email detected"); // Debugging log
-                    // If the email is invalid, clear the input field
                     emailInput.value = ""; // Clear the input field
                     emailInput.placeholder = "Invalid Email Address"; // Set placeholder message
                     emailInput.style.border = "1px solid red"; // Change border color to red
-                    emailInput.classList.add('invalid-input'); // Add class to change placeholder color
                     return; // Exit the function
                 } else {
-                    emailInput.classList.remove('invalid-input'); // Remove class if email is valid
+                    emailInput.style.border = ""; // Remove red border if valid
+                    emailInput.placeholder = "Email Address"; // Reset placeholder
                 }
+            }
 
-                // Continue with form submission or other logic if email is valid
+            // Function to validate phone number
+            function validatePhone() {
+                const phoneInput = document.getElementById('phone-input');
+                const phone = phoneInput.value;
+
+                // Check if the phone number is valid
+                if (!phoneRegex.test(phone) || phone.trim() === "") {
+                    console.log("Invalid phone number detected"); // Debugging log
+                    phoneInput.value = ""; // Clear the input field
+                    phoneInput.placeholder = "Invalid Phone Number"; // Set placeholder message
+                    phoneInput.style.border = "1px solid red"; // Change border color to red
+                    return; // Exit the function
+                } else {
+                    phoneInput.style.border = ""; // Remove red border if valid
+                    phoneInput.placeholder = "Phone Number"; // Reset placeholder
+                }
             }
 
             // Add event listener to the subscribe button
             document.getElementById('email-submit').addEventListener('click', (event) => {
                 event.preventDefault(); // Prevent default form submission
                 validateEmail(); // Call the email validation function
+                validatePhone(); // Call the phone validation function
             });
         });
     </script>
