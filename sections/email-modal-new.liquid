@@ -118,8 +118,8 @@
                     alt="acl product image"> <!-- Placeholder logo -->
                 <h2>Subscribe to Our Newsletter</h2>
                 <p>Get the latest updates and exclusive offers!</p>
-                <input id="email-input" type="email" name="contact[email]" placeholder="Email Address" required>
-                <input type="tel" id="phone-input" name="contact[phone]" placeholder="Phone Number" required>
+                <input id="email-input" type="email" name="contact[email]" placeholder="Email Address">
+                <input type="tel" id="phone-input" name="contact[phone]" placeholder="Phone Number">
                 <button id="email-submit" type="submit">Subscribe</button>
             </div>
         </div>
@@ -158,7 +158,7 @@
             }, 500); // Match this timeout with the transition duration
         });
 
-        // Email Address Functionality Code
+        // Email Address & Phone Number Functionality Code
         document.addEventListener('DOMContentLoaded', () => { // Ensure the DOM is fully loaded
             // Regular expression for validating email addresses
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
@@ -171,16 +171,17 @@
                 const email = emailInput.value;
 
                 // Check if the email is valid
-                if (!emailRegex.test(email) || email.trim() === "") {
+                if (email.trim() !== "" && !emailRegex.test(email)) {
                     console.log("Invalid email detected"); // Debugging log
                     emailInput.value = ""; // Clear the input field
                     emailInput.placeholder = "Invalid Email Address"; // Set placeholder message
                     emailInput.style.border = "1px solid red"; // Change border color to red
-                    return; // Exit the function
+                    return false; // Indicate validation failure
                 } else {
                     emailInput.style.border = ""; // Remove red border if valid
                     emailInput.placeholder = "Email Address"; // Reset placeholder
                 }
+                return true; // Indicate validation success
             }
 
             // Function to validate phone number
@@ -189,23 +190,32 @@
                 const phone = phoneInput.value;
 
                 // Check if the phone number is valid
-                if (!phoneRegex.test(phone) || phone.trim() === "") {
+                if (phone.trim() !== "" && !phoneRegex.test(phone)) {
                     console.log("Invalid phone number detected"); // Debugging log
                     phoneInput.value = ""; // Clear the input field
                     phoneInput.placeholder = "Invalid Phone Number"; // Set placeholder message
                     phoneInput.style.border = "1px solid red"; // Change border color to red
-                    return; // Exit the function
+                    return false; // Indicate validation failure
                 } else {
                     phoneInput.style.border = ""; // Remove red border if valid
                     phoneInput.placeholder = "Phone Number"; // Reset placeholder
                 }
+                return true; // Indicate validation success
             }
 
             // Add event listener to the subscribe button
             document.getElementById('email-submit').addEventListener('click', (event) => {
                 event.preventDefault(); // Prevent default form submission
-                validateEmail(); // Call the email validation function
-                validatePhone(); // Call the phone validation function
+                const emailValid = validateEmail(); // Call the email validation function
+                const phoneValid = validatePhone(); // Call the phone validation function
+
+                // Check if at least one field is valid
+                if (emailValid || phoneValid) {
+                    // Proceed with form submission or further processing
+                    console.log("Form is valid. Proceeding with submission.");
+                } else {
+                    console.log("Both fields are invalid.");
+                }
             });
         });
     </script>
