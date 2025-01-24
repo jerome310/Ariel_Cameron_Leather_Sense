@@ -95,31 +95,24 @@
 
     <div class="modal" id="emailModal">
         <div class="modal-content flex flex-col md:flex-row">
-            <div class="modal-image">
+            <div class="modal-image relative">
+                <!-- Close button positioned at the top left corner over the image for mobile -->
+                <button id="close-mobile-button" class="close-mobile-button block md:hidden" aria-label="Close Modal"
+                    style="position: absolute; top: 140px; font-size: 25px; right: 25px; z-index: 100; color: white;">✖</button>
+                <!-- Image that should be displayed -->
                 <img id="email-popup-product"
                     class="w-full h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
-                    src="{{ 'acl_product_image.jpeg' |  asset_url }}" alt="acl product image">
-                <div class="z-auto absolute top-0 ml-4 pt-4 pr-4 md:hidden">
-                    <svg id="mobile-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor" class="size-8 cursor-pointer">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                    </svg>
-                </div>
+                    src="{{ 'acl_product_image.jpeg' | asset_url }}" alt="acl product image">
+
             </div>
             <div class="modal-form text-center">
-                <div class="z-auto relative left-0 pt-0 hidden md:block">
-                    <svg id="desktop-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor"
-                        class="size-8 absolute md:left-[7rem] lg:left-[8rem] lg:bottom-[0px] cursor-pointer">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                    </svg>
-                </div>
-                <img style="width: 150px; height: 150px;" class="mx-auto" src="{{ 'acl_logo.png' |  asset_url }}"
+                <img style="width: 150px; height: 150px;" class="mx-auto" src="{{ 'acl_logo.png' | asset_url }}"
                     alt="acl product image"> <!-- Placeholder logo -->
+                <button id="close-desktop-button" class="close-desktop-button hidden md:block" aria-label="Close Modal" style="position: absolute; left:0; font-size: 24px; padding: 10px;">✖</button>
                 <h2>Subscribe to Our Newsletter</h2>
                 <p>Get the latest updates and exclusive offers!</p>
-                <input id="email-input" type="email" name="contact[email]" placeholder="Email Address">
-                <input type="tel" id="phone-input" name="contact[phone]" placeholder="Phone Number">
+                <input id="email-input" type="email" name="customer[email]" placeholder="Email Address" required>
+                <input type="tel" id="phone-input" name="customer[phone]" placeholder="Phone Number" required>
                 <button id="email-submit" type="submit">Subscribe</button>
             </div>
         </div>
@@ -130,7 +123,6 @@
         const emailModal = document.getElementById('emailModal');
         emailModal.style.opacity = '0';
         emailModal.style.display = 'flex'; // Set display to flex immediately
-
         // Show the modal after 3 seconds
         setTimeout(function () {
             if (emailModal) { // Check if the modal exists before applying styles
@@ -140,38 +132,41 @@
             }
         }, 3000); // Keep the timeout at 3000 milliseconds
 
-        // Mobile close button functionality
-        document.getElementById('mobile-button').addEventListener('click', () => {
+        // Close button functionality for desktop
+        document.getElementById('close-desktop-button').addEventListener('click', () => {
             emailModal.style.opacity = '0'; // Fade out effect
             emailModal.style.transform = 'translateY(50px)'; // Slide down effect
-            setTimeout(() => {
-                emailModal.style.display = 'none'; // Hide the modal after fade out
+            setTimeout(function () {
+                emailModal.style.display = 'none';
             }, 500); // Match this timeout with the transition duration
         });
 
-        // Desktop close button functionality
-        document.getElementById('desktop-button').addEventListener('click', () => {
+        // Mobile close button functionality
+        document.getElementById('close-mobile-button').addEventListener('click', () => {
             emailModal.style.opacity = '0'; // Fade out effect
             emailModal.style.transform = 'translateY(50px)'; // Slide down effect
-            setTimeout(() => {
-                emailModal.style.display = 'none'; // Hide the modal after fade out
+            setTimeout(function () {
+                emailModal.style.display = 'none';
             }, 500); // Match this timeout with the transition duration
         });
 
         // Email Address & Phone Number Functionality Code
-        document.addEventListener('DOMContentLoaded', () => { // Ensure the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
             // Regular expression for validating email addresses
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
-            // Updated regular expression for validating phone numbers
-            const phoneRegex = /^(?:\(\d{3}\)\s?|\d{3}[-\s]?)(\d{3})[-\s]?(\d{4})$/; // Flexible phone number formats
+            // Flexible phone number formats
+            const phoneRegex = /^(?:\+?\d{1,3}[-. ]?)?(?:\(?\d{3}\)?[-. ]?)?\d{3}[-. ]?\d{4}$/;
 
             // Function to validate email
             function validateEmail() {
                 const emailInput = document.getElementById('email-input');
                 const email = emailInput.value;
-
                 // Check if the email is valid
-                if (email.trim() !== "" && !emailRegex.test(email)) {
+                if (email.trim() === "") {
+                    emailInput.style.border = "1px solid red"; // Change border color to red
+                    emailInput.placeholder = "Email Address is required"; // Set placeholder message
+                    return false; // Indicate validation failure
+                } else if (!emailRegex.test(email)) {
                     console.log("Invalid email detected"); // Debugging log
                     emailInput.value = ""; // Clear the input field
                     emailInput.placeholder = "Invalid Email Address"; // Set placeholder message
@@ -188,9 +183,12 @@
             function validatePhone() {
                 const phoneInput = document.getElementById('phone-input');
                 const phone = phoneInput.value;
-
                 // Check if the phone number is valid
-                if (phone.trim() !== "" && !phoneRegex.test(phone)) {
+                if (phone.trim() === "") {
+                    phoneInput.style.border = "1px solid red"; // Change border color to red
+                    phoneInput.placeholder = "Phone Number is required"; // Set placeholder message
+                    return false; // Indicate validation failure
+                } else if (!phoneRegex.test(phone)) {
                     console.log("Invalid phone number detected"); // Debugging log
                     phoneInput.value = ""; // Clear the input field
                     phoneInput.placeholder = "Invalid Phone Number"; // Set placeholder message
@@ -209,9 +207,15 @@
                 const emailValid = validateEmail(); // Call the email validation function
                 const phoneValid = validatePhone(); // Call the phone validation function
 
-                // Check if at least one field is valid
-                if (emailValid || phoneValid) {
-                    // Proceed with form submission or further processing
+                // Check if at least one field is filled
+                if (document.getElementById('email-input').value.trim() === "" &&
+                    document.getElementById('phone-input').value.trim() === "") {
+                    console.log("At least one field must be filled out."); // Debugging log
+                    validateEmail(); // Validate email if empty
+                    validatePhone(); // Validate phone if empty
+                } else if (emailValid || phoneValid) {
+                    // Allow the form to submit if validation passes
+                    document.querySelector('form').submit(); // Submit the form
                     console.log("Form is valid. Proceeding with submission.");
                 } else {
                     console.log("Both fields are invalid.");
@@ -219,7 +223,6 @@
             });
         });
     </script>
-
 </body>
 
 </html>
