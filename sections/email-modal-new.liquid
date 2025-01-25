@@ -95,6 +95,37 @@
         .modal-form button:hover {
             background-color: #0056b3;
         }
+
+        /* Smallest Mobile Devices on the background for the modal popup */
+        @media (max-width: 320px) {
+            .modal {
+                max-height: 111vh;
+            }
+        }
+
+        /* Targetting mobile devices 360px */
+         @media (max-width: 360px) {
+            .close-mobile-button {
+                position: absolute !important; 
+                top: 50px !important;
+            }
+        }
+
+        /* Targetting mobile devices 375px - 380px */
+         @media (min-width: 375px) and (max-width: 380px) {
+            .close-mobile-button {
+                position: absolute !important; 
+                top: 100px !important;
+            }
+        }
+
+        /* Targetting mobile devices 390px - 430px */
+         @media (min-width: 390px) and (max-width: 431px) {
+            .close-mobile-button {
+                position: absolute !important; 
+                top: 50px !important;
+            }
+        }
     </style>
 </head>
 
