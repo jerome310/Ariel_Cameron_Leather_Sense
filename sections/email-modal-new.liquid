@@ -29,7 +29,12 @@
             transform: translateY(50px);
             /* Start further below */
             transition: opacity 0.5s ease, transform 0.5s ease;
-            /* Transition for opacity and transform */
+            overflow-y: auto;
+            /* Enable vertical scrolling */
+            max-height: 101vh;
+            /* Limit the height of the modal */
+            padding: 20px;
+            /* Optional: Add padding for better appearance */
         }
 
         .modal-content {
@@ -45,8 +50,10 @@
             flex: 1;
             background-image: url('https://via.placeholder.com/400');
             /* Placeholder image */
-            background-size: cover;
+            background-size: contain;
             background-position: center;
+            background-repeat: no-repeat;
+            height: 300px;
         }
 
         .modal-form {
@@ -98,17 +105,18 @@
             <div class="modal-image relative">
                 <!-- Close button positioned at the top left corner over the image for mobile -->
                 <button id="close-mobile-button" class="close-mobile-button block md:hidden" aria-label="Close Modal"
-                    style="position: absolute; top: 140px; font-size: 25px; right: 25px; z-index: 100; color: white;">✖</button>
+                    style="position: absolute; top: 120px; font-size: 25px; right: 25px; z-index: 100; color: white;">✖</button>
                 <!-- Image that should be displayed -->
                 <img id="email-popup-product"
-                    class="w-full h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
+                    class="w-full h-full md:w-auto md:h-auto mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
                     src="{{ 'acl_product_image.jpeg' | asset_url }}" alt="acl product image">
 
             </div>
             <div class="modal-form text-center">
                 <img style="width: 150px; height: 150px;" class="mx-auto" src="{{ 'acl_logo.png' | asset_url }}"
                     alt="acl product image"> <!-- Placeholder logo -->
-                <button id="close-desktop-button" class="close-desktop-button hidden md:block" aria-label="Close Modal" style="position: absolute; left:0; font-size: 24px; padding: 10px;">✖</button>
+                <button id="close-desktop-button" class="close-desktop-button hidden md:block" aria-label="Close Modal"
+                    style="position: absolute; left:0; font-size: 24px; padding: 10px;">✖</button>
                 <h2>Subscribe to Our Newsletter</h2>
                 <p>Get the latest updates and exclusive offers!</p>
                 <input id="email-input" type="email" name="customer[email]" placeholder="Email Address" required>
