@@ -104,26 +104,36 @@
         }
 
         /* Targetting mobile devices 360px */
-         @media (max-width: 360px) {
+        @media (max-width: 360px) {
             .close-mobile-button {
-                position: absolute !important; 
+                position: absolute !important;
                 top: 50px !important;
             }
         }
 
         /* Targetting mobile devices 375px - 380px */
-         @media (min-width: 375px) and (max-width: 380px) {
+        @media (min-width: 375px) and (max-width: 380px) {
             .close-mobile-button {
-                position: absolute !important; 
+                position: absolute !important;
                 top: 100px !important;
             }
         }
 
         /* Targetting mobile devices 390px - 430px */
-         @media (min-width: 390px) and (max-width: 431px) {
+        @media (min-width: 390px) and (max-width: 431px) {
             .close-mobile-button {
-                position: absolute !important; 
+                position: absolute !important;
                 top: 50px !important;
+            }
+        }
+
+        /* Media query for screens 768px and larger */
+        @media (min-width: 768px) {
+            #email-popup-product {
+                height: 470px;
+                /* Set height to 470px */
+                object-fit: cover;
+                /* Ensure the image covers the container */
             }
         }
     </style>
@@ -139,7 +149,7 @@
                     style="position: absolute; top: 120px; font-size: 25px; right: 25px; z-index: 100; color: white;">✖</button>
                 <!-- Image that should be displayed -->
                 <img id="email-popup-product"
-                    class="w-full h-full md:w-auto md:h-auto mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
+                    class="w-full h-full mx-auto md:mx-0 rounded-t-2xl md:rounded-s-2xl md:rounded-tr-none"
                     src="{{ 'acl_product_image.jpeg' | asset_url }}" alt="acl product image">
 
             </div>
