@@ -23,69 +23,77 @@
         background: black !important;
     }
 
-/* Input Default Arrow Disppearing */
-input[type="number"]{
-    outline: none;
-    -moz-appearance: textfield;
-}
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-    margin: 0;
-}
+    /* Input Default Arrow Disppearing */
+    input[type="number"] {
+        outline: none;
+        -moz-appearance: textfield;
+    }
 
-.belt-container {
-    margin-top: 20px;
-}
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-.belt-container h1 {
-    font-size: 30px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-}
+    .belt-container {
+        margin-top: 20px;
+    }
 
-.par-five {
-    width: 30%;
-}
+    .belt-container h1 {
+        font-size: 30px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
 
-.par,.par-two,.par-three,.par-four,.par-five {
-    margin: 0px 10px 24px 0;
-    border: 2px solid black;
-    transition: 0.5s ease;
-    cursor: pointer;
-    padding: 12px 0;
-}
+    .par-five {
+        width: 30%;
+    }
 
-.par:hover,.par-two:hover,.par-three:hover,.par-four:hover,.par-five:hover {
-    background-color: black;
-    color: white;
-}
+    .par,
+    .par-two,
+    .par-three,
+    .par-four,
+    .par-five {
+        margin: 0px 10px 24px 0;
+        border: 2px solid black;
+        transition: 0.5s ease;
+        cursor: pointer;
+        padding: 12px 0;
+    }
+
+    .par:hover,
+    .par-two:hover,
+    .par-three:hover,
+    .par-four:hover,
+    .par-five:hover {
+        background-color: black;
+        color: white;
+    }
 
 
-#beltDimensionsToggle {
-    padding: 10px 0;
-}
+    #beltDimensionsToggle {
+        padding: 10px 0;
+    }
 
-.size-option {
-    transition: all 0.3s ease;
-    font-size: 20px;
-}
-
+    .size-option {
+        transition: all 0.3s ease;
+        font-size: 20px;
+    }
 </style>
 
 {% comment %} Start Belt Bag Individual Code {% endcomment %}
-{% if request.path contains 'belt-bag-collection/products' or request.path contains '/products/beatrice-belt-bag' or request.path contains '/products/lloyd-belt-bag' or request.path contains '/products/yvette-belt-bag' %}
+{% if request.path contains 'belt-bag-collection/products' or request.path contains '/products/beatrice-belt-bag' or
+request.path contains '/products/lloyd-belt-bag' or request.path contains '/products/yvette-belt-bag' %}
 <div class="max-w-6xl mx-auto my-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20">
         <div class="product--medias">
             <div class="hidden md:block">
                 <div class="h-100 overflow-hidden p-2">
-                    {% comment %} PRODUCT IMAGES {% endcomment %}
+                    {% comment %} DESKTOP PRODUCT IMAGES {% endcomment %}
                     <div class="product-images">
                         {% assign image = product.featured_image %}
                         <img class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl transition-opacity duration-300 group-hover:opacity-0"
-                            src="{{ image.src | img_url: 'large' }}"
-                            alt="{{ image.alt | escape }}">
+                            src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}">
                         <div class="mt-4 flex">
                             {% for image in product.images %}
                             <img src="{{ image.src | img_url: 'large' }}" alt="{{ product.title }}"
@@ -96,20 +104,16 @@ input[type="number"]::-webkit-inner-spin-button{
                 </div>
             </div>
 
+            {% comment %} Mobile Images {% endcomment %}
             <div class="md:hidden">
                 <div class="swiper h-94">
                     <div class="swiper-wrapper">
-                        {% for media in product.media %}
+                        {% for image in product.images %}
                         <div class="swiper-slide">
                             <div class="h-80 overflow-hidden p-2">
-                                {% comment %} PRODUCT IMAGES {% endcomment %}
                                 <div class="product-images">
-                                    <img class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl transition-opacity duration-300 group-hover:opacity-0"
-                                        src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.title }}">
-                                    {% for image in product.images offset:1 %}
-                                    <img class="w-full h-full" src="{{ image.src | img_url: 'large' }}"
-                                        alt="{{ product.title }}">
-                                    {% endfor %}
+                                    <img class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl"
+                                        src="{{ image.src | img_url: 'large' }}" alt="{{ product.title }}">
                                 </div>
                             </div>
                         </div>
@@ -127,75 +131,76 @@ input[type="number"]::-webkit-inner-spin-button{
             <h3 class="text-5xl font-bold pt-2">{{ product.title }}</h3>
             <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
 
-        <form id="cartForm" action="/cart/add" method="post">
-        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-        
-        <!-- Hidden input to store selected size -->
-        <input type="hidden" id="selectedOption" name="properties[Size]" value="">
-            <div class="flex">
-                <div class="relative bg-red">
-                    <p>Quantity</p>
-                    <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
-                        onclick="decrementQuantity()">-</button>
-                    <input type="number" id="quantity" name="quantity" value="1" min="1"
-                        class="w-32 px-5 py-2 border rounded-md text-center border-black bg-[#FEF0D4]">
-                    <button type="button" class="absolute top-4 right-0 p-2 text-gray-500 text-3xl"
-                        onclick="incrementQuantity()">+</button>
-                </div>
-            </div>
-        
-            <!-- Belt Dimensions section -->
-            <div class="mt-4 relative">
-                <div id="beltDimensionsToggle" class="flex justify-between items-center cursor-pointer">
-                    <span class="font-bold text-xl">Belt Dimensions</span>
-                    <svg id="toggleArrow" class="w-[30px] h-[30px] transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-                    </svg>
-                </div>
-                <div id="sizeOptions" class="hidden mt-2">
-                    <div class="gap-2">
-                        <p class="size-option py-2">SMALL: <span>5x10x15</span></p>
-                        <p class="size-option py-2">MEDIUM: <span>20x25x30</span></p>
-                        <p class="size-option py-2">LARGE: <span>35x40x45</span></p>
-                        <p class="size-option py-2">EXTRA LARGE: <span>50x55x60</span></p>
+            <form id="cartForm" action="/cart/add" method="post">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+
+                <!-- Hidden input to store selected size -->
+                <input type="hidden" id="selectedOption" name="properties[Size]" value="">
+                <div class="flex">
+                    <div class="relative bg-red">
+                        <p>Quantity</p>
+                        <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
+                            onclick="decrementQuantity()">-</button>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1"
+                            class="w-32 px-5 py-2 border rounded-md text-center border-black bg-[#FEF0D4]">
+                        <button type="button" class="absolute top-4 right-0 p-2 text-gray-500 text-3xl"
+                            onclick="incrementQuantity()">+</button>
                     </div>
                 </div>
-            </div>
 
-            <div class="belt-container flex flex-col font-bold text-xl">
-                <div>
-                    <h1>Belt Length</h1>
+                <!-- Belt Dimensions section -->
+                <div class="mt-4 relative">
+                    <div id="beltDimensionsToggle" class="flex justify-between items-center cursor-pointer">
+                        <span class="font-bold text-xl">Belt Dimensions</span>
+                        <svg id="toggleArrow" class="w-[30px] h-[30px] transition-transform duration-300"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                        </svg>
+                    </div>
+                    <div id="sizeOptions" class="hidden mt-2">
+                        <div class="gap-2">
+                            <p class="size-option py-2">SMALL: <span>5x10x15</span></p>
+                            <p class="size-option py-2">MEDIUM: <span>20x25x30</span></p>
+                            <p class="size-option py-2">LARGE: <span>35x40x45</span></p>
+                            <p class="size-option py-2">EXTRA LARGE: <span>50x55x60</span></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex">
-                    <!-- Loop through options and find "Size" -->
-                    {% for option in product.options_with_values %}
-                    {% if option.name == 'Size' %}
-                    <!-- Loop through each size value individually and display them -->
-                    {% for value in option.values %}
-                    {% if value == 'S' %}
-                    <p class="par w-20 text-center">S</p>
-                    {% endif %}
-                    {% if value == 'M' %}
-                    <p class="par-two w-20 text-center">M</p>
-                    {% endif %}
-                    {% if value == 'L' %}
-                    <p class="par-three w-20 text-center">L</p>
-                    {% endif %}
-                    {% if value == 'XL' %}
-                    <p class="par-four w-20 text-center">XL</p>
-                    {% endif %}
-                    {% if value == 'Custom Size' %}
-                    <p class="par-five px-5 text-center">Custom Size</p>
-                    {% endif %}
-                    {% endfor %}
-                    {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
 
-        
-            {% render 'add-to-cart-button' %}
-        </form>
+                <div class="belt-container flex flex-col font-bold text-xl">
+                    <div>
+                        <h1>Belt Length</h1>
+                    </div>
+                    <div class="flex">
+                        <!-- Loop through options and find "Size" -->
+                        {% for option in product.options_with_values %}
+                        {% if option.name == 'Size' %}
+                        <!-- Loop through each size value individually and display them -->
+                        {% for value in option.values %}
+                        {% if value == 'S' %}
+                        <p class="par w-20 text-center">S</p>
+                        {% endif %}
+                        {% if value == 'M' %}
+                        <p class="par-two w-20 text-center">M</p>
+                        {% endif %}
+                        {% if value == 'L' %}
+                        <p class="par-three w-20 text-center">L</p>
+                        {% endif %}
+                        {% if value == 'XL' %}
+                        <p class="par-four w-20 text-center">XL</p>
+                        {% endif %}
+                        {% if value == 'Custom Size' %}
+                        <p class="par-five px-5 text-center">Custom Size</p>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+                {% render 'add-to-cart-button' %}
+            </form>
 
             <div class="description-par">
                 <p class="text-left pr-28">{{ product.description }}</p>
@@ -204,66 +209,70 @@ input[type="number"]::-webkit-inner-spin-button{
     </div>
 
     {% comment %} BEATRICE BELT BAG PRODUCT {% endcomment %}
-    {% if request.path == '/collections/belt-bag-collection/products/beatrice-belt-bag' or request.path == '/products/beatrice-belt-bag' %}
-      <div class="my-16">
+    {% if request.path == '/collections/belt-bag-collection/products/beatrice-belt-bag' or request.path ==
+    '/products/beatrice-belt-bag' %}
+    <div class="my-16">
         <h2 class="text-3xl font-bold mb-8 text-center">Complete The Beatrice Collection</h2>
         <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-          {% for product in collections['beatrice-collection'].products limit: 8 %}
+            {% for product in collections['beatrice-collection'].products limit: 8 %}
             {% unless product.handle == 'beatrice-belt-bag' %}
-              <div class="beatrice-product flex">
+            <div class="beatrice-product flex">
                 <a href="{{ product.url }}">
-                  <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
-                  <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
-                  <p class="text-xl text-gray-600 mb-10">{{ product.price | money }}</p>
+                    <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}"
+                        alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
+                    <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
+                    <p class="text-xl text-gray-600 mb-10">{{ product.price | money }}</p>
                 </a>
-              </div>
+            </div>
             {% endunless %}
-          {% endfor %}
+            {% endfor %}
         </div>
-      </div>
+    </div>
     {% endif %}
 
     {% comment %} LLOYD BELT BAG COLLECTION {% endcomment %}
-    {% if request.path == '/collections/belt-bag-collection/products/lloyd-belt-bag' or request.path == '/products/lloyd-belt-bag' %}
-      <div class="my-16">
+    {% if request.path == '/collections/belt-bag-collection/products/lloyd-belt-bag' or request.path ==
+    '/products/lloyd-belt-bag' %}
+    <div class="my-16">
         <h2 class="text-3xl font-bold mb-8 text-center">Complete The Lloyd Collection</h2>
         <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-          {% for product in collections['lloyd-collection'].products limit: 8 %}
+            {% for product in collections['lloyd-collection'].products limit: 8 %}
             {% unless product.handle == 'lloyd-belt-bag' %}
             <div>
                 <a href="{{ product.url }}">
-                    <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
-                        class="w-full h-auto object-cover rounded-lg">
+                    <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}"
+                        alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
                     <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
                     <p class="text-xl text-gray-600 mb-10">{{ product.price | money }}</p>
                 </a>
             </div>
             {% endunless %}
             {% endfor %}
-            </div>
-            </div>
-            {% endif %}
+        </div>
+    </div>
+    {% endif %}
 
-            {% comment %} YVETTE BELT BAG COLLECTION {% endcomment %}
-            {% if request.path == '/collections/belt-bag-collection/products/yvette-belt-bag' or request.path == '/products/yvette-belt-bag' %}
-            <div class="my-16">
+    {% comment %} YVETTE BELT BAG COLLECTION {% endcomment %}
+    {% if request.path == '/collections/belt-bag-collection/products/yvette-belt-bag' or request.path ==
+    '/products/yvette-belt-bag' %}
+    <div class="my-16">
         <h2 class="text-3xl font-bold mb-8 text-center">Complete The Lloyd Collection</h2>
         <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-          {% for product in collections['yvette-collection'].products limit: 8 %}
+            {% for product in collections['yvette-collection'].products limit: 8 %}
             {% unless product.handle == 'yvette-belt-bag' %}
             <div>
                 <a href="{{ product.url }}">
-                    <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
-                        class="w-full h-auto object-cover rounded-lg">
+                    <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}"
+                        alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
                     <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
                     <p class="text-xl text-gray-600 mb-10">{{ product.price | money }}</p>
                 </a>
             </div>
             {% endunless %}
             {% endfor %}
-            </div>
-            </div>
-            {% endif %}
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 {% comment %} End Belt Bag Individual Code {% endcomment %}
@@ -296,11 +305,7 @@ input[type="number"]::-webkit-inner-spin-button{
                                 {% comment %} PRODUCT IMAGES {% endcomment %}
                                 <div class="product-images">
                                     <img class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl transition-opacity duration-300 group-hover:opacity-0"
-                                        src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.title }}">
-                                    {% for image in product.images offset:1 %}
-                                    <img class="w-full h-full" src="{{ image.src | img_url: 'large' }}"
-                                        alt="{{ product.title }}">
-                                    {% endfor %}
+                                        src="{{ media | img_url: 'large' }}" alt="{{ product.title }}">
                                 </div>
                             </div>
                         </div>
@@ -344,8 +349,9 @@ input[type="number"]::-webkit-inner-spin-button{
 {% endif %}
 
 {% comment %} BEATRICE KEYCHAIN PRODUCT {% endcomment %}
-{% if request.path == '/collections/keychain-collection/products/beatrice-keychain' or request.path == '/products/beatrice-keychain' %}
- <div class="mt-16">
+{% if request.path == '/collections/keychain-collection/products/beatrice-keychain' or request.path ==
+'/products/beatrice-keychain' %}
+<div class="mt-16">
     <h2 class="text-3xl font-bold mb-8 text-center">Complete The Beatrice Collection</h2>
     <div class="flex justify-around">
         {% for product in collections['beatrice-collection'].products limit: 8 %}
@@ -413,23 +419,37 @@ input[type="number"]::-webkit-inner-spin-button{
 
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var swiper = new Swiper(".swiper", {
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    });
+
     // Feature that forces the customer to pick a button before going to the cart page
     let pClicked = false;
-        const pElements = document.querySelectorAll('.par, .par-two, .par-three, .par-four, .par-five');
-        const selectedOptionInput = document.getElementById('selectedOption');
+    const pElements = document.querySelectorAll('.par, .par-two, .par-three, .par-four, .par-five');
+    const selectedOptionInput = document.getElementById('selectedOption');
 
     pElements.forEach(p => {
         p.addEventListener('click', function () {
-          pClicked = true;
-          selectedOptionInput.value = p.textContent; // Set the value of the hidden input
+            pClicked = true;
+            selectedOptionInput.value = p.textContent; // Set the value of the hidden input
         });
     });
 
     document.getElementById('cartForm').addEventListener('submit', function (e) {
-            if (!pClicked) {
-                e.preventDefault();
-                alert("Please select a size option before adding to cart.");
-            }
+        if (!pClicked) {
+            e.preventDefault();
+            alert("Please select a size option before adding to cart.");
+        }
     });
 
     // Quantity Amount Feature
@@ -449,7 +469,7 @@ input[type="number"]::-webkit-inner-spin-button{
         }
     }
 
-    
+
 
     // Mobile Responsive Scroll Feature
     const swiper = new Swiper('.swiper', {
@@ -476,14 +496,14 @@ input[type="number"]::-webkit-inner-spin-button{
     sizeOptions.classList.remove('hidden');
     toggleArrow.style.transform = 'rotate(180deg)';
 
-    beltDimensionsToggle.addEventListener('click', function() {
+    beltDimensionsToggle.addEventListener('click', function () {
         isOptionsOpen = !isOptionsOpen;
         toggleArrow.style.transform = isOptionsOpen ? 'rotate(180deg)' : 'rotate(0)';
         sizeOptions.classList.toggle('hidden');
     });
 
     sizeButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             sizeButtons.forEach(btn => btn.classList.remove('selected'));
             this.classList.add('selected');
             // You can add logic here to update the hidden input or perform other actions
