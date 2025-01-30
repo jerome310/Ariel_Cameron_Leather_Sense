@@ -646,10 +646,6 @@ video {
   top: 1rem;
 }
 
-.bottom-0 {
-  bottom: 0px;
-}
-
 .z-40 {
   z-index: 40;
 }
@@ -1900,10 +1896,6 @@ video {
 
   .md\:h-\[800px\] {
     height: 800px;
-  }
-
-  .md\:h-auto {
-    height: auto;
   }
 
   .md\:h-full {
