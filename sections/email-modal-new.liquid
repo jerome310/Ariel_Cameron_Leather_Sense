@@ -84,16 +84,20 @@
         }
 
         .modal-form button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
+            color: black;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
 
-        .modal-form button:hover {
-            background-color: #0056b3;
+        .modal-form #email-submit {
+            background-color: #2784FE;
+            padding: 10px 20px;
+            color: white;
+        }
+
+        .modal-form #email-submit:hover {
+            background-color: #004187;
         }
 
         /* Smallest Mobile Devices on the background for the modal popup */
@@ -130,7 +134,7 @@
         /* Media query for screens 768px and larger */
         @media (min-width: 768px) {
             #email-popup-product {
-                height: 470px;
+                height: 500px;
                 /* Set height to 470px */
                 object-fit: cover;
                 /* Ensure the image covers the container */
@@ -153,11 +157,11 @@
                     src="{{ 'acl_product_image.jpeg' | asset_url }}" alt="acl product image">
 
             </div>
-            <div class="modal-form text-center">
+            <div class="modal-form text-center" style="position: relative;">
                 <img style="width: 150px; height: 150px;" class="mx-auto" src="{{ 'acl_logo.png' | asset_url }}"
                     alt="acl product image"> <!-- Placeholder logo -->
                 <button id="close-desktop-button" class="close-desktop-button hidden md:block" aria-label="Close Modal"
-                    style="position: absolute; left:0; font-size: 24px; padding: 10px;">✖</button>
+                    style="position: relative; z-index: 0; bottom: 40%; left: 40%; font-size: 24px; padding: 10px;">✖</button>
                 <h2>Subscribe to Our Newsletter</h2>
                 <p>Get the latest updates and exclusive offers!</p>
                 <input id="email-input" type="email" name="customer[email]" placeholder="Email Address" required>
