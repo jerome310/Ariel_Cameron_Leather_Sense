@@ -256,7 +256,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
     {% if request.path == '/collections/belt-bag-collection/products/yvette-belt-bag' or request.path ==
     '/products/yvette-belt-bag' %}
     <div class="my-16">
-        <h2 class="text-3xl font-bold mb-8 text-center">Complete The Lloyd Collection</h2>
+        <h2 class="text-3xl font-bold mb-8 text-center">Complete The Yvette Collection</h2>
         <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
             {% for product in collections['yvette-collection'].products limit: 8 %}
             {% unless product.handle == 'yvette-belt-bag' %}
@@ -348,15 +348,59 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
 </div>
 {% endif %}
 
+{% comment %} BEATRICE CARD HOLDER PRODUCT {% endcomment %}
+{% if request.path == '/collections/card-holder-collection/products/beatrice-card-holder' or request.path ==
+'/products/beatrice-card-holder' %}
+<div class="mt-16">
+    <h2 class="text-3xl font-bold mb-8 text-center">Complete The Beatrice Collection</h2>
+    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
+        {% for product in collections['beatrice-collection'].products limit: 8 %}
+        {% unless product.handle == 'beatrice-keychain' %}
+        <div class="beatrice-product">
+            <a href="{{ product.url }}">
+                <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
+                    class="w-full h-auto object-cover rounded-lg">
+                <p class="mt-2 text-base font-medium">{{ product.title }}</p>
+                <p class="text-base text-gray-600">{{ product.price | money }}</p>
+            </a>
+        </div>
+        {% endunless %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
 {% comment %} BEATRICE KEYCHAIN PRODUCT {% endcomment %}
 {% if request.path == '/collections/keychain-collection/products/beatrice-keychain' or request.path ==
 '/products/beatrice-keychain' %}
 <div class="mt-16">
     <h2 class="text-3xl font-bold mb-8 text-center">Complete The Beatrice Collection</h2>
-    <div class="flex justify-around">
+    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
         {% for product in collections['beatrice-collection'].products limit: 8 %}
         {% unless product.handle == 'beatrice-keychain' %}
         <div class="beatrice-product">
+            <a href="{{ product.url }}">
+                <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
+                    class="w-full h-auto object-cover rounded-lg">
+                <p class="mt-2 text-base font-medium">{{ product.title }}</p>
+                <p class="text-base text-gray-600">{{ product.price | money }}</p>
+            </a>
+        </div>
+        {% endunless %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% comment %} YVETTE CARDHOLDER PRODUCT {% endcomment %}
+{% if request.path == '/collections/card-holder-collection/products/yvette-card-holder' or request.path ==
+'/products/yvette-card-holder' %}
+<div class="my-16">
+    <h2 class="text-3xl font-bold mb-8 text-center">Complete The Yvette Collection</h2>
+    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
+        {% for product in collections['yvette-collection'].products limit: 8 %}
+        {% unless product.handle == 'yvette-keychain' %}
+        <div class="yvette-product">
             <a href="{{ product.url }}">
                 <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
                     class="w-full h-auto object-cover rounded-lg">
@@ -374,11 +418,33 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
 {% if request.path == '/collections/keychain-collection/products/yvette-keychain' or request.path ==
 '/products/yvette-keychain' %}
 <div class="my-16">
-    <h2 class="text-3xl font-bold mb-8 text-center">Complete The Beatrice Collection</h2>
-    <div class="flex justify-around">
+    <h2 class="text-3xl font-bold mb-8 text-center">Complete The Yvette Collection</h2>
+    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
         {% for product in collections['yvette-collection'].products limit: 8 %}
         {% unless product.handle == 'yvette-keychain' %}
         <div class="yvette-product">
+            <a href="{{ product.url }}">
+                <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
+                    class="w-full h-auto object-cover rounded-lg">
+                <p class="mt-2 text-base font-medium">{{ product.title }}</p>
+                <p class="text-base text-gray-600">{{ product.price | money }}</p>
+            </a>
+        </div>
+        {% endunless %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% comment %} LLOYD CARD HOLDER PRODUCT {% endcomment %}
+{% if request.path == '/collections/card-holder-collection/products/lloyd' or request.path ==
+'/products/lloyd' %}
+<div class="my-16">
+    <h2 class="text-3xl font-bold mb-8 text-center">Complete The Lloyd Collection</h2>
+    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
+        {% for product in collections['lloyd-collection'].products limit: 8 %}
+        {% unless product.handle == 'lloyd-keychain' %}
+        <div class="lloyd-product">
             <a href="{{ product.url }}">
                 <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
                     class="w-full h-auto object-cover rounded-lg">
@@ -397,7 +463,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
 '/products/lloyd-keychain' %}
 <div class="my-16">
     <h2 class="text-3xl font-bold mb-8 text-center">Complete The Lloyd Collection</h2>
-    <div class="flex justify-around">
+    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
         {% for product in collections['lloyd-collection'].products limit: 8 %}
         {% unless product.handle == 'lloyd-keychain' %}
         <div class="lloyd-product">
