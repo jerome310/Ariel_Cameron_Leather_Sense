@@ -203,7 +203,8 @@
                 const phoneRegex = /^(?:\+?\d{1,3}[-. ]?)?(?:\(?\d{3}\)?[-. ]?)?\d{3}[-. ]?\d{4}$/;
 
                 const emailModal = document.getElementById('emailModal');
-                const closeModalBtn = document.getElementById('close-desktop-button'); // Close button ID
+                const closeModalBtnDesktop = document.getElementById('close-desktop-button'); // Close button for desktop
+                const closeModalBtnMobile = document.getElementById('close-mobile-button'); // Close button for mobile
                 const body = document.body;
 
                 // Function to disable scroll (for desktop)
@@ -227,13 +228,16 @@
                 }
 
                 // Close the modal and allow scrolling again
-                closeModalBtn.addEventListener('click', () => {
+                function closeModal() {
                     emailModal.style.opacity = '0'; // Fade-out effect
                     setTimeout(() => {
                         emailModal.style.display = 'none'; // Hide modal after fade-out
                         enableScroll(); // Enable scrolling once the modal is hidden
                     }, 500); // Delay to match the fade-out time
-                });
+                }
+
+                closeModalBtnDesktop.addEventListener('click', closeModal); // Close button on desktop
+                closeModalBtnMobile.addEventListener('click', closeModal); // Close button on mobile
 
                 // Function to validate email
                 function validateEmail() {
@@ -298,17 +302,16 @@
                         phoneValid = validatePhone(); // Validate phone as usual
                     }
 
-                    // Enforce that an email is required for submission
-                    if (emailValid && (phoneValid || document.getElementById('phone-input').value.trim() === "")) {
-                        document.cookie = "formSubmitted=true; path=/; max-age=31536000"; // Store cookie for 1 year
+                    // If at least one field is filled out and valid, submit the form
+                    if ((document.getElementById('email-input').value.trim() !== "" || document.getElementById('phone-input').value.trim() !== "") && (emailValid || phoneValid)) {
                         document.querySelector('form').submit(); // Submit the form
                         console.log("Form is valid. Proceeding with submission.");
                     } else {
-                        console.log("Form submission blocked due to validation errors.");
+                        console.log("Both fields are invalid.");
                     }
                 });
 
-                // Check if the cookie is set and hide the modal accordingly
+                // Check for cookies to hide the modal if it has been submitted previously
                 function checkFormSubmittedCookie() {
                     const cookies = document.cookie.split(';');
                     for (let i = 0; i < cookies.length; i++) {
