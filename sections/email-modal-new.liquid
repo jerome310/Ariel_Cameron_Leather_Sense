@@ -5,142 +5,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Popup Modal</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+   <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    /* Ensuring the modal appears in front of everything */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 1050; /* Increased z-index to ensure it sits above other content */
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        overflow-y: auto;
+        max-height: 101vh;
+        padding: 20px;
+    }
 
+    /* Ensure modal content stays in front of other page elements */
+    .modal-content {
+        z-index: 1060; /* Higher z-index to ensure modal content is in front of the modal background */
+        display: flex;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 80%;
+        max-width: 800px;
+    }
+
+    /* Other modal styles unchanged */
+    .modal-image {
+        flex: 1;
+        background-image: url('https://via.placeholder.com/400');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 300px;
+    }
+
+    .modal-form {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-form img {
+        width: 100px;
+        margin-bottom: 20px;
+    }
+
+    .modal-form h2 {
+        margin: 0 0 10px;
+    }
+
+    .modal-form input {
+        width: 80%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .modal-form button {
+        color: black;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .modal-form #email-submit {
+        background-color: #2784FE;
+        padding: 10px 20px;
+        color: white;
+    }
+
+    .modal-form #email-submit:hover {
+        background-color: #004187;
+    }
+
+    /* Smallest Mobile Devices on the background for the modal popup */
+    @media (max-width: 320px) {
         .modal {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            /* Start with opacity 0 */
-            transform: translateY(50px);
-            /* Start further below */
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            overflow-y: auto;
-            /* Enable vertical scrolling */
-            max-height: 101vh;
-            /* Limit the height of the modal */
-            padding: 20px;
-            /* Optional: Add padding for better appearance */
+            max-height: 111vh;
         }
+    }
 
-        .modal-content {
-            display: flex;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            width: 80%;
-            max-width: 800px;
+    /* Targetting mobile devices 360px */
+    @media (max-width: 360px) {
+        .close-mobile-button {
+            position: absolute !important;
+            top: 50px !important;
         }
+    }
 
-        .modal-image {
-            flex: 1;
-            background-image: url('https://via.placeholder.com/400');
-            /* Placeholder image */
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 300px;
+    /* Targetting mobile devices 375px - 380px */
+    @media (min-width: 375px) and (max-width: 380px) {
+        .close-mobile-button {
+            position: absolute !important;
+            top: 100px !important;
         }
+    }
 
-        .modal-form {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+    /* Targetting mobile devices 390px - 430px */
+    @media (min-width: 390px) and (max-width: 431px) {
+        .close-mobile-button {
+            position: absolute !important;
+            top: 50px !important;
         }
+    }
 
-        .modal-form img {
-            width: 100px;
-            /* Company logo size */
-            margin-bottom: 20px;
+    /* Media query for screens 768px and larger */
+    @media (min-width: 768px) {
+        #email-popup-product {
+            height: 500px;
+            /* Set height to 470px */
+            object-fit: cover;
+            /* Ensure the image covers the container */
         }
+    }
 
-        .modal-form h2 {
-            margin: 0 0 10px;
-        }
+    /* Prevent scrolling on the body when the modal is open */
+    .no-scroll {
+        overflow: hidden;
+    }
 
-        .modal-form input {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    /* Desktop modal content (additional styling for larger screens) */
+    #emailModal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Example for the modal background */
+        display: none; /* Hidden by default */
+        transition: opacity 0.5s ease-in;
+        z-index: 1000;
+    }
 
-        .modal-form button {
-            color: black;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .modal-form #email-submit {
-            background-color: #2784FE;
-            padding: 10px 20px;
-            color: white;
-        }
-
-        .modal-form #email-submit:hover {
-            background-color: #004187;
-        }
-
-        /* Smallest Mobile Devices on the background for the modal popup */
-        @media (max-width: 320px) {
-            .modal {
-                max-height: 111vh;
-            }
-        }
-
-        /* Targetting mobile devices 360px */
-        @media (max-width: 360px) {
-            .close-mobile-button {
-                position: absolute !important;
-                top: 50px !important;
-            }
-        }
-
-        /* Targetting mobile devices 375px - 380px */
-        @media (min-width: 375px) and (max-width: 380px) {
-            .close-mobile-button {
-                position: absolute !important;
-                top: 100px !important;
-            }
-        }
-
-        /* Targetting mobile devices 390px - 430px */
-        @media (min-width: 390px) and (max-width: 431px) {
-            .close-mobile-button {
-                position: absolute !important;
-                top: 50px !important;
-            }
-        }
-
-        /* Media query for screens 768px and larger */
-        @media (min-width: 768px) {
-            #email-popup-product {
-                height: 500px;
-                /* Set height to 470px */
-                object-fit: cover;
-                /* Ensure the image covers the container */
-            }
-        }
-    </style>
+    /* Make sure modal content stays inside the modal */
+    .modal-content {
+        display: flex;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 80%;
+        max-width: 800px;
+    }
+   </style>
 </head>
 
 <body>
@@ -164,117 +187,145 @@
                     style="position: relative; z-index: 0; bottom: 40%; left: 40%; font-size: 24px; padding: 10px;">✖</button>
                 <h2>Subscribe to Our Newsletter</h2>
                 <p>Get the latest updates and exclusive offers!</p>
-                <input id="email-input" type="email" name="customer[email]" placeholder="Email Address" required>
-                <input type="tel" id="phone-input" name="customer[phone]" placeholder="Phone Number" required>
+                {% form 'customer' %}
+                <input id="email-input" type="email" name="contact[email]" placeholder="Email Address" required>
+                <input id="phone-input" type="tel" name="contact[phone]" placeholder="Phone Number">
                 <button id="email-submit" type="submit">Subscribe</button>
+                {% endform %}
             </div>
         </div>
     </div>
 
     <script>
-        // Initially hide the modal
-        const emailModal = document.getElementById('emailModal');
-        emailModal.style.opacity = '0';
-        emailModal.style.display = 'flex'; // Set display to flex immediately
-        // Show the modal after 3 seconds
-        setTimeout(function () {
-            if (emailModal) { // Check if the modal exists before applying styles
-                emailModal.style.transition = 'opacity 0.5s ease-in';
-                emailModal.style.opacity = '1'; // Fade in effect
-                emailModal.style.transform = 'translateY(0)'; // Slide up effect
-            }
-        }, 3000); // Keep the timeout at 3000 milliseconds
-
-        // Close button functionality for desktop
-        document.getElementById('close-desktop-button').addEventListener('click', () => {
-            emailModal.style.opacity = '0'; // Fade out effect
-            emailModal.style.transform = 'translateY(50px)'; // Slide down effect
-            setTimeout(function () {
-                emailModal.style.display = 'none';
-            }, 500); // Match this timeout with the transition duration
-        });
-
-        // Mobile close button functionality
-        document.getElementById('close-mobile-button').addEventListener('click', () => {
-            emailModal.style.opacity = '0'; // Fade out effect
-            emailModal.style.transform = 'translateY(50px)'; // Slide down effect
-            setTimeout(function () {
-                emailModal.style.display = 'none';
-            }, 500); // Match this timeout with the transition duration
-        });
-
-        // Email Address & Phone Number Functionality Code
         document.addEventListener('DOMContentLoaded', () => {
-            // Regular expression for validating email addresses
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
-            // Flexible phone number formats
-            const phoneRegex = /^(?:\+?\d{1,3}[-. ]?)?(?:\(?\d{3}\)?[-. ]?)?\d{3}[-. ]?\d{4}$/;
+                // Regular expression for validating email addresses
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
+                const phoneRegex = /^(?:\+?\d{1,3}[-. ]?)?(?:\(?\d{3}\)?[-. ]?)?\d{3}[-. ]?\d{4}$/;
 
-            // Function to validate email
-            function validateEmail() {
-                const emailInput = document.getElementById('email-input');
-                const email = emailInput.value;
-                // Check if the email is valid
-                if (email.trim() === "") {
-                    emailInput.style.border = "1px solid red"; // Change border color to red
-                    emailInput.placeholder = "Email Address is required"; // Set placeholder message
-                    return false; // Indicate validation failure
-                } else if (!emailRegex.test(email)) {
-                    console.log("Invalid email detected"); // Debugging log
-                    emailInput.value = ""; // Clear the input field
-                    emailInput.placeholder = "Invalid Email Address"; // Set placeholder message
-                    emailInput.style.border = "1px solid red"; // Change border color to red
-                    return false; // Indicate validation failure
-                } else {
-                    emailInput.style.border = ""; // Remove red border if valid
-                    emailInput.placeholder = "Email Address"; // Reset placeholder
+                const emailModal = document.getElementById('emailModal');
+                const closeModalBtn = document.getElementById('close-desktop-button'); // Close button ID
+                const body = document.body;
+
+                // Function to disable scroll (for desktop)
+                function disableScroll() {
+                    body.classList.add('no-scroll'); // Add class to body to prevent scrolling
                 }
-                return true; // Indicate validation success
-            }
 
-            // Function to validate phone number
-            function validatePhone() {
-                const phoneInput = document.getElementById('phone-input');
-                const phone = phoneInput.value;
-                // Check if the phone number is valid
-                if (phone.trim() === "") {
-                    phoneInput.style.border = "1px solid red"; // Change border color to red
-                    phoneInput.placeholder = "Phone Number is required"; // Set placeholder message
-                    return false; // Indicate validation failure
-                } else if (!phoneRegex.test(phone)) {
-                    console.log("Invalid phone number detected"); // Debugging log
-                    phoneInput.value = ""; // Clear the input field
-                    phoneInput.placeholder = "Invalid Phone Number"; // Set placeholder message
-                    phoneInput.style.border = "1px solid red"; // Change border color to red
-                    return false; // Indicate validation failure
-                } else {
-                    phoneInput.style.border = ""; // Remove red border if valid
-                    phoneInput.placeholder = "Phone Number"; // Reset placeholder
+                // Function to enable scroll (for desktop)
+                function enableScroll() {
+                    body.classList.remove('no-scroll'); // Remove class to allow scrolling
                 }
-                return true; // Indicate validation success
-            }
 
-            // Add event listener to the subscribe button
-            document.getElementById('email-submit').addEventListener('click', (event) => {
-                event.preventDefault(); // Prevent default form submission
-                const emailValid = validateEmail(); // Call the email validation function
-                const phoneValid = validatePhone(); // Call the phone validation function
-
-                // Check if at least one field is filled
-                if (document.getElementById('email-input').value.trim() === "" &&
-                    document.getElementById('phone-input').value.trim() === "") {
-                    console.log("At least one field must be filled out."); // Debugging log
-                    validateEmail(); // Validate email if empty
-                    validatePhone(); // Validate phone if empty
-                } else if (emailValid || phoneValid) {
-                    // Allow the form to submit if validation passes
-                    document.querySelector('form').submit(); // Submit the form
-                    console.log("Form is valid. Proceeding with submission.");
-                } else {
-                    console.log("Both fields are invalid.");
+                // Function to show modal and prevent scroll
+                function showModal() {
+                    emailModal.style.display = 'flex'; // Show modal
+                    setTimeout(() => {
+                        emailModal.style.transition = 'opacity 0.5s ease-in';
+                        emailModal.style.opacity = '1'; // Fade-in effect
+                    }, 100); // Slight delay for the fade-in
+                    disableScroll(); // Prevent scrolling when modal is shown
                 }
+
+                // Close the modal and allow scrolling again
+                closeModalBtn.addEventListener('click', () => {
+                    emailModal.style.opacity = '0'; // Fade-out effect
+                    setTimeout(() => {
+                        emailModal.style.display = 'none'; // Hide modal after fade-out
+                        enableScroll(); // Enable scrolling once the modal is hidden
+                    }, 500); // Delay to match the fade-out time
+                });
+
+                // Function to validate email
+                function validateEmail() {
+                    const emailInput = document.getElementById('email-input');
+                    const email = emailInput.value;
+                    if (email.trim() === "") {
+                        emailInput.style.border = "1px solid red"; // Change border color to red
+                        emailInput.placeholder = "Email Address is required"; // Set placeholder message
+                        return false; // Indicate validation failure
+                    } else if (!emailRegex.test(email)) {
+                        emailInput.value = ""; // Clear the input field
+                        emailInput.placeholder = "Invalid Email Address"; // Set placeholder message
+                        emailInput.style.border = "1px solid red"; // Change border color to red
+                        return false; // Indicate validation failure
+                    } else {
+                        emailInput.style.border = ""; // Remove red border if valid
+                        emailInput.placeholder = "Email Address"; // Reset placeholder
+                    }
+                    return true; // Indicate validation success
+                }
+
+                // Function to validate phone number
+                function validatePhone() {
+                    const phoneInput = document.getElementById('phone-input');
+                    const phone = phoneInput.value;
+
+                    if (phone.trim() === "" && document.getElementById('email-input').value.trim() === "") {
+                        // If both email and phone are empty
+                        phoneInput.placeholder = "Invalid Phone Number"; // Set placeholder message
+                        phoneInput.style.border = "1px solid red"; // Set red border
+                        return false; // Indicate validation failure
+                    }
+
+                    if (phone.trim() !== "") {
+                        if (!phoneRegex.test(phone)) {
+                            phoneInput.value = ""; // Clear the input field
+                            phoneInput.placeholder = "Invalid Phone Number"; // Set placeholder message
+                            phoneInput.style.border = "1px solid red"; // Change border color to red
+                            return false; // Indicate validation failure
+                        } else {
+                            phoneInput.style.border = ""; // Remove red border if valid
+                            phoneInput.placeholder = "Phone Number"; // Reset placeholder
+                        }
+                    }
+                    return true; // Indicate validation success or skip validation if empty
+                }
+
+                // Add event listener to the subscribe button
+                document.getElementById('email-submit').addEventListener('click', (event) => {
+                    event.preventDefault(); // Prevent default form submission
+                    const emailValid = validateEmail(); // Call the email validation function
+                    let phoneValid = true; // Default to valid, but change if phone is checked
+
+                    // Only check phone validation if email is valid and phone has a value
+                    if (emailValid) {
+                        const phoneInput = document.getElementById('phone-input');
+                        if (phoneInput.value.trim() !== "") {
+                            phoneValid = validatePhone(); // Validate phone if it has a value
+                        }
+                    } else {
+                        // If email is invalid, validate phone as well
+                        phoneValid = validatePhone(); // Validate phone as usual
+                    }
+
+                    // Enforce that an email is required for submission
+                    if (emailValid && (phoneValid || document.getElementById('phone-input').value.trim() === "")) {
+                        document.cookie = "formSubmitted=true; path=/; max-age=31536000"; // Store cookie for 1 year
+                        document.querySelector('form').submit(); // Submit the form
+                        console.log("Form is valid. Proceeding with submission.");
+                    } else {
+                        console.log("Form submission blocked due to validation errors.");
+                    }
+                });
+
+                // Check if the cookie is set and hide the modal accordingly
+                function checkFormSubmittedCookie() {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie === "formSubmitted=true") {
+                            emailModal.style.display = 'none'; // Don't show modal if the cookie is present
+                            return; // Exit the function if cookie is found
+                        }
+                    }
+                    // Show the modal if the cookie is not set
+                    showModal();
+                }
+
+                // Run the check on page load
+                checkFormSubmittedCookie();
             });
-        });
+
     </script>
 </body>
 
