@@ -1228,6 +1228,11 @@ video {
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
 
+.bg-\[\#FEB82B\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 184 43 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#FEB82B\]\/20 {
   background-color: rgb(254 184 43 / 0.2);
 }

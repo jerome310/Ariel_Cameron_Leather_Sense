@@ -199,113 +199,65 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
-            const phoneRegex = /^(?:\+?\d{1,3}[-. ]?)?(?:\(?\d{3}\)?[-. ]?)?\d{3}[-. ]?\d{4}$/;
+        document.addEventListener("DOMContentLoaded", function () {
+                const modal = document.getElementById("email-modal");
+                const emailSubmitButton = document.getElementById("email-submit");
+                const closeButton = document.querySelector(".close");
+                const emailInput = document.getElementById("email-input");
+                const phoneInput = document.getElementById("phone-input");
+                const form = document.getElementById("email-form");
 
-            const emailModal = document.getElementById('emailModal');
-            const closeModalBtnDesktop = document.getElementById('close-desktop-button');
-            const closeModalBtnMobile = document.getElementById('close-mobile-button');
-            const emailSubmitButton = document.getElementById('email-submit');
-            const body = document.body;
-
-            function disableScroll() {
-                body.classList.add('no-scroll');
-            }
-
-            function enableScroll() {
-                body.classList.remove('no-scroll');
-            }
-
-            function showModal() {
-                emailModal.style.display = 'flex';
-                setTimeout(() => {
-                    emailModal.style.transition = 'opacity 0.5s ease-in';
-                    emailModal.style.opacity = '1';
-                }, 100);
-                disableScroll();
-            }
-
-            function closeModal() {
-                emailModal.style.opacity = '0';
-                setTimeout(() => {
-                    emailModal.remove();  // Completely removes the modal from the DOM
-                    enableScroll();
-                }, 500);
-            }
-
-            closeModalBtnDesktop.addEventListener('click', closeModal);
-            closeModalBtnMobile.addEventListener('click', closeModal);
-
-            function validateEmail() {
-                const emailInput = document.getElementById('email-input');
-                const email = emailInput.value;
-                if (email.trim() === "") {
-                    emailInput.style.border = "1px solid red";
-                    emailInput.placeholder = "Email Address is required";
-                    return false;
-                } else if (!emailRegex.test(email)) {
-                    emailInput.value = "";
-                    emailInput.placeholder = "Invalid Email Address";
-                    emailInput.style.border = "1px solid red";
-                    return false;
-                } else {
-                    emailInput.style.border = "";
-                    emailInput.placeholder = "Email Address";
-                }
-                return true;
-            }
-
-            function validatePhone() {
-                const phoneInput = document.getElementById('phone-input');
-                const phone = phoneInput.value;
-                if (phone.trim() !== "" && !phoneRegex.test(phone)) {
-                    phoneInput.value = "";
-                    phoneInput.placeholder = "Invalid Phone Number";
-                    phoneInput.style.border = "1px solid red";
-                    return false;
-                } else {
-                    phoneInput.style.border = "";
-                    phoneInput.placeholder = "Phone Number";
-                }
-                return true;
-            }
-
-            // Function to check if the email address is already stored in localStorage
-            function checkIfEmailStored() {
-                const storedEmail = localStorage.getItem('subscribedEmail');
-                if (storedEmail) {
-                    closeModal(); // Close modal if email is already in localStorage
-                }
-            }
-
-            // Save email to localStorage after successful form submission
-            emailSubmitButton.addEventListener('click', (event) => {
-                const emailInput = document.getElementById('email-input');
-                const phoneInput = document.getElementById('phone-input');
-
-                // Validate email and phone
-                const emailValid = validateEmail();
-                const phoneValid = validatePhone();
-
-                if (!emailValid && emailInput.value.trim() !== "") {
-                    event.preventDefault();
-                    return;
+                function showModal() {
+                    modal.style.display = "block";
                 }
 
-                // Save the email address to localStorage and remove modal
-                if (emailValid && emailInput.value.trim() !== "") {
-                    localStorage.setItem('subscribedEmail', emailInput.value); // Store email in localStorage
-                    closeModal(); // Close the modal after submitting
+                function closeModal() {
+                    modal.style.display = "none";
                 }
+
+                function validateEmail() {
+                    const email = emailInput.value.trim();
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailPattern.test(email)) {
+                        alert("Please enter a valid email address.");
+                        return false;
+                    }
+                    return true;
+                }
+
+                function validatePhone() {
+                    const phone = phoneInput.value.trim();
+                    const phonePattern = /^\d{10}$/;
+                    if (!phonePattern.test(phone)) {
+                        alert("Please enter a valid 10-digit phone number.");
+                        return false;
+                    }
+                    return true;
+                }
+
+                emailSubmitButton.addEventListener("click", (event) => {
+                    const emailValid = validateEmail();
+                    const phoneValid = validatePhone();
+
+                    if (!emailValid) {
+                        event.preventDefault();
+                        return;
+                    }
+
+                    localStorage.setItem("subscribedEmail", emailInput.value);
+                    closeModal();
+                });
+
+                closeButton.addEventListener("click", closeModal);
+                window.addEventListener("click", (event) => {
+                    if (event.target === modal) {
+                        closeModal();
+                    }
+                });
+
+                setTimeout(showModal, 5000);
             });
 
-            // Show the modal only if the email is not already stored in localStorage
-            checkIfEmailStored();
-            if (!localStorage.getItem('subscribedEmail')) {
-                showModal();  // Show modal only if email not found in localStorage
-            }
-        });
     </script>
 
 
