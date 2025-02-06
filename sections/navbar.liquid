@@ -92,9 +92,37 @@
         {% endfor %}
         {% endif %}
     </div>
+
+    <!-- Search Modal for Desktop -->
+    <div x-show="searchBarButtonOpen" x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div class="bg-white p-4 rounded-md w-3/4 md:w-1/3">
+            <button x-on:click="searchBarButtonOpen = false; document.body.style.overflow = 'auto';"
+                class="absolute top-2 right-2 text-xl font-semibold">
+                ✖
+            </button>
+            <input type="text" placeholder="Search..." class="w-full px-4 py-2 border rounded-md">
+        </div>
+    </div>
+
+    <!-- Search Modal for Mobile -->
+    <div x-show="searchBarButtonOpenMobile" x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div class="bg-white p-4 rounded-md w-3/4 md:w-1/3">
+            <button x-on:click="searchBarButtonOpenMobile = false; document.body.style.overflow = 'auto';"
+                class="absolute top-2 right-2 text-xl font-semibold">
+                ✖
+            </button>
+            <input type="text" placeholder="Search..." class="w-full px-4 py-2 border rounded-md">
+        </div>
+    </div>
 </div>
-
-
 
 {% schema %}
 {
