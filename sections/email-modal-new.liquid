@@ -229,7 +229,7 @@
             function closeModal() {
                 emailModal.style.opacity = '0';
                 setTimeout(() => {
-                    emailModal.remove();
+                    emailModal.remove();  // Completely removes the modal from the DOM
                     enableScroll();
                 }, 500);
             }
@@ -271,32 +271,39 @@
                 return true;
             }
 
-            // Prevent form submission if email is invalid
-            document.querySelector('form').addEventListener('submit', function (event) {
-                const emailValid = validateEmail();
-                const phoneValid = validatePhone();
+            // Function to check if the email address is already stored in localStorage
+            function checkIfEmailStored() {
+                const storedEmail = localStorage.getItem('subscribedEmail');
+                if (storedEmail) {
+                    closeModal(); // Close modal if email is already in localStorage
+                }
+            }
 
+            // Save email to localStorage after successful form submission
+            emailSubmitButton.addEventListener('click', (event) => {
                 const emailInput = document.getElementById('email-input');
                 const phoneInput = document.getElementById('phone-input');
 
-                // Prevent form submission if email is invalid and it is not empty
+                // Validate email and phone
+                const emailValid = validateEmail();
+                const phoneValid = validatePhone();
+
                 if (!emailValid && emailInput.value.trim() !== "") {
-                    event.preventDefault(); // Prevent form submission if email is invalid
-                    return false;
+                    event.preventDefault();
+                    return;
                 }
 
-                // Allow submission if both are empty (email and phone)
-                if (emailInput.value.trim() === "" && phoneInput.value.trim() === "") {
-                    return true; // Allow form submission
+                // Save the email address to localStorage and remove modal
+                if (emailValid && emailInput.value.trim() !== "") {
+                    localStorage.setItem('subscribedEmail', emailInput.value); // Store email in localStorage
+                    closeModal(); // Close the modal after submitting
                 }
-
-                // Allow submission if email is valid and phone is optional
-                return true;
             });
 
-            // Show modal only if the user has NOT subscribed
-            if (!localStorage.getItem('subscribed')) {
-                showModal();
+            // Show the modal only if the email is not already stored in localStorage
+            checkIfEmailStored();
+            if (!localStorage.getItem('subscribedEmail')) {
+                showModal();  // Show modal only if email not found in localStorage
             }
         });
     </script>
