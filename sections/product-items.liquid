@@ -149,7 +149,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                 </div>
 
                 <!-- Belt Dimensions section -->
-                <div class="mt-4 relative">
+                {% comment %} <div class="mt-4 relative">
                     <div id="beltDimensionsToggle" class="flex justify-between items-center cursor-pointer">
                         <span class="font-bold text-xl">Belt Dimensions</span>
                         <svg id="toggleArrow" class="w-[30px] h-[30px] transition-transform duration-300"
@@ -196,7 +196,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                         {% endif %}
                         {% endfor %}
                     </div>
-                </div>
+                </div> {% endcomment %}
 
 
                 {% render 'add-to-cart-button' %}
@@ -500,23 +500,23 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
     });
 
     // Feature that forces the customer to pick a button before going to the cart page
-    let pClicked = false;
-    const pElements = document.querySelectorAll('.par, .par-two, .par-three, .par-four, .par-five');
-    const selectedOptionInput = document.getElementById('selectedOption');
+    // let pClicked = false;
+    // const pElements = document.querySelectorAll('.par, .par-two, .par-three, .par-four, .par-five');
+    // const selectedOptionInput = document.getElementById('selectedOption');
 
-    pElements.forEach(p => {
-        p.addEventListener('click', function () {
-            pClicked = true;
-            selectedOptionInput.value = p.textContent; // Set the value of the hidden input
-        });
-    });
+    // pElements.forEach(p => {
+    //     p.addEventListener('click', function () {
+    //         pClicked = true;
+    //         selectedOptionInput.value = p.textContent; // Set the value of the hidden input
+    //     });
+    // });
 
-    document.getElementById('cartForm').addEventListener('submit', function (e) {
-        if (!pClicked) {
-            e.preventDefault();
-            alert("Please select a size option before adding to cart.");
-        }
-    });
+    // document.getElementById('cartForm').addEventListener('submit', function (e) {
+    //     if (!pClicked) {
+    //         e.preventDefault();
+    //         alert("Please select a size option before adding to cart.");
+    //     }
+    // });
 
     // Quantity Amount Feature
     function incrementQuantity() {

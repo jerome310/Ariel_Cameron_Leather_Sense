@@ -1,0 +1,31 @@
+<div class="relative w-full bg-gray-50 text-gray-900">
+    <!-- Hero Section -->
+    <section class="relative bg-black text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Exclusive Event</h1>
+            <p class="text-lg md:text-2xl mb-8">Join us for a special showcase of our latest collection</p>
+            <a href="#register"
+                class="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition">
+                Register Now
+            </a>
+        </div>
+        <div class="absolute inset-0 -z-10">
+            <img src="{{ 'event-hero.jpg' | asset_url }}" class="w-full h-full object-cover opacity-40"
+                alt="Event Hero">
+        </div>
+    </section>
+
+    <!-- (your event details, highlights, and form code here) -->
+</div>
+
+{% schema %}
+{
+"name": "Events Page",
+"settings": [],
+"presets": [
+{
+"name": "Events Page"
+}
+]
+}
+{% endschema %}
