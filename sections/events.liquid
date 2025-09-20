@@ -1,31 +1,430 @@
-<div class="relative w-full bg-gray-50 text-gray-900">
-    <!-- Hero Section -->
-    <section class="relative bg-black text-white py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">Exclusive Event</h1>
-            <p class="text-lg md:text-2xl mb-8">Join us for a special showcase of our latest collection</p>
-            <a href="#register"
-                class="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition">
-                Register Now
-            </a>
-        </div>
-        <div class="absolute inset-0 -z-10">
-            <img src="{{ 'event-hero.jpg' | asset_url }}" class="w-full h-full object-cover opacity-40"
-                alt="Event Hero">
-        </div>
-    </section>
+<html lang="en">
 
-    <!-- (your event details, highlights, and form code here) -->
-</div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Holly Days Events at The Arcade | Upcoming Events 2025</title>
+    <meta name="description"
+        content="Join us for Holly Days at The Arcade on December 3rd and 4th, 2025. View upcoming events, times, and book your spot for festive holiday celebrations." />
+    <meta name="keywords" content="Holly Days, The Arcade, events, December 2025, holiday events, arcade games" />
 
-{% schema %}
-{
-"name": "Events Page",
-"settings": [],
-"presets": [
-{
-"name": "Events Page"
-}
-]
-}
-{% endschema %}
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Holly Days Events at The Arcade | Upcoming Events 2025" />
+    <meta property="og:description"
+        content="Join us for Holly Days at The Arcade on December 3rd and 4th, 2025. View upcoming events, times, and book your spot for festive holiday celebrations." />
+
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'ABeeZee', Arial, sans-serif;
+            background-color: #fff1d5;
+            line-height: 1.5;
+        }
+
+        /* Layout components */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            max-width: 1084px;
+            margin-top: 60px;
+            margin-bottom: 48px;
+            padding: 0 16px;
+        }
+
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 60px;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 508px;
+            height: auto;
+            margin-top: 18px;
+        }
+
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            width: 100%;
+        }
+
+        .event-card {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            width: 100%;
+        }
+
+        .event-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+            gap: 16px;
+        }
+
+        .event-main {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+            gap: 16px;
+        }
+
+        .event-info {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+            gap: 28px;
+        }
+
+        .event-logo {
+            width: 80px;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        .event-details {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex: 1;
+        }
+
+        .event-time-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .bullet-point {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .view-event-btn {
+            width: 100%;
+            max-width: 200px;
+            height: 50px;
+            align-self: center;
+            margin-top: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .view-event-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .event-divider {
+            width: 100%;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.25);
+        }
+
+        /* Typography */
+        .page-title {
+            font-size: 24px;
+            font-family: 'JejuGothic', Arial, sans-serif;
+            font-weight: 400;
+            line-height: 28px;
+            text-align: center;
+            color: #000000;
+            margin-bottom: 18px;
+        }
+
+        .event-title {
+            font-size: 18px;
+            font-family: 'JejuGothic', Arial, sans-serif;
+            font-weight: 600;
+            line-height: 22px;
+            text-align: left;
+            color: #000000;
+        }
+
+        .event-date,
+        .event-time {
+            font-size: 16px;
+            font-family: 'ABeeZee', Arial, sans-serif;
+            font-weight: 100 !important;
+            line-height: 22px;
+            text-align: left;
+            color: #000000;
+        }
+
+        /* Responsive media queries */
+        @media (min-width: 640px) {
+            .content-wrapper {
+                padding: 0 24px;
+                margin-top: 80px;
+            }
+
+            .page-title {
+                font-size: 28px;
+                line-height: 32px;
+            }
+
+            .event-title {
+                font-size: 20px;
+            }
+
+            .event-date,
+            .event-time {
+                font-size: 17px;
+            }
+
+            .event-logo {
+                width: 100px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .content-wrapper {
+                padding: 0 32px;
+                margin-top: 100px;
+            }
+
+            .page-title {
+                font-size: 32px;
+                line-height: 36px;
+            }
+
+            .event-content {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .event-main {
+                flex: 1;
+            }
+
+            .view-event-btn {
+                align-self: flex-start;
+                margin-top: 0;
+            }
+
+            .event-logo {
+                width: 110px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .content-wrapper {
+                margin-top: 142px;
+            }
+
+            .page-title {
+                font-size: 36px;
+                line-height: 40px;
+            }
+
+            .event-title {
+                font-size: 20px;
+            }
+
+            .event-date,
+            .event-time {
+                font-size: 18px;
+            }
+
+            .event-logo {
+                width: 124px;
+            }
+
+              @media only screen and (max-width: 600px) {
+        .wrapper {
+            margin-top: 10% !important;
+        }
+    }
+
+    .wrapper {
+        position: relative;
+        margin: 50px auto;
+        /* keeps it centered and spaced */
+        text-align: center;
+        /* centers the button inside */
+    }
+
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 18px;
+        font-family: sans-serif;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid black;
+        border-radius: 6px;
+        background: transparent;
+        letter-spacing: 2px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all .35s;
+    }
+
+    .button span {
+        position: relative;
+        z-index: 2;
+    }
+
+    .button:after {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(to right, #feb82b, #2387ff, #e561a1);
+        transition: all .35s;
+        z-index: 1;
+    }
+
+    .button:hover {
+        color: #fff;
+    }
+
+    .button:hover:after {
+        width: 100%;
+    }
+        }
+    </style>
+    <script type="module"
+        src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fkidbraves4762back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+
+<body>
+    <main class="main-container">
+        <div class="content-wrapper">
+            <section class="hero-section">
+                <h1 class="page-title">Upcoming Events</h1>
+                <img class="hero-image" src="{{ 'img_acl_bag_image.png' | asset_url }}" alt="Holly Days at The Arcade event logo">
+            </section>
+
+            <section class="events-list">
+                <article class="event-card">
+                    <div class="event-content">
+                        <div class="event-main">
+                            <div class="event-info">
+                                <img src="{{ 'holly-days-img.png' | asset_url }}" alt="Holly Days at The Arcade event logo">
+                                <div class="event-details">
+                                    <h2 class="event-title">Holly Days At The Arcade</h2>
+                                    <div class="event-time-row">
+                                        <span class="event-date">Saturday, December 3, 2025</span>
+                                        <img class="bullet-point" src="{{ 'img_bullet_point.png' | asset_url }}" alt="Holly Days at The Arcade event logo">
+                                        <span class="event-time">7pm -11pm</span>
+                                    </div>
+                                    <div class="event-time-row">
+                                        <span class="event-date">Saturday, December 4, 2025</span>
+                                        <img class="bullet-point" src="{{ 'img_bullet_point.png' | asset_url }}" alt="Holly Days at The Arcade event logo">
+                                        <span class="event-time">6pm -10pm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper">
+                            <button type="button" class="button">
+                                <span class="text"><a target="_blank" href="https://www.chess.com">View Event</a></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="event-divider"></div>
+                </article>
+
+                <article class="event-card">
+                    <div class="event-content">
+                        <div class="event-main">
+                            <div class="event-info">
+                                <img src="{{ 'holly-days-img.png' | asset_url }}" alt="Holly Days at The Arcade event logo">
+                                <div class="event-details">
+                                    <h2 class="event-title">Holly Days At The Arcade</h2>
+                                    <div class="event-time-row">
+                                        <span class="event-date">Saturday, December 3, 2025</span>
+                                        <img class="bullet-point" src="{{ 'img_bullet_point.png' | asset_url }}" alt="Holly Days at The Arcade event logo">
+                                        <span class="event-time">7pm -11pm</span>
+                                    </div>
+                                    <div class="event-time-row">
+                                        <span class="event-date">Saturday, December 4, 2025</span>
+                                        <img class="bullet-point" src="{{ 'img_bullet_point.png' | asset_url }}" alt="Holly Days at The Arcade event logo">
+                                        <span class="event-time">6pm -10pm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper">
+                            <button type="button" class="button">
+                                <span class="text"><a target="_blank" href="https://www.chess.com">View Event</a></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="event-divider"></div>
+                </article>
+
+                <article class="event-card">
+                    <div class="event-content">
+                        <div class="event-main">
+                            <div class="event-info">
+                                <img src="{{ 'holly-days-img.png' | asset_url }}" alt="Holly Days at The Arcade event logo">
+                                <div class="event-details">
+                                    <h2 class="event-title">Holly Days At The Arcade</h2>
+                                    <div class="event-time-row">
+                                        <span class="event-date">Saturday, December 3, 2025</span>
+                                        <img class="bullet-point" src="{{ 'img_bullet_point.png' | asset_url }}" alt="Holly Days at The Arcade event logo">
+                                        <span class="event-time">7pm -11pm</span>
+                                    </div>
+                                    <div class="event-time-row">
+                                        <span class="event-date">Saturday, December 4, 2025</span>
+                                        <img class="bullet-point" src="{{ 'img_bullet_point.png' | asset_url }}" alt="Holly Days at The Arcade event logo">
+                                        <span class="event-time">6pm -10pm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper">
+                            <button type="button" class="button">
+                                <span class="text"><a target="_blank" href="https://www.chess.com">View Event</a></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="event-divider"></div>
+                </article>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

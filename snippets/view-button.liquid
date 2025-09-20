@@ -1,0 +1,63 @@
+<style>
+    @media only screen and (max-width: 600px) {
+        .wrapper {
+            margin-top: 10% !important;
+        }
+    }
+
+    .wrapper {
+        position: relative;
+        margin: 50px auto;
+        /* keeps it centered and spaced */
+        text-align: center;
+        /* centers the button inside */
+    }
+
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 18px;
+        font-family: sans-serif;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid black;
+        border-radius: 6px;
+        background: transparent;
+        letter-spacing: 2px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all .35s;
+    }
+
+    .button span {
+        position: relative;
+        z-index: 2;
+    }
+
+    .button:after {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(to right, #feb82b, #2387ff, #e561a1);
+        transition: all .35s;
+        z-index: 1;
+    }
+
+    .button:hover {
+        color: #fff;
+    }
+
+    .button:hover:after {
+        width: 100%;
+    }
+</style>
+
+<div class="wrapper">
+    <button type="button" class="button">
+        <span class="text"><a href="">View Event</a></span>
+    </button>
+</div>
