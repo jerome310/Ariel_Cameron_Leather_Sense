@@ -1,52 +1,56 @@
 <style>
-.handcrafted {
-text-shadow: -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red, 1px 1px 0 red;
-}
+    .handcrafted {
+        text-shadow: -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red, 1px 1px 0 red;
+    }
 
-.quality {
-text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
-}
+    .quality {
+        text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+    }
 
-.unique {
-text-shadow: -1px -1px 0 #2784FE, 1px -1px 0 #2784FE, -1px 1px 0 #2784FE, 1px 1px 0 #2784FE;
-}
+    .unique {
+        text-shadow: -1px -1px 0 #2784FE, 1px -1px 0 #2784FE, -1px 1px 0 #2784FE, 1px 1px 0 #2784FE;
+    }
 </style>
 
 <!-- Header Gradient Section -->
-<div class="flex flex-col-reverse flex-col justify-around items-center md:flex-row max-w-screen-lg mx-auto">
+<div
+    class="flex flex-col-reverse md:flex-row justify-center items-center max-w-xs sm:max-w-md md:max-w-screen-lg mx-auto">
     <!-- Color Boxes -->
-<div class="flex flex-col items-center max-w-md mx-auto">
-    <!-- Handcrafted Section -->
-    <div class="bg-[#feb82b] py-3 px-6 w-full mb-4 shadow-[6px_6px_2px_-2px_#2280fa]">
-        <h2 class="handcrafted font-bold text-white text-center text-3xl md:text-4xl">HANDCRAFTED</h2>
-    </div>
+    <div class="flex flex-col items-center mx-auto w-full">
 
-    <!-- Quality Section -->
-    <div class="bg-[#fede8c] py-3 px-6 w-full shadow-[6px_6px_2px_-2px_#2A3F54] transform rotate-[5deg] z-40 mb-4">
-        <h2 class="quality font-bold text-[#2784FE] text-center text-3xl md:text-4xl">HAND-STITCHED</h2>
-        <p class="text-center text-sm md:text-base">"No sewing machine" 😊</p>
-    </div>
+        <!-- Handcrafted Section -->
+        <div class="bg-[#feb82b] py-2 px-4 sm:py-3 sm:px-6 w-full mb-4 shadow-[6px_6px_2px_-2px_#2280fa]">
+            <h2 class="handcrafted font-bold text-white text-center text-2xl sm:text-3xl md:text-4xl">HANDCRAFTED</h2>
+        </div>
 
-    <!-- Unique Section -->
-    <div
-        class="relative mt-2 bg-[#e561a1] py-3 px-6 w-full mb-4 shadow-[6px_6px_2px_-2px_#61e5dc] transform rotate-[-5deg]">
-        <h2 class="unique font-bold text-[#FEDE8C] text-center text-3xl md:text-4xl">UNIQUE LEATHER GOODS</h2>
-    </div>
-</div>
+        <!-- Quality Section -->
+        <div
+            class="bg-[#fede8c] py-2 px-4 sm:py-3 sm:px-6 w-full shadow-[6px_6px_2px_-2px_#2A3F54] transform rotate-[5deg] z-40 mb-4">
+            <h2 class="quality font-bold text-[#2784FE] text-center text-2xl sm:text-3xl md:text-4xl">HAND-STITCHED</h2>
+            <p class="text-center text-xs sm:text-sm md:text-base">"No sewing machine" 😊</p>
+        </div>
 
+        <!-- Unique Section -->
+        <div
+            class="relative mt-1 sm:mt-2 bg-[#e561a1] py-2 px-4 sm:py-3 sm:px-6 w-full mb-4 shadow-[6px_6px_2px_-2px_#61e5dc] transform rotate-[-5deg]">
+            <h2 class="unique font-bold text-[#FEDE8C] text-center text-2xl sm:text-3xl md:text-4xl">UNIQUE LEATHER
+                GOODS</h2>
+        </div>
+    </div>
 
     <!-- Wallet Image -->
-    <div class="mb-16 md:mb-0">
+    <div class="mb-16 md:mb-0 flex justify-center mx-auto">
         {% if section.settings.image == blank %}
-        <img class="w-[375px] h-[666px]" src="{{ 'ceo-totebag.png' | asset_url }}" alt="Ceo holding totebag">
+        <img class="w-[200px] sm:w-[250px] md:w-[375px] h-auto" src="{{ 'ceo-totebag.png' | asset_url }}"
+            alt="Ceo holding totebag">
         {% else %}
-        <img class="w-[150px] h-[150px] md:w-[175px] md:h-[175px]" src="{{ section.settings.image | img_url: 'master' }}"
+        <img class="w-[100px] sm:w-[150px] md:w-[175px] h-auto" src="{{ section.settings.image | img_url: 'master' }}"
             alt="My company logo">
         {% endif %}
     </div>
-    </div>
+</div>
 
-{% comment %} ACL BUTTON {% endcomment %}
+<!-- ACL BUTTON -->
 <div class="w-3/4 mx-auto">
     {% render 'homepage-button' %}
 </div>
