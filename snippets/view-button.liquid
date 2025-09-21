@@ -8,21 +8,19 @@
     .wrapper {
         position: relative;
         margin: 50px auto;
-        /* keeps it centered and spaced */
         text-align: center;
-        /* centers the button inside */
     }
 
     .button {
         display: inline-block;
-        padding: 10px 20px;
+        padding: 12px 24px;
         font-size: 18px;
         font-family: sans-serif;
         text-decoration: none;
         color: #333;
         border: 1px solid black;
         border-radius: 6px;
-        background: transparent;
+        background: #f2f2f2; /* ✅ fallback background so it always shows */
         letter-spacing: 2px;
         cursor: pointer;
         position: relative;
@@ -57,7 +55,5 @@
 </style>
 
 <div class="wrapper">
-    <button type="button" class="button">
-        <span class="text"><a href="">View Event</a></span>
-    </button>
+    <a href="#" class="button"><span>View Event</span></a>
 </div>
