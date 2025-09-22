@@ -911,10 +911,6 @@ video {
   height: 120px;
 }
 
-.h-\[150px\] {
-  height: 150px;
-}
-
 .h-\[15px\] {
   height: 15px;
 }
@@ -937,10 +933,6 @@ video {
 
 .h-\[553px\] {
   height: 553px;
-}
-
-.h-\[666px\] {
-  height: 666px;
 }
 
 .h-auto {
@@ -999,12 +991,12 @@ video {
   width: 20rem;
 }
 
-.w-\[120px\] {
-  width: 120px;
+.w-\[100px\] {
+  width: 100px;
 }
 
-.w-\[150px\] {
-  width: 150px;
+.w-\[120px\] {
+  width: 120px;
 }
 
 .w-\[15px\] {
@@ -1015,12 +1007,12 @@ video {
   width: 180px;
 }
 
-.w-\[30px\] {
-  width: 30px;
+.w-\[250px\] {
+  width: 250px;
 }
 
-.w-\[375px\] {
-  width: 375px;
+.w-\[30px\] {
+  width: 30px;
 }
 
 .w-\[40\%\] {
@@ -1035,12 +1027,28 @@ video {
   width: 100%;
 }
 
-.w-\[100px\] {
-  width: 100px;
+.w-\[25px\] {
+  width: 25px;
 }
 
-.w-\[250px\] {
-  width: 250px;
+.w-\[2px\] {
+  width: 2px;
+}
+
+.w-\[px\] {
+  width: px;
+}
+
+.w-\[3px\] {
+  width: 3px;
+}
+
+.w-\[37px\] {
+  width: 37px;
+}
+
+.w-\[375px\] {
+  width: 375px;
 }
 
 .max-w-6xl {
@@ -1966,6 +1974,30 @@ video {
     width: 250px;
   }
 
+  .sm\:w-\[25px\] {
+    width: 25px;
+  }
+
+  .sm\:w-\[2px\] {
+    width: 2px;
+  }
+
+  .sm\:w-\[px\] {
+    width: px;
+  }
+
+  .sm\:w-\[3px\] {
+    width: 3px;
+  }
+
+  .sm\:w-\[37px\] {
+    width: 37px;
+  }
+
+  .sm\:w-\[375px\] {
+    width: 375px;
+  }
+
   .sm\:max-w-md {
     max-width: 28rem;
   }
@@ -2026,10 +2058,6 @@ video {
     height: 18rem;
   }
 
-  .md\:h-\[175px\] {
-    height: 175px;
-  }
-
   .md\:h-\[200px\] {
     height: 200px;
   }
@@ -2062,6 +2090,10 @@ video {
     width: 5rem;
   }
 
+  .md\:w-3\/4 {
+    width: 75%;
+  }
+
   .md\:w-80 {
     width: 20rem;
   }
@@ -2078,6 +2110,10 @@ video {
     width: 200px;
   }
 
+  .md\:w-\[425px\] {
+    width: 425px;
+  }
+
   .md\:w-\[85\%\] {
     width: 85%;
   }
@@ -2090,16 +2126,40 @@ video {
     width: 100%;
   }
 
+  .md\:w-\[42px\] {
+    width: 42px;
+  }
+
+  .md\:w-\[4px\] {
+    width: 4px;
+  }
+
   .md\:w-\[375px\] {
     width: 375px;
   }
 
-  .md\:w-3\/4 {
-    width: 75%;
+  .md\:w-\[37px\] {
+    width: 37px;
   }
 
-  .md\:w-\[425px\] {
-    width: 425px;
+  .md\:w-\[3px\] {
+    width: 3px;
+  }
+
+  .md\:w-\[px\] {
+    width: px;
+  }
+
+  .md\:w-\[5px\] {
+    width: 5px;
+  }
+
+  .md\:w-\[50px\] {
+    width: 50px;
+  }
+
+  .md\:w-\[500px\] {
+    width: 500px;
   }
 
   .md\:max-w-lg {

@@ -40,7 +40,7 @@
     <!-- Wallet Image -->
     <div class="mb-16 md:mb-0 flex justify-center mx-auto">
         {% if section.settings.image == blank %}
-        <img class="w-[250px] sm:w-[250px] md:w-[425px] h-auto" src="{{ 'ceo-totebag.png' | asset_url }}"
+        <img class="w-[375px] sm:w-[375px] md:w-[500px] h-auto" src="{{ 'ceo-totebag.png' | asset_url }}"
             alt="Ceo holding totebag">
         {% else %}
         <img class="w-[100px] sm:w-[150px] md:w-[175px] h-auto" src="{{ section.settings.image | img_url: 'master' }}"
