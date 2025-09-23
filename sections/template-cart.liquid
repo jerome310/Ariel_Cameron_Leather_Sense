@@ -11,7 +11,7 @@
     </div>
 
     <div class="max-w-6xl flex flex-col my-10 mx-auto">
-        <form action="{{ routes.cart_url }}" method="POST" novalidate id="cart-form">
+        <form action="/cart/update" method="POST" novalidate id="cart-form">
             <table class="table-auto divide-y divide-black my-4 w-full">
                 <thead>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-500">Product</th>
@@ -34,7 +34,7 @@
                         <td class="px-2 flex flex-col justify-center">
                             <a href="{{ item.url }}" class="my-1">{{ item.product.title | truncatewords: 5 }}</a>
                             <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
-                                class="text-sm font-medium text-red-500 my-1">remove</a>
+                                class="text-sm font-medium text-red-500 my-1">Remove</a>
                         </td>
                         <td class="py-4 px-2">
                             <input type="number" name="updates[]" id="updates_{{ forloop.index }}"
@@ -54,7 +54,7 @@
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="w-full my-4">
                     <div class="flex flex-col items-start">
-                        <label for="cart_notes my-1">Cart notes</label>
+                        <label for="cart_note" class="my-1">Cart notes</label>
                         <textarea name="note" id="cart_note"
                             class="w-full md:max-w-lg resize-none border h-20"></textarea>
                     </div>
@@ -65,10 +65,16 @@
                         Subtotal: <span id="subtotal-amount">{{ cart.total_price | money }}</span>
                     </div>
                     <div class="my-2">
-                        {% render 'update-button' %}
+                        <!-- Replace update-button snippet -->
+                        <button type="submit" class="bg-gray-800 text-white px-4 py-2 rounded w-full">
+                            Update Cart
+                        </button>
                     </div>
                     <div class="my-2">
-                        {% render 'checkout-button' %}
+                        <!-- Replace checkout-button snippet -->
+                        <a href="/checkout" class="bg-blue-600 text-white px-4 py-2 rounded w-full block text-center">
+                            Checkout
+                        </a>
                     </div>
                 </div>
             </div>
@@ -111,12 +117,10 @@
         }
 
         qtyInputs.forEach(input => {
-            // Real-time subtotal update as you type or click +/–
             input.addEventListener("input", function () {
                 recalcSubtotal();
             });
 
-            // Sync with Shopify when you finish editing
             input.addEventListener("change", function () {
                 const line = parseInt(this.dataset.line);
                 const quantity = parseInt(this.value) || 0;
@@ -126,9 +130,7 @@
                     body: JSON.stringify({ line, quantity })
                 })
                     .then(res => res.json())
-                    .then(cart => {
-                        updateCartCount(cart); // ✅ keep Shopify's cart count in sync
-                    })
+                    .then(cart => updateCartCount(cart))
                     .catch(err => console.error(err));
             });
         });
