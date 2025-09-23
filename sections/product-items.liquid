@@ -129,88 +129,40 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
         <div class="product--information pl-4 md:pl-0">
             <h2 class="text-sm pt-8 md:pt-0">{{ product.vendor }}</h2>
             <h3 class="text-5xl font-bold pt-2">{{ product.title }}</h3>
+
+            {% comment %} Use Shopify's product form for Shop Pay installments {% endcomment %}
+            {% form 'product', product %}
             <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
 
             <div class="shopify-installments">
                 {{ form | payment_terms }}
             </div>
 
+            <!-- Hidden input to store selected size -->
+            <input type="hidden" id="selectedOption" name="properties[Size]" value="">
 
-            <form id="cartForm" action="/cart/add" method="post">
-                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-
-                <!-- Hidden input to store selected size -->
-                <input type="hidden" id="selectedOption" name="properties[Size]" value="">
-                <div class="flex">
-                    <div class="relative bg-red">
-                        <p>Quantity</p>
-                        <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
-                            onclick="decrementQuantity()">-</button>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1"
-                            class="w-32 px-5 py-2 border rounded-md text-center border-black bg-[#FEF0D4]">
-                        <button type="button" class="absolute top-4 right-0 p-2 text-gray-500 text-3xl"
-                            onclick="incrementQuantity()">+</button>
-                    </div>
+            <!-- Quantity selector -->
+            <div class="flex mt-4">
+                <div class="relative bg-red">
+                    <p>Quantity</p>
+                    <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
+                        onclick="decrementQuantity()">-</button>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1"
+                        class="w-32 px-5 py-2 border rounded-md text-center border-black bg-[#FEF0D4]">
+                    <button type="button" class="absolute top-4 right-0 p-2 text-gray-500 text-3xl"
+                        onclick="incrementQuantity()">+</button>
                 </div>
+            </div>
 
-                <!-- Belt Dimensions section -->
-                {% comment %} <div class="mt-4 relative">
-                    <div id="beltDimensionsToggle" class="flex justify-between items-center cursor-pointer">
-                        <span class="font-bold text-xl">Belt Dimensions</span>
-                        <svg id="toggleArrow" class="w-[30px] h-[30px] transition-transform duration-300"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-                        </svg>
-                    </div>
-                    <div id="sizeOptions" class="hidden mt-2">
-                        <div class="gap-2">
-                            <p class="size-option py-2">SMALL: <span>5x10x15</span></p>
-                            <p class="size-option py-2">MEDIUM: <span>20x25x30</span></p>
-                            <p class="size-option py-2">LARGE: <span>35x40x45</span></p>
-                            <p class="size-option py-2">EXTRA LARGE: <span>50x55x60</span></p>
-                        </div>
-                    </div>
-                </div>
+            {% comment %} Add to cart button snippet {% endcomment %}
+            {% render 'add-to-cart-button' %}
+            {% endform %}
 
-                <div class="belt-container flex flex-col font-bold text-xl">
-                    <div>
-                        <h1>Belt Length</h1>
-                    </div>
-                    <div class="flex">
-                        <!-- Loop through options and find "Size" -->
-                        {% for option in product.options_with_values %}
-                        {% if option.name == 'Size' %}
-                        <!-- Loop through each size value individually and display them -->
-                        {% for value in option.values %}
-                        {% if value == 'S' %}
-                        <p class="par w-20 text-center">S</p>
-                        {% endif %}
-                        {% if value == 'M' %}
-                        <p class="par-two w-20 text-center">M</p>
-                        {% endif %}
-                        {% if value == 'L' %}
-                        <p class="par-three w-20 text-center">L</p>
-                        {% endif %}
-                        {% if value == 'XL' %}
-                        <p class="par-four w-20 text-center">XL</p>
-                        {% endif %}
-                        {% if value == 'Custom Size' %}
-                        <p class="par-five px-5 text-center">Custom Size</p>
-                        {% endif %}
-                        {% endfor %}
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                </div> {% endcomment %}
-
-
-                {% render 'add-to-cart-button' %}
-            </form>
-
-            <div class="description-par">
+            <div class="description-par mt-6">
                 <p class="text-left pr-28">{{ product.description }}</p>
             </div>
         </div>
+
     </div>
 
     {% comment %} BEATRICE BELT BAG PRODUCT {% endcomment %}
