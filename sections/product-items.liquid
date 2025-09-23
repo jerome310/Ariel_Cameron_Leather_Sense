@@ -131,6 +131,11 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
             <h3 class="text-5xl font-bold pt-2">{{ product.title }}</h3>
             <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
 
+            <div class="shopify-installments">
+                {{ form | payment_terms }}
+            </div>
+
+
             <form id="cartForm" action="/cart/add" method="post">
                 <input type="hidden" name="id" value="{{ product.variants.first.id }}">
 
