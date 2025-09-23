@@ -133,7 +133,6 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
             {% comment %} Use Shopify's product form for Shop Pay installments {% endcomment %}
             {% form 'product', product %}
             <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
-
             <div class="shopify-installments">
                 {{ form | payment_terms }}
             </div>
@@ -178,7 +177,12 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                     <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}"
                         alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
                     <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
-                    <p class="text-xl text-gray-600 mb-10">{{ product.price | money }}</p>
+                    <p class="text-xl text-gray-600 mb-2">{{ product.price | money }}</p>
+                    <div class="shopify-installments">
+                        {% form 'product', product %}
+                        {{ form | payment_terms }}
+                        {% endform %}
+                    </div>
                 </a>
             </div>
             {% endunless %}
@@ -200,7 +204,12 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                     <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}"
                         alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
                     <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
-                    <p class="text-xl text-gray-600 mb-10">{{ product.price | money }}</p>
+                    <p class="text-xl text-gray-600 mb-2">{{ product.price | money }}</p>
+                    <div class="shopify-installments">
+                        {% form 'product', product %}
+                        {{ form | payment_terms }}
+                        {% endform %}
+                    </div>
                 </a>
             </div>
             {% endunless %}
@@ -222,7 +231,12 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                     <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}"
                         alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
                     <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
-                    <p class="text-xl text-gray-600 mb-10">{{ product.price | money }}</p>
+                    <p class="text-xl text-gray-600 mb-2">{{ product.price | money }}</p>
+                    <div class="shopify-installments">
+                        {% form 'product', product %}
+                        {{ form | payment_terms }}
+                        {% endform %}
+                    </div>
                 </a>
             </div>
             {% endunless %}
@@ -279,6 +293,11 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
             <h2 class="text-sm pt-8 md:pt-0">{{ product.vendor }}</h2>
             <h3 class="text-5xl font-bold pt-2">{{ product.title }}</h3>
             <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
+            <div class="shopify-installments">
+                {% form 'product', product %}
+                {{ form | payment_terms }}
+                {% endform %}
+            </div>
 
             <form action="/cart/add" method="post">
                 <div class="flex">
@@ -318,7 +337,12 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                 <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
                     class="w-full h-auto object-cover rounded-lg">
                 <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                <p class="text-base text-gray-600">{{ product.price | money }}</p>
+                <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
+                <div class="shopify-installments">
+                    {% form 'product', product %}
+                    {{ form | payment_terms }}
+                    {% endform %}
+                </div>
             </a>
         </div>
         {% endunless %}
@@ -340,7 +364,12 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                 <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
                     class="w-full h-auto object-cover rounded-lg">
                 <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                <p class="text-base text-gray-600">{{ product.price | money }}</p>
+                <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
+                <div class="shopify-installments">
+                    {% form 'product', product %}
+                    {{ form | payment_terms }}
+                    {% endform %}
+                </div>
             </a>
         </div>
         {% endunless %}
@@ -362,7 +391,12 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                 <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
                     class="w-full h-auto object-cover rounded-lg">
                 <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                <p class="text-base text-gray-600">{{ product.price | money }}</p>
+                <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
+                <div class="shopify-installments">
+                    {% form 'product', product %}
+                    {{ form | payment_terms }}
+                    {% endform %}
+                </div>
             </a>
         </div>
         {% endunless %}
@@ -384,7 +418,12 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                 <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
                     class="w-full h-auto object-cover rounded-lg">
                 <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                <p class="text-base text-gray-600">{{ product.price | money }}</p>
+                <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
+                <div class="shopify-installments">
+                    {% form 'product', product %}
+                    {{ form | payment_terms }}
+                    {% endform %}
+                </div>
             </a>
         </div>
         {% endunless %}
@@ -392,145 +431,34 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
     </div>
 </div>
 {% endif %}
-
-{% comment %} LLOYD CARD HOLDER PRODUCT {% endcomment %}
-{% if request.path == '/collections/card-holder-collection/products/lloyd' or request.path ==
-'/products/lloyd' %}
-<div class="my-16">
-    <h2 class="text-3xl font-bold mb-8 text-center">Complete The Lloyd Collection</h2>
-    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-        {% for product in collections['lloyd-collection'].products limit: 8 %}
-        {% unless product.handle == 'lloyd-keychain' %}
-        <div class="lloyd-product">
-            <a href="{{ product.url }}">
-                <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
-                    class="w-full h-auto object-cover rounded-lg">
-                <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                <p class="text-base text-gray-600">{{ product.price | money }}</p>
-            </a>
-        </div>
-        {% endunless %}
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
-
-{% comment %} LLOYD KEYCHAIN PRODUCT {% endcomment %}
-{% if request.path == '/collections/keychain-collection/products/lloyd-keychain' or request.path ==
-'/products/lloyd-keychain' %}
-<div class="my-16">
-    <h2 class="text-3xl font-bold mb-8 text-center">Complete The Lloyd Collection</h2>
-    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-        {% for product in collections['lloyd-collection'].products limit: 8 %}
-        {% unless product.handle == 'lloyd-keychain' %}
-        <div class="lloyd-product">
-            <a href="{{ product.url }}">
-                <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
-                    class="w-full h-auto object-cover rounded-lg">
-                <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                <p class="text-base text-gray-600">{{ product.price | money }}</p>
-            </a>
-        </div>
-        {% endunless %}
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
-
-{% render 'multi-product-selector' %}
-
-
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var swiper = new Swiper(".swiper", {
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
-    });
-
-    // Feature that forces the customer to pick a button before going to the cart page
-    // let pClicked = false;
-    // const pElements = document.querySelectorAll('.par, .par-two, .par-three, .par-four, .par-five');
-    // const selectedOptionInput = document.getElementById('selectedOption');
-
-    // pElements.forEach(p => {
-    //     p.addEventListener('click', function () {
-    //         pClicked = true;
-    //         selectedOptionInput.value = p.textContent; // Set the value of the hidden input
-    //     });
-    // });
-
-    // document.getElementById('cartForm').addEventListener('submit', function (e) {
-    //     if (!pClicked) {
-    //         e.preventDefault();
-    //         alert("Please select a size option before adding to cart.");
-    //     }
-    // });
-
-    // Quantity Amount Feature
     function incrementQuantity() {
         var quantityInput = document.getElementById('quantity');
-        var currentValue = parseInt(quantityInput.value);
-        if (!isNaN(currentValue)) {
-            quantityInput.value = currentValue + 1;
-        }
+        var currentValue = parseInt(quantityInput.value, 10);
+        quantityInput.value = currentValue + 1;
     }
 
     function decrementQuantity() {
         var quantityInput = document.getElementById('quantity');
-        var currentValue = parseInt(quantityInput.value);
-        if (!isNaN(currentValue) && currentValue > 1) {
+        var currentValue = parseInt(quantityInput.value, 10);
+        if (currentValue > 1) {
             quantityInput.value = currentValue - 1;
         }
     }
 
-
-
-    // Mobile Responsive Scroll Feature
-    const swiper = new Swiper('.swiper', {
-        direction: 'horizontal',
-
-        pagination: {
-            el: '.swiper-pagination'
-        },
-
-        navigation: {
-            prevEl: '.swiper-button-prev',
-            nextEl: '.swiper-button-next'
-        }
-    })
-
-    // Updated code for Belt Dimensions toggle
-    const beltDimensionsToggle = document.getElementById('beltDimensionsToggle');
-    const toggleArrow = document.getElementById('toggleArrow');
-    const sizeOptions = document.getElementById('sizeOptions');
-    const sizeButtons = document.querySelectorAll('.size-option');
-    let isOptionsOpen = true; // Start with options open
-
-    // Show options by default
-    sizeOptions.classList.remove('hidden');
-    toggleArrow.style.transform = 'rotate(180deg)';
-
-    beltDimensionsToggle.addEventListener('click', function () {
-        isOptionsOpen = !isOptionsOpen;
-        toggleArrow.style.transform = isOptionsOpen ? 'rotate(180deg)' : 'rotate(0)';
-        sizeOptions.classList.toggle('hidden');
-    });
-
-    sizeButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            sizeButtons.forEach(btn => btn.classList.remove('selected'));
-            this.classList.add('selected');
-            // You can add logic here to update the hidden input or perform other actions
-            console.log('Selected size:', this.textContent);
+    // Swiper setup
+    document.addEventListener('DOMContentLoaded', function () {
+        new Swiper('.swiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
         });
     });
 </script>
