@@ -130,17 +130,14 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
             <h2 class="text-sm pt-8 md:pt-0">{{ product.vendor }}</h2>
             <h3 class="text-5xl font-bold pt-2">{{ product.title }}</h3>
 
-            {% comment %} Use Shopify's product form for Shop Pay installments {% endcomment %}
             {% form 'product', product %}
             <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
-            <div class="shopify-installments">
+            <div class="shopify-installments pb-4">
                 {{ form | payment_terms }}
             </div>
 
-            <!-- Hidden input to store selected size -->
             <input type="hidden" id="selectedOption" name="properties[Size]" value="">
 
-            <!-- Quantity selector -->
             <div class="flex mt-4">
                 <div class="relative bg-red">
                     <p>Quantity</p>
@@ -153,7 +150,6 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                 </div>
             </div>
 
-            {% comment %} Add to cart button snippet {% endcomment %}
             {% render 'add-to-cart-button' %}
             {% endform %}
 
@@ -161,7 +157,6 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                 <p class="text-left pr-28">{{ product.description }}</p>
             </div>
         </div>
-
     </div>
 
     {% comment %} BEATRICE BELT BAG PRODUCT {% endcomment %}
@@ -178,7 +173,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                         alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
                     <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
                     <p class="text-xl text-gray-600 mb-2">{{ product.price | money }}</p>
-                    <div class="shopify-installments">
+                    <div class="shopify-installments pb-4">
                         {% form 'product', product %}
                         {{ form | payment_terms }}
                         {% endform %}
@@ -205,7 +200,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                         alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
                     <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
                     <p class="text-xl text-gray-600 mb-2">{{ product.price | money }}</p>
-                    <div class="shopify-installments">
+                    <div class="shopify-installments pb-4">
                         {% form 'product', product %}
                         {{ form | payment_terms }}
                         {% endform %}
@@ -232,7 +227,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                         alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
                     <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
                     <p class="text-xl text-gray-600 mb-2">{{ product.price | money }}</p>
-                    <div class="shopify-installments">
+                    <div class="shopify-installments pb-4">
                         {% form 'product', product %}
                         {{ form | payment_terms }}
                         {% endform %}
@@ -273,7 +268,6 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                         {% for media in product.media %}
                         <div class="swiper-slide">
                             <div class="h-80 overflow-hidden p-2">
-                                {% comment %} PRODUCT IMAGES {% endcomment %}
                                 <div class="product-images">
                                     <img class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl transition-opacity duration-300 group-hover:opacity-0"
                                         src="{{ media | img_url: 'large' }}" alt="{{ product.title }}">
@@ -293,7 +287,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
             <h2 class="text-sm pt-8 md:pt-0">{{ product.vendor }}</h2>
             <h3 class="text-5xl font-bold pt-2">{{ product.title }}</h3>
             <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
-            <div class="shopify-installments">
+            <div class="shopify-installments pb-4">
                 {% form 'product', product %}
                 {{ form | payment_terms }}
                 {% endform %}
@@ -338,7 +332,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                     class="w-full h-auto object-cover rounded-lg">
                 <p class="mt-2 text-base font-medium">{{ product.title }}</p>
                 <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
-                <div class="shopify-installments">
+                <div class="shopify-installments pb-4">
                     {% form 'product', product %}
                     {{ form | payment_terms }}
                     {% endform %}
@@ -365,7 +359,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                     class="w-full h-auto object-cover rounded-lg">
                 <p class="mt-2 text-base font-medium">{{ product.title }}</p>
                 <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
-                <div class="shopify-installments">
+                <div class="shopify-installments pb-4">
                     {% form 'product', product %}
                     {{ form | payment_terms }}
                     {% endform %}
@@ -392,7 +386,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                     class="w-full h-auto object-cover rounded-lg">
                 <p class="mt-2 text-base font-medium">{{ product.title }}</p>
                 <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
-                <div class="shopify-installments">
+                <div class="shopify-installments pb-4">
                     {% form 'product', product %}
                     {{ form | payment_terms }}
                     {% endform %}
@@ -419,7 +413,7 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                     class="w-full h-auto object-cover rounded-lg">
                 <p class="mt-2 text-base font-medium">{{ product.title }}</p>
                 <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
-                <div class="shopify-installments">
+                <div class="shopify-installments pb-4">
                     {% form 'product', product %}
                     {{ form | payment_terms }}
                     {% endform %}
