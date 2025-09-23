@@ -50,7 +50,7 @@
                 </tbody>
             </table>
 
-            <!-- Subtotal, Update, and Checkout -->
+            <!-- Cart Notes and Subtotal -->
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="w-full my-4">
                     <div class="flex flex-col items-start">
@@ -64,14 +64,9 @@
                     <div id="cart-subtotal">
                         Subtotal: <span id="subtotal-amount">{{ cart.total_price | money }}</span>
                     </div>
+
+                    <!-- Checkout Button -->
                     <div class="my-2">
-                        <!-- Replace update-button snippet -->
-                        <button type="submit" class="bg-gray-800 text-white px-4 py-2 rounded w-full">
-                            Update Cart
-                        </button>
-                    </div>
-                    <div class="my-2">
-                        <!-- Replace checkout-button snippet -->
                         <a href="/checkout" class="bg-blue-600 text-white px-4 py-2 rounded w-full block text-center">
                             Checkout
                         </a>
@@ -87,7 +82,7 @@
         const qtyInputs = document.querySelectorAll(".cart-qty");
         const subtotalEl = document.getElementById("subtotal-amount");
 
-        // Format money helper
+        // Format money
         function formatMoney(cents) {
             if (typeof Shopify !== "undefined" && Shopify.formatMoney) {
                 return Shopify.formatMoney(cents);
@@ -95,11 +90,11 @@
             return (cents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" });
         }
 
-        // Recalculate subtotal + line totals instantly
+        // Recalculate subtotal on cart page
         function recalcSubtotal() {
             let subtotal = 0;
             document.querySelectorAll("tr[data-line]").forEach(row => {
-                const price = parseInt(row.dataset.price); // unit price in cents
+                const price = parseInt(row.dataset.price);
                 const qty = parseInt(row.querySelector(".cart-qty").value) || 0;
                 const lineTotal = price * qty;
                 subtotal += lineTotal;
@@ -108,32 +103,43 @@
             subtotalEl.textContent = formatMoney(subtotal);
         }
 
-        // Update Shopify cart count in header (adjust selector to match your theme)
-        function updateCartCount(cart) {
-            const countEls = document.querySelectorAll(".cart-count, [data-cart-count]");
-            countEls.forEach(el => {
-                el.textContent = cart.item_count;
-            });
+        // Update Shopify cart immediately
+        function updateCart(line, quantity) {
+            fetch('/cart/change.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ line, quantity })
+            })
+                .then(res => res.json())
+                .then(cart => {
+                    document.querySelectorAll(".cart-count, [data-cart-count]").forEach(el => {
+                        el.textContent = cart.item_count;
+                    });
+                })
+                .catch(err => console.error(err));
         }
 
         qtyInputs.forEach(input => {
-            input.addEventListener("input", function () {
-                recalcSubtotal();
-            });
+            // Instant subtotal update
+            input.addEventListener("input", recalcSubtotal);
 
+            // Sync with Shopify on change
             input.addEventListener("change", function () {
                 const line = parseInt(this.dataset.line);
                 const quantity = parseInt(this.value) || 0;
-                fetch(`/cart/change.js`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ line, quantity })
-                })
-                    .then(res => res.json())
-                    .then(cart => updateCartCount(cart))
-                    .catch(err => console.error(err));
+                updateCart(line, quantity);
+            });
+
+            // Optional: sync on blur for mobile
+            input.addEventListener("blur", function () {
+                const line = parseInt(this.dataset.line);
+                const quantity = parseInt(this.value) || 0;
+                updateCart(line, quantity);
             });
         });
+
+        // Initial subtotal
+        recalcSubtotal();
     });
 </script>
 
