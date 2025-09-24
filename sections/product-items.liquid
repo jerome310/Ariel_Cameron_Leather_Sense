@@ -1,144 +1,64 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
-<style>
-    .swiper-button-prev,
-    .swiper-button-next {
-        color: black;
-        top: auto !important;
-        height: 20px;
-    }
+<div class="max-w-6xl mx-auto my-10 p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-    .swiper-button-prev::after,
-    .swiper-button-next::after {
-        font-size: 20px;
-    }
-
-    .swiper-pagination {
-        color: black;
-        bottom: 0 !important;
-    }
-
-    .swiper-pagination-bullet-active {
-        background: black !important;
-    }
-
-    /* Input Default Arrow Disppearing */
-    input[type="number"] {
-        outline: none;
-        -moz-appearance: textfield;
-    }
-
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    .belt-container {
-        margin-top: 20px;
-    }
-
-    .belt-container h1 {
-        font-size: 30px;
-        padding-top: 10px;
-        padding-bottom: 20px;
-    }
-
-    .par-five {
-        width: 30%;
-    }
-
-    .par,
-    .par-two,
-    .par-three,
-    .par-four,
-    .par-five {
-        margin: 0px 10px 24px 0;
-        border: 2px solid black;
-        transition: 0.5s ease;
-        cursor: pointer;
-        padding: 12px 0;
-    }
-
-    .par:hover,
-    .par-two:hover,
-    .par-three:hover,
-    .par-four:hover,
-    .par-five:hover {
-        background-color: black;
-        color: white;
-    }
-
-
-    #beltDimensionsToggle {
-        padding: 10px 0;
-    }
-
-    .size-option {
-        transition: all 0.3s ease;
-        font-size: 20px;
-    }
-</style>
-
-{% comment %} Start Belt Bag Individual Code {% endcomment %}
-{% if request.path contains 'belt-bag-collection/products' or request.path contains '/products/beatrice-belt-bag' or
-request.path contains '/products/lloyd-belt-bag' or request.path contains '/products/yvette-belt-bag' %}
-<div class="max-w-6xl mx-auto my-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20">
-        <div class="product--medias">
-            <div class="hidden md:block">
-                <div class="h-100 overflow-hidden p-2">
-                    {% comment %} DESKTOP PRODUCT IMAGES {% endcomment %}
-                    <div class="product-images">
-                        {% assign image = product.featured_image %}
-                        <img class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl transition-opacity duration-300 group-hover:opacity-0"
-                            src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}">
-                        <div class="mt-4 flex">
-                            {% for image in product.images %}
-                            <img src="{{ image.src | img_url: 'large' }}" alt="{{ product.title }}"
-                                class="mx-1 w-[80px] object-cover bg-gray-100 transition-opacity duration-300 group-hover:opacity-0 cursor-pointer">
-                            {% endfor %}
-                        </div>
+        <!-- Product Images -->
+        <div>
+            {% if product.images.size > 0 %}
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    {% for image in product.images %}
+                    <div class="swiper-slide">
+                        <img src="{{ image | img_url: '1024x1024' }}" alt="{{ product.title | escape }}"
+                            class="w-full object-cover border">
                     </div>
+                    {% endfor %}
                 </div>
+                <!-- Add navigation buttons -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-
-            {% comment %} Mobile Images {% endcomment %}
-            <div class="md:hidden">
-                <div class="swiper h-94">
-                    <div class="swiper-wrapper">
-                        {% for image in product.images %}
-                        <div class="swiper-slide">
-                            <div class="h-80 overflow-hidden p-2">
-                                <div class="product-images">
-                                    <img class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl"
-                                        src="{{ image.src | img_url: 'large' }}" alt="{{ product.title }}">
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                </div>
-            </div>
+            {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'w-full object-cover border' }}
+            {% endif %}
         </div>
 
-        <div class="product--information pl-4 md:pl-0">
-            <h2 class="text-sm pt-8 md:pt-0">{{ product.vendor }}</h2>
-            <h3 class="text-5xl font-bold pt-2">{{ product.title }}</h3>
+        <!-- Product Info -->
+        <div>
+            <h1 class="text-3xl font-bold mb-4">{{ product.title }}</h1>
+            <div class="mb-4">{{ product.description }}</div>
 
+            <!-- Price -->
+            <p class="text-xl font-semibold mb-4">
+                {{ product.selected_or_first_available_variant.price | money }}
+            </p>
+
+            {% if product.collections contains collections['belt-bag'] %}
+            <!-- Special belt collection form -->
             {% form 'product', product %}
-            <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
-            <div class="shopify-installments" style="padding-bottom: 1rem;">
-                {{ form | payment_terms }}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <div class="flex">
+                <div class="relative">
+                    <p class="mb-1">Quantity</p>
+                    <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
+                        onclick="decrementQuantity()">-</button>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1"
+                        class="w-32 px-5 py-2 border rounded-md text-center border-black bg-[#FEF0D4]">
+                    <button type="button" class="absolute top-4 right-0 p-2 text-gray-500 text-3xl"
+                        onclick="incrementQuantity()">+</button>
+                </div>
             </div>
-
-            <input type="hidden" id="selectedOption" name="properties[Size]" value="">
-
-            <div class="flex mt-4">
+            <div class="mt-6">
+                {% render 'add-to-cart-button' %}
+            </div>
+            {% endform %}
+            {% else %}
+            <!-- General product form -->
+            {% form 'product', product %}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <div class="flex">
                 <div class="relative bg-red">
                     <p>Quantity</p>
                     <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
@@ -149,309 +69,38 @@ request.path contains '/products/lloyd-belt-bag' or request.path contains '/prod
                         onclick="incrementQuantity()">+</button>
                 </div>
             </div>
-
             {% render 'add-to-cart-button' %}
             {% endform %}
+            {% endif %}
 
-            <div class="description-par mt-6">
-                <p class="text-left pr-28">{{ product.description }}</p>
-            </div>
-        </div>
-    </div>
-
-    {% comment %} BEATRICE BELT BAG PRODUCT {% endcomment %}
-    {% if request.path == '/collections/belt-bag-collection/products/beatrice-belt-bag' or request.path ==
-    '/products/beatrice-belt-bag' %}
-    <div class="my-16">
-        <h2 class="text-3xl font-bold mb-8 text-center">Complete The Beatrice Collection</h2>
-        <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-            {% for product in collections['beatrice-collection'].products limit: 8 %}
-            {% unless product.handle == 'beatrice-belt-bag' %}
-            <div class="beatrice-product flex">
-                <a href="{{ product.url }}">
-                    <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}"
-                        alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
-                    <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
-                    <p class="text-xl text-gray-600 mb-2">{{ product.price | money }}</p>
-                    <div class="shopify-installments" style="padding-bottom: 1rem;">
-                        {% form 'product', product %}
-                        {{ form | payment_terms }}
-                        {% endform %}
-                    </div>
-                </a>
-            </div>
-            {% endunless %}
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-
-    {% comment %} LLOYD BELT BAG COLLECTION {% endcomment %}
-    {% if request.path == '/collections/belt-bag-collection/products/lloyd-belt-bag' or request.path ==
-    '/products/lloyd-belt-bag' %}
-    <div class="my-16">
-        <h2 class="text-3xl font-bold mb-8 text-center">Complete The Lloyd Collection</h2>
-        <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-            {% for product in collections['lloyd-collection'].products limit: 8 %}
-            {% unless product.handle == 'lloyd-belt-bag' %}
-            <div>
-                <a href="{{ product.url }}">
-                    <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}"
-                        alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
-                    <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
-                    <p class="text-xl text-gray-600 mb-2">{{ product.price | money }}</p>
-                    <div class="shopify-installments" style="padding-bottom: 1rem;">
-                        {% form 'product', product %}
-                        {{ form | payment_terms }}
-                        {% endform %}
-                    </div>
-                </a>
-            </div>
-            {% endunless %}
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-
-    {% comment %} YVETTE BELT BAG COLLECTION {% endcomment %}
-    {% if request.path == '/collections/belt-bag-collection/products/yvette-belt-bag' or request.path ==
-    '/products/yvette-belt-bag' %}
-    <div class="my-16">
-        <h2 class="text-3xl font-bold mb-8 text-center">Complete The Yvette Collection</h2>
-        <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-            {% for product in collections['yvette-collection'].products limit: 8 %}
-            {% unless product.handle == 'yvette-belt-bag' %}
-            <div>
-                <a href="{{ product.url }}">
-                    <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}"
-                        alt="{{ product.title }}" class="w-full h-auto object-cover rounded-lg">
-                    <p class="mt-2 text-xl font-medium">{{ product.title }}</p>
-                    <p class="text-xl text-gray-600 mb-2">{{ product.price | money }}</p>
-                    <div class="shopify-installments" style="padding-bottom: 1rem;">
-                        {% form 'product', product %}
-                        {{ form | payment_terms }}
-                        {% endform %}
-                    </div>
-                </a>
-            </div>
-            {% endunless %}
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-</div>
-
-{% comment %} End Belt Bag Individual Code {% endcomment %}
-{% else %}
-<div class="max-w-6xl mx-auto my-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20">
-        <div class="product--medias">
-            <div class="hidden md:block">
-                <div class="h-100 overflow-hidden p-2">
-                    {% comment %} PRODUCT IMAGES {% endcomment %}
-                    <div class="product-images">
-                        <img class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl transition-opacity duration-300 group-hover:opacity-0"
-                            src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.title }}">
-                        <div class="mt-4 flex">
-                            {% for image in product.images %}
-                            <img src="{{ image.src | img_url: 'large' }}" alt="{{ product.title }}"
-                                class="mx-1 w-[80px] object-cover bg-gray-100 transition-opacity duration-300 group-hover:opacity-0 cursor-pointer">
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="md:hidden">
-                <div class="swiper h-94">
-                    <div class="swiper-wrapper">
-                        {% for media in product.media %}
-                        <div class="swiper-slide">
-                            <div class="h-80 overflow-hidden p-2">
-                                <div class="product-images">
-                                    <img class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl transition-opacity duration-300 group-hover:opacity-0"
-                                        src="{{ media | img_url: 'large' }}" alt="{{ product.title }}">
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="product--information pl-4 md:pl-0">
-            <h2 class="text-sm pt-8 md:pt-0">{{ product.vendor }}</h2>
-            <h3 class="text-5xl font-bold pt-2">{{ product.title }}</h3>
-            <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
-            <div class="shopify-installments" style="padding-bottom: 1rem;">
-                {% form 'product', product %}
+            <!-- Shop Pay Installments -->
+            <div class="mt-4">
                 {{ form | payment_terms }}
-                {% endform %}
-            </div>
-
-            <form action="/cart/add" method="post">
-                <div class="flex">
-                    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-                    <div class="relative bg-red">
-                        <p>Quantity</p>
-                        <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
-                            onclick="decrementQuantity()">-</button>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1"
-                            class="w-32 px-5 py-2 border rounded-md text-center border-black bg-[#FEF0D4]">
-                        <button type="button" class="absolute top-4 right-0 p-2 text-gray-500 text-3xl"
-                            onclick="incrementQuantity()">+</button>
-                    </div>
-                </div>
-
-                {% render 'add-to-cart-button' %}
-            </form>
-
-            <div class="description-par">
-                <p class="text-left pr-28">{{ product.description }}</p>
             </div>
         </div>
     </div>
 </div>
-{% endif %}
 
-{% comment %} BEATRICE CARD HOLDER PRODUCT {% endcomment %}
-{% if request.path == '/collections/card-holder-collection/products/beatrice-card-holder' or request.path ==
-'/products/beatrice-card-holder' %}
-<div class="mt-16">
-    <h2 class="text-3xl font-bold mb-8 text-center">Complete The Beatrice Collection</h2>
-    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-        {% for product in collections['beatrice-collection'].products limit: 8 %}
-        {% unless product.handle == 'beatrice-keychain' %}
-        <div class="beatrice-product">
-            <a href="{{ product.url }}">
-                <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
-                    class="w-full h-auto object-cover rounded-lg">
-                <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
-                <div class="shopify-installments" style="padding-bottom: 1rem;">
-                    {% form 'product', product %}
-                    {{ form | payment_terms }}
-                    {% endform %}
-                </div>
-            </a>
-        </div>
-        {% endunless %}
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
-
-{% comment %} BEATRICE KEYCHAIN PRODUCT {% endcomment %}
-{% if request.path == '/collections/keychain-collection/products/beatrice-keychain' or request.path ==
-'/products/beatrice-keychain' %}
-<div class="mt-16">
-    <h2 class="text-3xl font-bold mb-8 text-center">Complete The Beatrice Collection</h2>
-    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-        {% for product in collections['beatrice-collection'].products limit: 8 %}
-        {% unless product.handle == 'beatrice-keychain' %}
-        <div class="beatrice-product">
-            <a href="{{ product.url }}">
-                <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
-                    class="w-full h-auto object-cover rounded-lg">
-                <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
-                <div class="shopify-installments" style="padding-bottom: 1rem;">
-                    {% form 'product', product %}
-                    {{ form | payment_terms }}
-                    {% endform %}
-                </div>
-            </a>
-        </div>
-        {% endunless %}
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
-
-{% comment %} YVETTE CARDHOLDER PRODUCT {% endcomment %}
-{% if request.path == '/collections/card-holder-collection/products/yvette-card-holder' or request.path ==
-'/products/yvette-card-holder' %}
-<div class="my-16">
-    <h2 class="text-3xl font-bold mb-8 text-center">Complete The Yvette Collection</h2>
-    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-        {% for product in collections['yvette-collection'].products limit: 8 %}
-        {% unless product.handle == 'yvette-keychain' %}
-        <div class="yvette-product">
-            <a href="{{ product.url }}">
-                <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
-                    class="w-full h-auto object-cover rounded-lg">
-                <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
-                <div class="shopify-installments" style="padding-bottom: 1rem;">
-                    {% form 'product', product %}
-                    {{ form | payment_terms }}
-                    {% endform %}
-                </div>
-            </a>
-        </div>
-        {% endunless %}
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
-
-{% comment %} YVETTE KEYCHAIN PRODUCT {% endcomment %}
-{% if request.path == '/collections/keychain-collection/products/yvette-keychain' or request.path ==
-'/products/yvette-keychain' %}
-<div class="my-16">
-    <h2 class="text-3xl font-bold mb-8 text-center">Complete The Yvette Collection</h2>
-    <div class="flex flex-col md:flex-row justify-center items-center md:justify-around">
-        {% for product in collections['yvette-collection'].products limit: 8 %}
-        {% unless product.handle == 'yvette-keychain' %}
-        <div class="yvette-product">
-            <a href="{{ product.url }}">
-                <img src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ product.title }}"
-                    class="w-full h-auto object-cover rounded-lg">
-                <p class="mt-2 text-base font-medium">{{ product.title }}</p>
-                <p class="text-base text-gray-600 mb-2">{{ product.price | money }}</p>
-                <div class="shopify-installments" style="padding-bottom: 1rem;">
-                    {% form 'product', product %}
-                    {{ form | payment_terms }}
-                    {% endform %}
-                </div>
-            </a>
-        </div>
-        {% endunless %}
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
-
+<!-- Quantity Controls -->
 <script>
     function incrementQuantity() {
-        var quantityInput = document.getElementById('quantity');
-        var currentValue = parseInt(quantityInput.value, 10);
-        quantityInput.value = currentValue + 1;
+        const qtyInput = document.getElementById("quantity");
+        qtyInput.value = parseInt(qtyInput.value) + 1;
     }
 
     function decrementQuantity() {
-        var quantityInput = document.getElementById('quantity');
-        var currentValue = parseInt(quantityInput.value, 10);
-        if (currentValue > 1) {
-            quantityInput.value = currentValue - 1;
+        const qtyInput = document.getElementById("quantity");
+        if (parseInt(qtyInput.value) > 1) {
+            qtyInput.value = parseInt(qtyInput.value) - 1;
         }
     }
 
-    // Swiper setup
-    document.addEventListener('DOMContentLoaded', function () {
-        new Swiper('.swiper', {
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
+    // Swiper init
+    document.addEventListener("DOMContentLoaded", function () {
+        new Swiper(".mySwiper", {
             navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
             },
         });
     });
