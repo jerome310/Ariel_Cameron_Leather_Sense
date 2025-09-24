@@ -1,46 +1,128 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
+<style>
+    /* Swiper Navigation */
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: black;
+        top: auto !important;
+        height: 20px;
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 20px;
+    }
+
+    .swiper-pagination {
+        color: black;
+        bottom: 0 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: black !important;
+    }
+
+    /* Input Number Styling */
+    input[type="number"] {
+        outline: none;
+        -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Product Styling */
+    .belt-container {
+        margin-top: 20px;
+    }
+
+    .belt-container h1 {
+        font-size: 30px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+
+    .par-five {
+        width: 30%;
+    }
+
+    .par,
+    .par-two,
+    .par-three,
+    .par-four,
+    .par-five {
+        margin: 0px 10px 24px 0;
+        border: 2px solid black;
+        transition: 0.5s ease;
+        cursor: pointer;
+        padding: 12px 0;
+    }
+
+    .par:hover,
+    .par-two:hover,
+    .par-three:hover,
+    .par-four:hover,
+    .par-five:hover {
+        background-color: black;
+        color: white;
+    }
+
+    .size-option {
+        transition: all 0.3s ease;
+        font-size: 20px;
+    }
+</style>
+
 <div class="max-w-6xl mx-auto my-10 p-4">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
         <!-- Product Images -->
         <div>
-            {% if product.images.size > 0 %}
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
+            <div class="hidden md:block">
+                <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}"
+                    class="w-full h-[400px] object-cover rounded-2xl">
+                <div class="mt-4 flex">
                     {% for image in product.images %}
-                    <div class="swiper-slide">
-                        <img src="{{ image | img_url: '1024x1024' }}" alt="{{ product.title | escape }}"
-                            class="w-full object-cover border">
-                    </div>
+                    <img src="{{ image | img_url: 'large' }}" alt="{{ product.title }}"
+                        class="mx-1 w-[80px] object-cover cursor-pointer">
                     {% endfor %}
                 </div>
-                <!-- Add navigation buttons -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
             </div>
-            {% else %}
-            {{ 'product-1' | placeholder_svg_tag: 'w-full object-cover border' }}
-            {% endif %}
+
+            <div class="md:hidden">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        {% for image in product.images %}
+                        <div class="swiper-slide">
+                            <img src="{{ image | img_url: '1024x1024' }}" alt="{{ product.title | escape }}"
+                                class="w-full object-cover border rounded-2xl">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
         </div>
 
         <!-- Product Info -->
         <div>
             <h1 class="text-3xl font-bold mb-4">{{ product.title }}</h1>
             <div class="mb-4">{{ product.description }}</div>
+            <p class="text-xl font-semibold mb-4">{{ product.selected_or_first_available_variant.price | money }}</p>
 
-            <!-- Price -->
-            <p class="text-xl font-semibold mb-4">
-                {{ product.selected_or_first_available_variant.price | money }}
-            </p>
-
-            {% if product.collections contains collections['belt-bag'] %}
-            <!-- Special belt collection form -->
+            <!-- Product Form with Shop Pay -->
             {% form 'product', product %}
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-            <div class="flex">
-                <div class="relative">
+
+            <div class="flex relative mb-4">
+                <div>
                     <p class="mb-1">Quantity</p>
                     <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
                         onclick="decrementQuantity()">-</button>
@@ -50,33 +132,17 @@
                         onclick="incrementQuantity()">+</button>
                 </div>
             </div>
+
             <div class="mt-6">
                 {% render 'add-to-cart-button' %}
             </div>
-            {% endform %}
-            {% else %}
-            <!-- General product form -->
-            {% form 'product', product %}
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-            <div class="flex">
-                <div class="relative bg-red">
-                    <p>Quantity</p>
-                    <button type="button" class="absolute top-4 left-0 p-2 text-gray-500 text-3xl"
-                        onclick="decrementQuantity()">-</button>
-                    <input type="number" id="quantity" name="quantity" value="1" min="1"
-                        class="w-32 px-5 py-2 border rounded-md text-center border-black bg-[#FEF0D4]">
-                    <button type="button" class="absolute top-4 right-0 p-2 text-gray-500 text-3xl"
-                        onclick="incrementQuantity()">+</button>
-                </div>
-            </div>
-            {% render 'add-to-cart-button' %}
-            {% endform %}
-            {% endif %}
 
-            <!-- Shop Pay Installments -->
+            <!-- Shop Pay -->
             <div class="mt-4">
                 {{ form | payment_terms }}
             </div>
+            {% endform %}
+
         </div>
     </div>
 </div>
@@ -87,7 +153,6 @@
         const qtyInput = document.getElementById("quantity");
         qtyInput.value = parseInt(qtyInput.value) + 1;
     }
-
     function decrementQuantity() {
         const qtyInput = document.getElementById("quantity");
         if (parseInt(qtyInput.value) > 1) {
@@ -95,9 +160,14 @@
         }
     }
 
-    // Swiper init
+    // Swiper Init
     document.addEventListener("DOMContentLoaded", function () {
         new Swiper(".mySwiper", {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
