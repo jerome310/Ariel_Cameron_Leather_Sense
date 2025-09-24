@@ -4,14 +4,15 @@
 <style>
     .swiper-button-prev,
     .swiper-button-next {
-        color: black;
-        top: auto !important;
-        height: 20px;
+        color: white;
+        top: 50% !important;
+        transform: translateY(-50%);
+        height: 30px;
     }
 
     .swiper-button-prev::after,
     .swiper-button-next::after {
-        font-size: 20px;
+        font-size: 24px;
     }
 
     .swiper-pagination {
@@ -35,153 +36,168 @@
         margin: 0;
     }
 
-    /* Thumbnail Wrap */
-    .thumbnails {
+    /* Quantity Box */
+    .quantity-container {
+        display: inline-flex;
+        align-items: center;
+        margin-top: 1rem;
+        border: 2px solid black;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .quantity-container input {
+        text-align: center;
+        font-size: 16px;
+        padding: 10px 0;
+        width: 60px;
+        border: none;
+        background-color: transparent;
+        /* removed white background */
+    }
+
+    .quantity-container button {
+        font-size: 22px;
+        color: #333;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px 15px;
+    }
+
+    /* Add vertical borders */
+    .quantity-container .decrement {
+        border-right: 2px solid black;
+    }
+
+    .quantity-container .increment {
+        border-left: 2px solid black;
+    }
+
+    /* Thumbnails grid wrap */
+    .thumbnail-grid {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
         margin-top: 12px;
+        max-width: 500px;
     }
 
-    .thumbnails img {
-        width: 64px;
-        height: 64px;
+    .thumbnail-grid img {
+        width: 80px;
+        height: 80px;
         object-fit: cover;
-        border: 2px solid black;
         cursor: pointer;
-        flex-shrink: 0;
-        transition: 0.3s;
-    }
-
-    .thumbnails img:hover {
-        opacity: 0.8;
-    }
-
-    /* Quantity Inline Styling (buttons inside input box) */
-    .quantity-wrapper {
-        display: flex;
-        align-items: center;
-        width: fit-content;
-        border: 2px solid black;
         border-radius: 6px;
-        overflow: hidden;
-        background-color: #FEF0D4;
-    }
-
-    .quantity-wrapper button {
-        background: #FEF0D4;
-        border: none;
-        font-size: 22px;
-        padding: 0 12px;
-        cursor: pointer;
-        user-select: none;
-        color: gray;
-        height: 100%;
-    }
-
-    .quantity-wrapper input {
-        width: 60px;
-        text-align: center;
-        border: none;
-        outline: none;
-        background-color: #FEF0D4;
-        font-size: 18px;
-        height: 100%;
+        border: 1px solid #ddd;
     }
 </style>
 
-<div class="max-w-6xl mx-auto my-10 p-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-    <!-- Product Images -->
-    <div>
-        {% if product.images.size > 0 %}
-        <img id="mainImage" src="{{ product.images.first | img_url: '1024x1024' }}" alt="{{ product.title }}"
-            class="w-full object-cover border rounded-xl mb-4">
+<div class="max-w-6xl mx-auto my-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20">
+        <div class="product--medias">
+            <!-- Desktop Images -->
+            <div class="hidden md:block">
+                <div class="h-100 overflow-hidden p-2">
+                    <div class="product-images">
+                        <img id="main-product-image"
+                            class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl"
+                            src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
 
-        <!-- Desktop Thumbnails -->
-        <div class="hidden md:flex thumbnails">
-            {% for image in product.images %}
-            <img src="{{ image | img_url: '200x200' }}" alt="{{ product.title }}"
-                data-full="{{ image | img_url: '1024x1024' }}">
-            {% endfor %}
-        </div>
-
-        <!-- Mobile Swiper -->
-        <div class="md:hidden swiper">
-            <div class="swiper-wrapper">
-                {% for image in product.images %}
-                <div class="swiper-slide">
-                    <img src="{{ image | img_url: '1024x1024' }}" alt="{{ product.title }}"
-                        class="w-full object-cover border rounded-xl">
+                        <!-- Thumbnails -->
+                        <div class="thumbnail-grid">
+                            {% for image in product.images %}
+                            <img src="{{ image.src | img_url: 'large' }}" alt="{{ product.title }}"
+                                onclick="switchImage('{{ image.src | img_url: 'large' }}')">
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
-                {% endfor %}
             </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-        {% endif %}
-    </div>
 
-    <!-- Product Info -->
-    <div>
-        <h1 class="text-3xl font-bold mb-4">{{ product.title }}</h1>
-        <div class="mb-4">{{ product.description }}</div>
-        <p class="text-xl font-semibold mb-4">{{ product.selected_or_first_available_variant.price | money }}</p>
-
-        {% form 'product', product %}
-        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-
-        <!-- Quantity -->
-        <div class="quantity-container mt-4">
-            <p>Quantity</p>
-            <div class="quantity-wrapper">
-                <button type="button" onclick="decrementQuantity()">-</button>
-                <input type="number" id="quantity" name="quantity" value="1" min="1">
-                <button type="button" onclick="incrementQuantity()">+</button>
+            <!-- Mobile Swiper -->
+            <div class="md:hidden">
+                <div class="swiper h-94">
+                    <div class="swiper-wrapper">
+                        {% for image in product.images %}
+                        <div class="swiper-slide">
+                            <div class="h-80 overflow-hidden p-2">
+                                <div class="product-images">
+                                    <img class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl"
+                                        src="{{ image.src | img_url: 'large' }}" alt="{{ product.title }}">
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
             </div>
         </div>
 
-        <div class="mt-6">
-            {% render 'add-to-cart-button' %}
-        </div>
+        <div class="product--information pl-4 md:pl-0">
+            <h2 class="text-sm pt-8 md:pt-0">{{ product.vendor }}</h2>
+            <h3 class="text-5xl font-bold pt-2">{{ product.title }}</h3>
+            <p class="text-[17px] py-4">{{ product.price | money }} USD</p>
 
-        <!-- Shop Pay Installments -->
-        <div class="mt-4 shopify-installments">
-            {{ form | payment_terms }}
+            <div class="shopify-installments" style="padding-bottom: 1rem;">
+                {% form 'product', product %}
+                {{ form | payment_terms }}
+                {% endform %}
+            </div>
+
+            <form action="/cart/add" method="post">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+
+                <div class="quantity-container">
+                    <button type="button" class="decrement" onclick="decrementQuantity()">-</button>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1">
+                    <button type="button" class="increment" onclick="incrementQuantity()">+</button>
+                </div>
+
+                {% render 'add-to-cart-button' %}
+            </form>
+
+            <div class="description-par mt-6">
+                <p class="text-left pr-28">{{ product.description }}</p>
+            </div>
         </div>
-        {% endform %}
     </div>
 </div>
 
 <script>
     function incrementQuantity() {
-        const qtyInput = document.getElementById("quantity");
-        qtyInput.value = parseInt(qtyInput.value) + 1;
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value, 10);
+        quantityInput.value = currentValue + 1;
     }
 
     function decrementQuantity() {
-        const qtyInput = document.getElementById("quantity");
-        if (parseInt(qtyInput.value) > 1) {
-            qtyInput.value = parseInt(qtyInput.value) - 1;
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value, 10);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
         }
     }
 
-    // Thumbnail click changes main image
-    document.addEventListener("DOMContentLoaded", function () {
-        const thumbnails = document.querySelectorAll(".thumbnails img");
-        const mainImage = document.getElementById("mainImage");
+    function switchImage(imageSrc) {
+        document.getElementById('main-product-image').src = imageSrc;
+    }
 
-        thumbnails.forEach(thumb => {
-            thumb.addEventListener("click", function () {
-                mainImage.src = this.dataset.full;
-            });
-        });
-
-        // Swiper init for mobile
-        new Swiper(".swiper", {
+    // Swiper setup
+    document.addEventListener('DOMContentLoaded', function () {
+        new Swiper('.swiper', {
             loop: true,
-            pagination: { el: ".swiper-pagination", clickable: true },
-            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
         });
     });
 </script>
