@@ -1,14 +1,14 @@
 <div class="flex flex-col md:flex-row md:justify-center mt-10 mb-12">
     <div class="w-11/12 mx-auto flex flex-col md:flex-row justify-around md:mx-0 md:w-[85%]">
         {% comment %} 1ST CARD {% endcomment %}
-        <a class="w-full" href="{{ '/collections/belt-bag-collection' | url }}">
+        <a class="w-full" href="{{ '/collections/mini-bag-collection' | url }}">
             <div class="relative group mb-5 mr-5 w-full md:w-auto">
                 <div class="hover:underline underline-offset-2 decoration-white w-full h-80 relative">
-                    <img src="{{ all_products['beatrice-belt-bag'].featured_image.src | img_url: 'large'}}"
+                    <img src="{{ all_products['mustard-mini-bag'].featured_image.src | img_url: 'large'}}"
                         alt="Beatrice Belt Product Image"
                         class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-t-2xl transition-opacity duration-300 group-hover:opacity-0">
 
-                    {% assign images = all_products['beatrice-belt-bag'].images %}
+                    {% assign images = all_products['mustard-mini-bag'].images %}
                     {% if images.size > 1 %}
                     <img src="{{ images[1].src | img_url: 'large'}}" alt="Beatrice belt bag Alternate Image"
                         class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-t-2xl absolute top-0 left-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -18,7 +18,7 @@
                         class="text-white hover:underline underline-offset-2 decoration-white text-center py-2 px-6 mt-1 md:mt-0">
                         <div
                             class="text-black hover:underline underline-offset-2 decoration-black text-center py-6 px-6 mt-1 md:mt-0">
-                            {% assign collection_handle = 'belt-bag-collection' %}
+                            {% assign collection_handle = 'mini-bag-collection' %}
                             <h1 class="text-xl">{{ collections[collection_handle].title }}</h1>
                         </div>
                     </div>
