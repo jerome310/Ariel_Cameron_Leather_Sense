@@ -1973,6 +1973,16 @@ video {
   .sm\:max-w-md {
     max-width: 28rem;
   }
+
+  .sm\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .sm\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
 
 @media (min-width: 768px) {
