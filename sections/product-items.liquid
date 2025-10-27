@@ -2,17 +2,41 @@
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
 <style>
+    /* Swiper Navigation Buttons */
     .swiper-button-prev,
     .swiper-button-next {
-        color: white;
-        top: 50% !important;
+        position: absolute;
+        top: 50%;
         transform: translateY(-50%);
-        height: 30px;
+        color: black;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+        transition: all 0.3s ease;
+    }
+
+    .swiper-button-prev:hover,
+    .swiper-button-next:hover {
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 0.5);
     }
 
     .swiper-button-prev::after,
     .swiper-button-next::after {
         font-size: 24px;
+    }
+
+    .swiper-button-prev {
+        left: 5px;
+    }
+
+    .swiper-button-next {
+        right: 5px;
     }
 
     .swiper-pagination {
@@ -53,7 +77,6 @@
         width: 60px;
         border: none;
         background-color: transparent;
-        /* removed white background */
     }
 
     .quantity-container button {
@@ -91,6 +114,37 @@
         border-radius: 6px;
         border: 1px solid #ddd;
     }
+
+    /* 🌐 Mobile box design fix for product images */
+    @media (max-width: 768px) {
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 0 10px;
+        }
+
+        .swiper-slide .product-images {
+            background-color: rgba(246, 246, 246, 0.75);
+            border-radius: 1rem;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .swiper-slide .product-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            object-fit: contain;
+            background-color: #f6f6f6;
+        }
+
+        .swiper {
+            padding-bottom: 20px;
+        }
+    }
 </style>
 
 <div class="max-w-6xl mx-auto my-8">
@@ -100,11 +154,12 @@
             <div class="hidden md:block">
                 <div class="h-100 overflow-hidden p-2">
                     <div class="product-images">
+                        <!-- MAIN IMAGE -->
                         <img id="main-product-image"
                             class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl"
                             src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
 
-                        <!-- Thumbnails -->
+                        <!-- THUMBNAILS -->
                         <div class="thumbnail-grid">
                             {% for image in product.images %}
                             <img src="{{ image.src | img_url: 'large' }}" alt="{{ product.title }}"
@@ -117,15 +172,13 @@
 
             <!-- Mobile Swiper -->
             <div class="md:hidden">
-                <div class="swiper h-94">
+                <div class="swiper">
                     <div class="swiper-wrapper">
                         {% for image in product.images %}
                         <div class="swiper-slide">
-                            <div class="h-80 overflow-hidden p-2">
-                                <div class="product-images">
-                                    <img class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-2xl"
-                                        src="{{ image.src | img_url: 'large' }}" alt="{{ product.title }}">
-                                </div>
+                            <div class="product-images">
+                                <img class="w-full object-cover rounded-2xl" src="{{ image.src | img_url: 'large' }}"
+                                    alt="{{ product.title }}">
                             </div>
                         </div>
                         {% endfor %}
@@ -182,11 +235,12 @@
         }
     }
 
+    // Desktop thumbnail switch function
     function switchImage(imageSrc) {
         document.getElementById('main-product-image').src = imageSrc;
     }
 
-    // Swiper setup
+    // Swiper setup (mobile only)
     document.addEventListener('DOMContentLoaded', function () {
         new Swiper('.swiper', {
             loop: true,
