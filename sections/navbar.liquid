@@ -1,7 +1,14 @@
-<div class="py-4 px-10 md:px-0 bg-gradient-to-r from-[#feb82b]/50 via-[#e561a1]/50 to-[#feb82b]/50">
-    <p class="text-center" aria-label="Welcome message">&#128075;Handcrafted, Hand-Stitched Leather Goods, designed & made by Ariel! &#128512;</p>
-</div>
+<style>
+    /* Hide Alpine elements until initialized to prevent flash */
+    [x-cloak] {
+        display: none !important;
+    }
+</style>
 
+<div class="py-4 px-10 md:px-0 bg-gradient-to-r from-[#feb82b]/50 via-[#e561a1]/50 to-[#feb82b]/50">
+    <p class="text-center" aria-label="Welcome message">&#128075;Handcrafted, Hand-Stitched Leather Goods, designed &
+        made by Ariel! &#128512;</p>
+</div>
 
 <!-- Create a navbar slider with a hamburger icon -->
 <div class="flex flex-col w-full mx-auto pt-5"
@@ -49,7 +56,7 @@
     <div class="bg-[#FEB82B]/20 md:hidden" x-show="open" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="transform -translate-x-full" x-transition:enter-end="transform translate-x-0"
         x-transition:leave="transition ease-in duration-300" x-transition:leave-start="transform translate-x-0"
-        x-transition:leave-end="transform -translate-x-full">
+        x-transition:leave-end="transform -translate-x-full" x-cloak>
         <div class="flex flex-col px-4 pt-6 space-y-2">
             {% if linklists.main-menu.links.size > 0 %}
             {% for link in linklists.main-menu.links %}
@@ -112,7 +119,7 @@
         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
         x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" x-cloak>
 
         <!-- Close Button pinned to viewport top-right -->
         <button x-on:click="searchBarButtonOpen = false; document.body.style.overflow = 'auto';"
@@ -135,7 +142,7 @@
         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
         x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" x-cloak>
 
         <!-- Close Button pinned to viewport top-right -->
         <button x-on:click="searchBarButtonOpenMobile = false; document.body.style.overflow = 'auto';"
@@ -153,8 +160,6 @@
         </div>
     </div>
 </div>
-
-                                                                                                                                                                               
 
 {% schema %}
 {

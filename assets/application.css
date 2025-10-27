@@ -907,10 +907,6 @@ video {
   height: 20rem;
 }
 
-.h-94 {
-  height: 22rem;
-}
-
 .h-96 {
   height: 24rem;
 }
@@ -1088,10 +1084,6 @@ video {
 
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.cursor-pointer {
-  cursor: pointer;
 }
 
 .resize-none {
