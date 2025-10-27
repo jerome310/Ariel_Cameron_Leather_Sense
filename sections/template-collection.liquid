@@ -5,7 +5,7 @@
     <div class="max-w-6xl mx-auto mt-10">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-10">
             {% if collection.handle == 'mini-bag-collection' or collection.handle == 'crossbody-collection' or collection.handle ==
-            'card-holder-collection' or collection.handle == 'keychain-collection' or collection.handle == 'all' %}
+            'tote-collection' or collection.handle == 'keychain-collection' or collection.handle == 'all' %}
             {% for product in collection.products %}    
             <a href="{{ product.url | within: collection }}">
                 <div class="flex flex-col w-3/4 md:w-full mx-auto pb-8">
