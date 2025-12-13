@@ -5,6 +5,15 @@
     }
 </style>
 
+{% comment %}
+Determine if the page is homepage for color logic
+{% endcomment %}
+{% if template.name == 'index' %}
+{% assign is_homepage = true %}
+{% else %}
+{% assign is_homepage = false %}
+{% endif %}
+
 <!-- Top Banner -->
 <div class="py-4 px-10 md:px-0 bg-gradient-to-r from-[#feb82b]/50 via-[#e561a1]/50 to-[#feb82b]/50 z-10 relative">
     <p class="text-center" aria-label="Welcome message">&#128075;Handcrafted, Hand-Stitched Leather Goods, designed &
@@ -12,29 +21,32 @@
 </div>
 
 <!-- Navbar + Hero Section -->
-<div class="relative w-full" x-data="{
-        open: false,
-        searchBarButtonOpen: false,
-        searchBarButtonOpenMobile: false,
-        init() {
-            window.addEventListener('resize', () => {
-                // Close slider if screen is desktop or bigger
-                if(window.innerWidth >= 768) this.open = false;
-            });
-        }
-    }" x-init="init()">
+<div class="relative w-full" x-data="{ 
+         open: false, 
+         searchBarButtonOpen: false, 
+         searchBarButtonOpenMobile: false,
+         init() {
+             // Close mobile slider if resizing to desktop
+             window.addEventListener('resize', () => {
+                 if (window.innerWidth >= 768) {
+                     this.open = false;
+                 }
+             })
+         }
+     }" x-init="init()">
 
     <!-- Navbar Mobile -->
-    <div class="grid grid-cols-3 items-center px-4 py-3 md:hidden absolute top-0 left-0 w-full z-20">
+    <div class="grid grid-cols-3 items-center px-4 py-3 md:hidden absolute top-0 left-0 w-full z-20"
+        style="color: {% if is_homepage %}white{% else %}black{% endif %};">
         <!-- Hamburger -->
         <div class="flex items-center">
-            <button class="text-white focus:outline-none" x-on:click="open = !open" :aria-expanded="open.toString()">
-                <svg class="h-6 w-6" x-show="!open" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    aria-label="Open menu">
+            <button class="focus:outline-none" x-on:click="open = !open" :aria-expanded="open.toString()">
+                <svg class="h-6 w-6" x-show="!open" fill="none" viewBox="0 0 24 24"
+                    stroke="{% if is_homepage %}white{% else %}black{% endif %}" aria-label="Open menu">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
-                <svg class="h-6 w-6" x-show="open" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    aria-label="Close menu">
+                <svg class="h-6 w-6" x-show="open" fill="none" viewBox="0 0 24 24"
+                    stroke="{% if is_homepage %}white{% else %}black{% endif %}" aria-label="Close menu">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
@@ -53,7 +65,8 @@
         </div>
 
         <!-- Search + Cart -->
-        <div class="flex justify-end items-center space-x-4 text-white">
+        <div class="flex justify-end items-center space-x-4"
+            style="color: {% if is_homepage %}white{% else %}black{% endif %};">
             <button
                 x-on:click="searchBarButtonOpenMobile = true; $nextTick(() => { document.body.style.overflow = 'hidden'; })"
                 type="button" class="whitespace-nowrap text-base hover:text-gray-200"
@@ -62,7 +75,7 @@
             </button>
             <a href="{{ routes.cart_url }}" class="cart-link relative">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="white" class="w-6 h-6">
+                    stroke="{% if is_homepage %}white{% else %}black{% endif %}" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                 </svg>
@@ -84,17 +97,15 @@
         x-transition:leave-end="transform -translate-x-full opacity-0" class="fixed inset-0 z-50 flex" x-cloak>
         <div class="relative bg-[#FFF1D5] w-3/4 h-full p-6 flex flex-col space-y-4 overflow-y-auto shadow-lg">
             <!-- Close Button Top Left -->
-            <button x-on:click="open = false" class="absolute top-4 left-4 text-[#2E2D34] font-bold text-xl z-50">
-                ✖
-            </button>
+            <button x-on:click="open = false"
+                class="absolute top-4 left-4 text-[#2E2D34] font-bold text-xl z-50">✖</button>
 
             <!-- Menu Links -->
             {% if linklists.main-menu.links.size > 0 %}
             {% for link in linklists.main-menu.links %}
             <a href="{{ link.url }}" title="{{ link.title }}"
-                class="block text-[#2E2D34] font-medium py-3 px-2 hover:bg-[#FDE9C8] rounded transition-colors duration-200">
-                {{ link.title }}
-            </a>
+                class="block text-[#2E2D34] font-medium py-3 px-2 hover:bg-[#FDE9C8] rounded transition-colors duration-200">{{
+                link.title }}</a>
             {% endfor %}
             {% else %}
             <p class="text-[#2E2D34]">No menu links available.</p>
@@ -102,11 +113,15 @@
 
             <!-- Social Media -->
             <div class="flex space-x-4 mt-6">
-                {% render 'social-media-twitter' %}
-                {% render 'social-media-facebook' %}
-                {% render 'social-media-pinterest' %}
-                {% render 'social-media-instagram' %}
-                {% render 'social-media-tiktok' %}
+                <a href="https://www.facebook.com/arielcameronleather" target="_blank" rel="noopener noreferrer">
+                    {% render 'social-media-facebook' %}
+                </a>
+                <a href="https://www.instagram.com/arielcameronleather/" target="_blank" rel="noopener noreferrer">
+                    {% render 'social-media-instagram' %}
+                </a>
+                <a href="https://www.tiktok.com/@arielcameronleather" target="_blank" rel="noopener noreferrer">
+                    {% render 'social-media-tiktok' %}
+                </a>
             </div>
         </div>
 
@@ -115,12 +130,14 @@
     </div>
 
     <!-- Desktop Navbar -->
-    <div class="hidden md:flex items-center justify-between w-full px-6 absolute top-0 left-0 z-20">
+    <div class="hidden md:flex items-center justify-between w-full px-6 absolute top-0 left-0 z-20"
+        style="color: {% if is_homepage %}white{% else %}black{% endif %};">
         <div class="flex-1 flex space-x-8">
             {% if linklists.main-menu.links.size > 0 %}
             {% for link in linklists.main-menu.links %}
-            <a class="font-normal text-white hover:underline underline-offset-4 decoration-1 block py-2 text-lg"
-                href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+            <a class="font-normal hover:underline underline-offset-4 decoration-1 block py-2 text-lg"
+                href="{{ link.url }}" title="{{ link.title }}"
+                style="color: {% if is_homepage %}white{% else %}black{% endif %};">{{ link.title }}</a>
             {% endfor %}
             {% endif %}
         </div>
@@ -137,7 +154,7 @@
             </a>
         </div>
 
-        <div class="flex-1 flex justify-end items-center space-x-8 text-white">
+        <div class="flex-1 flex justify-end items-center space-x-8">
             <button
                 x-on:click="searchBarButtonOpen = true; $nextTick(() => { document.body.style.overflow = 'hidden'; })"
                 type="button" class="whitespace-nowrap text-base hover:text-gray-200" aria-label="Open search bar">
@@ -145,7 +162,7 @@
             </button>
             <a href="{{ routes.cart_url }}" class="cart-link relative">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="white" class="w-6 h-6">
+                    stroke="{% if is_homepage %}white{% else %}black{% endif %}" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                 </svg>
@@ -158,7 +175,8 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Homepage Only) -->
+    {% if is_homepage %}
     <div class="relative w-full h-[500px] md:h-[700px]">
         <div class="absolute inset-0 bg-gradient-to-r from-[#feb82b] via-[#2387ff] to-[#e561a1] z-0"></div>
         <img src="{{ 'ariel_denim.jpg' | asset_url }}" class="object-cover w-full h-full relative z-0" alt="Hero Image">
@@ -174,6 +192,8 @@
             </a>
         </div>
     </div>
+    {% endif %}
+
 </div>
 
 {% schema %}

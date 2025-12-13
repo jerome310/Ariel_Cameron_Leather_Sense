@@ -26,19 +26,32 @@
 </head>
 
 <body class="bg-[#FEB82B]/20 font-comic">
-  {% unless template.name == '404' %}
-  {% section 'navbar-hero' %}
-  {% endunless %}
 
+  {% section 'navbar-hero' %}
 
   <main role="main">
-    {{ content_for_layout }}
+    {% unless template.name == 'index' %}
+    {% if template.name == 'collection' or template.name contains 'product' %}
+    <div class="pt-[250px] md:pt-[270px]"> <!-- More space for product pages -->
+      {% elsif template.name == 'page.contact' %}
+      <div class="pt-[130px] md:pt-[150px]"> <!-- Contact page spacing, 50px more -->
+        {% else %}
+        <div class="pt-[130px] md:pt-[150px]"> <!-- Other non-home pages -->
+          {% endif %}
+          {% endunless %}
+
+          {{ content_for_layout }}
+
+          {% unless template.name == 'index' %}
+        </div>
+        {% endunless %}
   </main>
 
   {% section 'footer' %}
 
   {{ 'shopify_payment_terms.js' | asset_url | script_tag }}
 </body>
+
 
 
 </html>
