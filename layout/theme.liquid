@@ -18,12 +18,18 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
   </style>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="512x512" href="{{ 'favicon_512x512.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="512x512" href="{{ 'favicon_512x512.png' | asset_url }}">
+  <link rel="icon" href="{{ 'favicon.ico' | file_url }}">
 </head>
 
 <body class="bg-[#FEB82B]/20 font-comic">
   {% unless template.name == '404' %}
-  {% section 'navbar' %}
+  {% section 'navbar-hero' %}
   {% endunless %}
+
 
   <main role="main">
     {{ content_for_layout }}
