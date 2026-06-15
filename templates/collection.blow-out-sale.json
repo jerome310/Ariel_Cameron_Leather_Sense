@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "main": {
+      "type": "blow-out-sale-collection"
+    }
+  },
+  "order": ["main"]
+}
