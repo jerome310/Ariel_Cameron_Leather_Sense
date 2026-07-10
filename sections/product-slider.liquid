@@ -2,8 +2,8 @@
     /* FULL WIDTH FIX */
     .hero-banner {
         position: relative;
-        width: 100vw;
-        margin-left: calc(-50vw + 50%);
+        width: 100%;
+        margin-left: 0;
         overflow: hidden;
         height: 1250px;
     }
@@ -75,55 +75,67 @@
     }
 
     /* TABLET */
-@media screen and (max-width: 768px) {
+    @media screen and (max-width: 768px) {
 
-    .hero-banner {
-        height: 900px;
+        .hero-overlay {
+            top: 50%;
+            /* 👈 push it down */
+            left: 40px;
+            transform: none;
+            /* 👈 IMPORTANT */
+        }
+
     }
 
-    .hero-overlay {
-        left: 40px;
-        top: 50%;
+    @media screen and (max-height: 700px) {
+
+        .hero-overlay {
+            top: 32%;
+            bottom: 30px;
+            /* stays consistent */
+        }
+
+        .hero-text-images img {
+            max-width: 350px;
+            width: 70vw;
+        }
+
     }
 
-    .hero-text-images img {
-        width: 350px;
+
+    /* MOBILE */
+    @media screen and (max-width: 480px) {
+
+        .hero-banner {
+            height: 700px;
+        }
+
+        .hero-overlay {
+            top: 45%;
+            /* 👈 push it LOWER */
+            left: 20px;
+            right: 20px;
+            transform: none;
+            /* 👈 remove centering */
+        }
+
+        .hero-image {
+            object-fit: contain;
+            object-position: center;
+            background: #ffffff;
+        }
+
+        .hero-text-images img {
+            width: 220px;
+        }
+
+        .hero-btn {
+            margin-top: 10px;
+            padding: 10px 22px;
+            font-size: 13px;
+        }
+
     }
-
-}
-
-
-/* MOBILE */
-@media screen and (max-width: 480px) {
-
-    .hero-banner {
-        height: 700px;
-    }
-
-    .hero-overlay {
-        top: 45%;
-        left: 20px;
-        right: 20px;
-        transform: translateY(-50%);
-    }
-
-     .hero-image {
-        object-fit: contain;
-        object-position: center;
-        background: #ffffff;
-    }
-
-    .hero-text-images img {
-        width: 220px;
-    }
-
-    .hero-btn {
-        margin-top: 10px;
-        padding: 10px 22px;
-        font-size: 13px;
-    }
-
-}
 </style>
 
 <div class="hero-banner">
