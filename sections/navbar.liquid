@@ -40,7 +40,7 @@
         <div class="text-center">
             <a href="{{ shop.url }}" title="Homepage">
                 {% if section.settings.image == blank %}
-                <img class="w-[120px] h-[120px]" src="{{ 'logo.png' | asset_url }}" alt="My company logo">
+                <img class="w-[120px] h-[120px]" src="{{ 'Header_ACL_Logo.png' | asset_url }}" alt="My company logo">
                 {% else %}
                 <img class="w-[120px] h-[120px]" src="{{ section.settings.image | img_url: 'master' }}"
                     alt="My company logo">
@@ -100,8 +100,7 @@
         <div class="flex-shrink-0 mx-auto">
             <a href="{{ shop.url }}" title="Homepage">
                 {% if section.settings.image == blank %}
-                <img class="w-[180px] h-[180px] md:w-[200px] md:h-[200px]" src="{{ 'logo.png' | asset_url }}"
-                    alt="My company logo">
+                <img class="w-[135px] h-auto md:w-[175px]" src="{{ 'Header_ACL_Logo.png' | asset_url }}" alt="My company logo">
                 {% else %}
                 <img class="w-[180px] h-[180px] md:w-[200px] md:h-[200px]"
                     src="{{ section.settings.image | img_url: 'master' }}" alt="My company logo">

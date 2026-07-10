@@ -6,6 +6,7 @@
         margin-left: 0;
         overflow: hidden;
         height: 1250px;
+        margin-top: 50px;
     }
 
     .hero-image {
@@ -18,13 +19,13 @@
 
     /* OVERLAY */
     .hero-overlay {
-    position: absolute;
-    top: auto;
-    bottom: 180px;
-    left: 80px;
-    transform: none;
-    z-index: 10;
-}
+        position: absolute;
+        top: auto;
+        bottom: 180px;
+        left: 80px;
+        transform: none;
+        z-index: 10;
+    }
 
     /* TEXT IMAGE STACK */
     .hero-text-images {
@@ -34,19 +35,19 @@
         margin-bottom: 15px;
     }
 
-    
+
 
     /* BUTTON */
     .hero-btn {
         display: inline-block;
-    padding: 12px 26px;
-    background: white;
-    color: black;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
+        padding: 12px 26px;
+        background: white;
+        color: black;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
     }
 
     /* HOVER */
@@ -86,45 +87,51 @@
 
     @media screen and (max-height: 700px) and (max-width: 1023px) {
 
-    .hero-overlay {
-        top: 32%;
-        bottom: 30px;
+         /* Fixing areas for mobile */
+        .hero-banner {
+            height: 700px;
+        }
+
+        /* Fixing areas for mobile */
+
+        .hero-overlay {
+            top: 58%;
+        }
+
+        .hero-text-images img {
+            max-width: 350px;
+            width: 70vw;
+        }
+
     }
 
-    .hero-text-images img {
-        max-width: 350px;
-        width: 70vw;
-    }
+    @media screen and (min-width: 1024px) {
+        .hero-text-images img {
+            width: 550px;
+            max-width: 100%;
+        }
 
-}
-
-  @media screen and (min-width: 1024px) {
-    .hero-text-images img {
-        width: 550px;
-        max-width: 100%;
+        .hero-overlay {
+            left: 50px;
+            /* move left/right */
+            bottom: 500px;
+            /* move up/down */
+        }
     }
-
-    .hero-overlay {
-        left: 50px; /* move left/right */
-        bottom: 500px; /* move up/down */
-    }
-}
 
 
     /* MOBILE */
     @media screen and (max-width: 480px) {
 
+        /* Fixing areas for mobile */
         .hero-banner {
-            height: 700px;
+            height: 530px;
         }
 
+        /* Fixing areas for mobile */
+
         .hero-overlay {
-            top: 45%;
-            /* 👈 push it LOWER */
-            left: 20px;
-            right: 20px;
-            transform: none;
-            /* 👈 remove centering */
+            top: 62%;
         }
 
         .hero-image {
