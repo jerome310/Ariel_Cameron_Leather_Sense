@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "main": {
+      "type": "strawberry-product-drop"
+    }
+  },
+  "order": ["main"]
+}
