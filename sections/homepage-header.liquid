@@ -18,11 +18,12 @@
 
     /* OVERLAY */
     .hero-overlay {
-        position: absolute;
-        top: 50%;
-        left: 80px;
-        transform: translateY(-50%);
-    }
+    position: absolute;
+    top: auto;
+    bottom: 180px;
+    left: 80px;
+    transform: none;
+}
 
     /* TEXT IMAGE STACK */
     .hero-text-images {
@@ -32,12 +33,7 @@
         margin-bottom: 15px;
     }
 
-    /* TEXT IMAGES */
-    .hero-text-images img {
-        width: 500px;
-        /* control text size */
-        max-width: 100%;
-    }
+    
 
     /* BUTTON */
     .hero-btn {
@@ -87,20 +83,31 @@
 
     }
 
-    @media screen and (max-height: 700px) {
+    @media screen and (max-height: 700px) and (max-width: 1023px) {
 
-        .hero-overlay {
-            top: 32%;
-            bottom: 30px;
-            /* stays consistent */
-        }
-
-        .hero-text-images img {
-            max-width: 350px;
-            width: 70vw;
-        }
-
+    .hero-overlay {
+        top: 32%;
+        bottom: 30px;
     }
+
+    .hero-text-images img {
+        max-width: 350px;
+        width: 70vw;
+    }
+
+}
+
+  @media screen and (min-width: 1024px) {
+    .hero-text-images img {
+        width: 550px;
+        max-width: 100%;
+    }
+
+    .hero-overlay {
+        left: 50px; /* move left/right */
+        bottom: 500px; /* move up/down */
+    }
+}
 
 
     /* MOBILE */
