@@ -1,0 +1,319 @@
+/**
+ * =============================================================================
+ * FILE: testimonials.css
+ * LOCATION: Upload to your Shopify theme's "Assets" folder
+ * PURPOSE: Styles for the Customer Reviews & Testimonials carousel section
+ * =============================================================================
+ */
+
+/* =============================================================================
+   SECTION WRAPPER
+   ============================================================================= */
+
+.testimonials-section {
+    width: 100%;
+    background-color: #FFF1D5;
+    padding: 0rem 0 8rem;
+}
+
+.testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* =============================================================================
+   HEADING
+   ============================================================================= */
+
+.testimonials-heading {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.testimonials-title {
+    font-size: 1.875rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 0.625rem;
+    letter-spacing: -0.01em;
+}
+
+.testimonials-subtitle {
+    font-size: 0.9375rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* =============================================================================
+   CAROUSEL WRAPPER
+   ============================================================================= */
+
+.testimonials-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* =============================================================================
+   NAVIGATION ARROWS
+   ============================================================================= */
+
+.carousel-arrow {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #6b7280;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    z-index: 2;
+}
+
+.carousel-arrow:hover {
+    color: #111827;
+    border-color: #9ca3af;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.carousel-arrow:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* =============================================================================
+   TRACK — holds all cards, clips overflow
+   ============================================================================= */
+
+.testimonials-track {
+    flex: 1;
+    display: grid;
+    /* 3 visible columns: side | featured center | side */
+    grid-template-columns: 1fr 1.4fr 1fr;
+    gap: 1.25rem;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* =============================================================================
+   CARD BASE
+   ============================================================================= */
+
+.testimonial-card {
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    /* Side cards are shorter */
+    min-height: 220px;
+}
+
+/* Cards fading out during transition */
+.testimonial-card.is-exiting {
+    opacity: 0;
+    transform: scale(0.97);
+}
+
+/* =============================================================================
+   SIDE CARD — avatar + quote
+   ============================================================================= */
+
+.testimonial-card__top {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+}
+
+.testimonial-card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: #e5e7eb;
+}
+
+.testimonial-card__avatar--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+}
+
+.testimonial-card__name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.testimonial-card__quote {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #374151;
+    margin: 0;
+    font-style: normal;
+}
+
+/* =============================================================================
+   FEATURED CENTER CARD — tall portrait photo + overlay
+   ============================================================================= */
+
+.testimonial-card--featured {
+    position: relative;
+    padding: 0;
+    /* Taller than side cards */
+    min-height: 420px;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: #1a1a1a;
+}
+
+/* Portrait photo fills the card */
+.testimonial-card__photo {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    transition: transform 0.6s ease;
+}
+
+.testimonial-card--featured:hover .testimonial-card__photo {
+    transform: scale(1.03);
+}
+
+.testimonial-card__photo--placeholder {
+    background: linear-gradient(160deg, #2a2a2a 0%, #4a4a4a 100%);
+}
+
+/* Dark gradient overlay so text is readable */
+.testimonial-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.82) 0%,
+            rgba(0, 0, 0, 0.45) 50%,
+            rgba(0, 0, 0, 0.08) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem 1.75rem;
+}
+
+.testimonial-card__featured-quote {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: #ffffff;
+    margin: 0 0 0.875rem;
+    font-style: italic;
+}
+
+.testimonial-card__featured-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.02em;
+}
+
+/* =============================================================================
+   TRANSITION ANIMATIONS
+   ============================================================================= */
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeSlideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.testimonials-track.animating-next .testimonial-card {
+    animation: fadeSlideIn 0.4s ease both;
+}
+
+.testimonials-track.animating-prev .testimonial-card {
+    animation: fadeSlideInLeft 0.4s ease both;
+}
+
+/* Stagger each card slightly */
+.testimonials-track .testimonial-card:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.testimonials-track .testimonial-card:nth-child(2) {
+    animation-delay: 0.05s;
+}
+
+.testimonials-track .testimonial-card:nth-child(3) {
+    animation-delay: 0.1s;
+}
+
+/* =============================================================================
+   RESPONSIVE
+   ============================================================================= */
+
+/* Tablet: show only center + one side card */
+@media (max-width: 900px) {
+    .testimonials-track {
+        grid-template-columns: 1fr 1.4fr;
+    }
+
+    /* Hide the third card (right side) */
+    .testimonials-track .testimonial-card:last-child {
+        display: none;
+    }
+}
+
+/* Mobile: single card */
+@media (max-width: 600px) {
+    .testimonials-section {
+        padding: 3rem 0;
+    }
+
+    .testimonials-title {
+        font-size: 1.375rem;
+    }
+
+    .testimonials-track {
+        grid-template-columns: 1fr;
+    }
+
+    /* Show only the featured card on mobile */
+    .testimonials-track .testimonial-card:not(.testimonial-card--featured) {
+        display: none;
+    }
+
+    .testimonial-card--featured {
+        min-height: 360px;
+    }
+
+    .carousel-arrow {
+        width: 36px;
+        height: 36px;
+    }
+}

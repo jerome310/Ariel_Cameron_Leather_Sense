@@ -20,10 +20,14 @@
             "type": "variety-product-card",
             "settings": {}
         },
+        "customers-testimonials": {
+            "type": "customers-testimonials",
+            "settings": {}
+        },
         "four-column-description": {
             "type": "four-column-description",
             "settings": {}
         }
     },
-    "order": ["homepage-header","homepage-hero","collection-line","gradient-message", "variety-product-card", "four-column-description"]
+    "order": ["homepage-header","homepage-hero","collection-line","gradient-message", "variety-product-card", "customers-testimonials", "four-column-description"]
 }
