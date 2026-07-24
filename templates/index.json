@@ -1,7 +1,7 @@
 {
     "sections": {
-        "homepage-header": {
-            "type": "homepage-header",
+        "homepage-product-slider": {
+            "type": "homepage-product-slider",
             "settings": {}
         },
         "homepage-hero": {
@@ -29,5 +29,5 @@
             "settings": {}
         }
     },
-    "order": ["homepage-header","homepage-hero","collection-line","gradient-message", "variety-product-card", "customers-testimonials", "four-column-description"]
+    "order": ["homepage-product-slider","homepage-hero","collection-line","gradient-message", "variety-product-card", "customers-testimonials", "four-column-description"]
 }
