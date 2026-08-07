@@ -2,26 +2,18 @@
     /* ===== Promo bar ===== */
     .promo-bar {
         padding: 1rem 2.5rem;
-        background: linear-gradient(to right, rgba(254, 184, 43, 0.5), rgba(229, 97, 161, 0.5), rgba(254, 184, 43, 0.5));
+        background: linear-gradient(to right, rgba(254,184,43,0.5), rgba(229,97,161,0.5), rgba(254,184,43,0.5));
     }
-
     @media (min-width: 768px) {
-        .promo-bar {
-            padding: 1rem 0;
-        }
+        .promo-bar { padding: 1rem 0; }
     }
-
     .promo-bar__inner {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0.75rem;
     }
-
-    .promo-bar__emoji {
-        font-size: 1.25rem;
-    }
-
+    .promo-bar__emoji { font-size: 1.25rem; }
     .promo-bar__text {
         text-align: center;
         font-weight: 600;
@@ -47,13 +39,9 @@
         justify-content: space-between;
         padding: 0.75rem 1rem;
     }
-
     @media (min-width: 768px) {
-        .mobile-topbar {
-            display: none;
-        }
+        .mobile-topbar { display: none; }
     }
-
     .hamburger-btn {
         background: none;
         border: none;
@@ -62,28 +50,12 @@
         padding: 0;
         line-height: 0;
     }
+    .hamburger-btn svg { width: 24px; height: 24px; }
+    .hamburger-btn .icon-close { display: none; }
+    .hamburger-btn.is-open .icon-open { display: none; }
+    .hamburger-btn.is-open .icon-close { display: block; }
 
-    .hamburger-btn svg {
-        width: 24px;
-        height: 24px;
-    }
-
-    .hamburger-btn .icon-close {
-        display: none;
-    }
-
-    .hamburger-btn.is-open .icon-open {
-        display: none;
-    }
-
-    .hamburger-btn.is-open .icon-close {
-        display: block;
-    }
-
-    .mobile-logo img {
-        width: 120px;
-        height: 120px;
-    }
+    .mobile-logo img { width: 120px; height: 120px; }
 
     .mobile-actions {
         display: flex;
@@ -91,7 +63,6 @@
         gap: 1rem;
         color: #2E2D34;
     }
-
     .mobile-actions button {
         background: none;
         border: none;
@@ -102,21 +73,15 @@
 
     /* ===== Mobile slide-out menu ===== */
     .mobile-menu {
-        background: rgba(254, 184, 43, 0.2);
+        background: rgba(254,184,43,0.2);
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease;
     }
-
     @media (min-width: 768px) {
-        .mobile-menu {
-            display: none;
-        }
+        .mobile-menu { display: none; }
     }
-
-    .mobile-menu.is-open {
-        max-height: 800px;
-    }
+    .mobile-menu.is-open { max-height: 800px; }
 
     .mobile-menu__links {
         display: flex;
@@ -134,19 +99,10 @@
         border-radius: 0.375rem;
         font-size: 1rem;
     }
+    .mobile-nav-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 
-    .mobile-nav-link:hover {
-        text-decoration: underline;
-        text-underline-offset: 4px;
-    }
-
-    .mobile-accordion {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    .mobile-accordion:last-child {
-        border-bottom: none;
-    }
+    .mobile-accordion { border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .mobile-accordion:last-child { border-bottom: none; }
 
     .mobile-accordion__toggle {
         width: 100%;
@@ -164,11 +120,7 @@
         border-radius: 0.375rem;
         font-size: 1rem;
     }
-
-    .mobile-accordion__toggle:hover {
-        text-decoration: underline;
-        text-underline-offset: 4px;
-    }
+    .mobile-accordion__toggle:hover { text-decoration: underline; text-underline-offset: 4px; }
 
     .mobile-accordion__icon {
         width: 10px;
@@ -177,14 +129,8 @@
         margin-left: 0.5rem;
         transition: transform 0.3s ease-in-out;
     }
-
-    .mobile-accordion__toggle:hover .mobile-accordion__icon {
-        transform: rotate(-180deg);
-    }
-
-    .mobile-accordion.is-open .mobile-accordion__icon {
-        transform: rotate(-180deg);
-    }
+    .mobile-accordion__toggle:hover .mobile-accordion__icon { transform: rotate(-180deg); }
+    .mobile-accordion.is-open .mobile-accordion__icon { transform: rotate(-180deg); }
 
     .mobile-accordion__panel {
         display: flex;
@@ -195,7 +141,6 @@
         overflow: hidden;
         transition: max-height 0.3s ease;
     }
-
     .mobile-accordion.is-open .mobile-accordion__panel {
         max-height: 500px;
         padding-bottom: 0.75rem;
@@ -211,9 +156,8 @@
         font-size: 0.875rem;
         transition: background-color 0.15s ease, color 0.15s ease;
     }
-
     .mobile-accordion__link:hover {
-        background: rgba(254, 184, 43, 0.1);
+        background: rgba(254,184,43,0.1);
         color: #2E2D34;
         text-decoration: underline;
         text-underline-offset: 4px;
@@ -234,11 +178,8 @@
         margin-top: 1rem;
         padding: 0 1.5rem;
     }
-
     @media (min-width: 768px) {
-        .desktop-nav {
-            display: flex;
-        }
+        .desktop-nav { display: flex; }
     }
 
     .desktop-nav__links {
@@ -255,15 +196,9 @@
         padding: 0.5rem 0;
         font-size: 1.125rem;
     }
+    .desktop-nav-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 
-    .desktop-nav-link:hover {
-        text-decoration: underline;
-        text-underline-offset: 4px;
-    }
-
-    .nav-item {
-        position: relative;
-    }
+    .nav-item { position: relative; }
 
     .nav-item__toggle {
         display: flex;
@@ -278,48 +213,43 @@
         padding: 0.5rem 0;
         font-size: 1.125rem;
     }
-
-    .nav-item__toggle:hover {
-        text-decoration: underline;
-        text-underline-offset: 4px;
-    }
+    .nav-item__toggle:hover { text-decoration: underline; text-underline-offset: 4px; }
 
     .nav-item__icon {
-        width: 15px;
-        height: 15px;
+        width: 8px;
+        height: 8px;
         flex-shrink: 0;
         transition: transform 0.3s ease-in-out;
     }
-
     .nav-item:hover .nav-item__icon,
     .nav-item.is-open .nav-item__icon {
         transform: rotate(-180deg);
     }
 
     .nav-dropdown {
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    margin-top: 0.75rem;
-    width: max-content;
-    min-width: 320px;
-    background: #fff;
-    border: 1px solid #f0f0f0;
-    border-radius: 0.75rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    overflow: hidden;
-    z-index: 40;
-    opacity: 0;
-    visibility: hidden;
-    transform: translate(calc(-50% + 30px), -4px);
-    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
-}
-.nav-item:hover .nav-dropdown,
-.nav-item.is-open .nav-dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(calc(-50% + 30px), 0);
-}
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        margin-top: 0.75rem;
+        width: max-content;
+        min-width: 320px;
+        background: #fff;
+        border: 1px solid #f0f0f0;
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        overflow: hidden;
+        z-index: 40;
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, -4px);
+        transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+    }
+    .nav-item:hover .nav-dropdown,
+    .nav-item.is-open .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, 0);
+    }
 
     .nav-dropdown__arrow {
         position: absolute;
@@ -333,11 +263,7 @@
         border-left: 1px solid #f0f0f0;
     }
 
-    .nav-dropdown__list {
-        position: relative;
-        padding: 0.5rem 0;
-    }
-
+    .nav-dropdown__list { position: relative; padding: 0.5rem 0; }
     .nav-dropdown__list a {
         display: block;
         white-space: nowrap;
@@ -349,40 +275,15 @@
         border-bottom: 1px solid #f3f4f6;
         transition: background-color 0.15s ease, color 0.15s ease;
     }
+    .nav-dropdown__list a:last-child { border-bottom: none; }
+    .nav-dropdown__list a:hover { background: rgba(254,184,43,0.1); color: #2E2D34; }
 
-    .nav-dropdown__list a:last-child {
-        border-bottom: none;
-    }
-
-    .nav-dropdown__list a:hover {
-        background: rgba(254, 184, 43, 0.1);
-        color: #2E2D34;
-    }
-
-    .desktop-logo {
-        flex-shrink: 0;
-        margin: 0 auto;
-    }
-
-    .desktop-logo--default img {
-        width: 135px;
-        height: auto;
-    }
-
-    .desktop-logo--custom img {
-        width: 180px;
-        height: 180px;
-    }
-
+    .desktop-logo { flex-shrink: 0; margin: 0 auto; }
+    .desktop-logo--default img { width: 135px; height: auto; }
+    .desktop-logo--custom img { width: 180px; height: 180px; }
     @media (min-width: 768px) {
-        .desktop-logo--default img {
-            width: 175px;
-        }
-
-        .desktop-logo--custom img {
-            width: 200px;
-            height: 200px;
-        }
+        .desktop-logo--default img { width: 175px; }
+        .desktop-logo--custom img { width: 200px; height: 200px; }
     }
 
     .desktop-actions {
@@ -392,7 +293,6 @@
         align-items: center;
         gap: 2rem;
     }
-
     .icon-btn {
         background: none;
         border: none;
@@ -402,28 +302,21 @@
         font-size: 1rem;
         padding: 0;
     }
-
-    .icon-btn:hover {
-        color: #111827;
-    }
+    .icon-btn:hover { color: #111827; }
 
     /* ===== Search modals ===== */
     .search-modal {
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0,0,0,0.5);
         align-items: center;
         justify-content: center;
         z-index: 50;
         opacity: 0;
         transition: opacity 0.25s ease;
     }
-
-    .search-modal.is-open {
-        display: flex;
-        opacity: 1;
-    }
+    .search-modal.is-open { display: flex; opacity: 1; }
 
     .search-modal__close {
         position: fixed;
@@ -444,13 +337,9 @@
         width: 75%;
         position: relative;
     }
-
     @media (min-width: 768px) {
-        .search-modal__box {
-            width: 33.333%;
-        }
+        .search-modal__box { width: 33.333%; }
     }
-
     .search-modal__box input {
         width: 100%;
         padding: 0.5rem 1rem;
@@ -458,7 +347,6 @@
         border-radius: 0.375rem;
         box-sizing: border-box;
     }
-
     .search-modal__box button[type="submit"] {
         margin-top: 0.5rem;
         width: 100%;
@@ -485,8 +373,7 @@
 
     <!-- Mobile top bar -->
     <div class="mobile-topbar">
-        <button class="hamburger-btn" id="hamburger-btn" type="button" aria-expanded="false"
-            aria-controls="mobile-menu">
+        <button class="hamburger-btn" id="hamburger-btn" type="button" aria-expanded="false" aria-controls="mobile-menu">
             <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-label="Open menu">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -518,34 +405,34 @@
         <div class="mobile-menu__links">
             {% if linklists.main-menu.links.size > 0 %}
             {% for link in linklists.main-menu.links %}
-            {% if link.links.size > 0 %}
-            <div class="mobile-accordion">
-                <button type="button" class="mobile-accordion__toggle" aria-expanded="false">
-                    <span>{{ link.title }}</span>
-                    <svg class="mobile-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="3" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div class="mobile-accordion__panel">
-                    {% for childlink in link.links %}
-                    <a class="mobile-accordion__link" href="{{ childlink.url }}" title="{{ childlink.title }}">{{
-                        childlink.title }}</a>
-                    {% endfor %}
+                {% if link.links.size > 0 %}
+                <div class="mobile-accordion">
+                    <button type="button" class="mobile-accordion__toggle" aria-expanded="false">
+                        <span>{{ link.title }}</span>
+                        <svg class="mobile-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="mobile-accordion__panel">
+                        {% for childlink in link.links %}
+                        <a class="mobile-accordion__link" href="{{ childlink.url }}" title="{{ childlink.title }}">{{ childlink.title }}</a>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-            {% else %}
-            <a class="mobile-nav-link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
-            {% endif %}
+                {% else %}
+                <a class="mobile-nav-link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+                {% endif %}
             {% endfor %}
             {% else %}
             <p>No menu links available.</p>
             {% endif %}
         </div>
         <div class="mobile-menu__social">
+            {% render 'social-media-twitter' %}
+            {% render 'social-media-facebook' %}
+            {% render 'social-media-pinterest' %}
             {% render 'social-media-instagram' %}
             {% render 'social-media-tiktok' %}
-            {% render 'social-media-youtube' %}
         </div>
     </div>
 
@@ -554,33 +441,31 @@
         <div class="desktop-nav__links">
             {% if linklists.main-menu.links.size > 0 %}
             {% for link in linklists.main-menu.links %}
-            {% if link.links.size > 0 %}
-            <div class="nav-item">
-                <button type="button" class="nav-item__toggle" aria-expanded="false">
-                    <span>{{ link.title }}</span>
-                    <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div class="nav-dropdown">
-                    <div class="nav-dropdown__arrow"></div>
-                    <div class="nav-dropdown__list">
-                        {% for childlink in link.links %}
-                        <a href="{{ childlink.url }}" title="{{ childlink.title }}">{{ childlink.title }}</a>
-                        {% endfor %}
+                {% if link.links.size > 0 %}
+                <div class="nav-item">
+                    <button type="button" class="nav-item__toggle" aria-expanded="false">
+                        <span>{{ link.title }}</span>
+                        <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="nav-dropdown">
+                        <div class="nav-dropdown__arrow"></div>
+                        <div class="nav-dropdown__list">
+                            {% for childlink in link.links %}
+                            <a href="{{ childlink.url }}" title="{{ childlink.title }}">{{ childlink.title }}</a>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% else %}
-            <a class="desktop-nav-link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
-            {% endif %}
+                {% else %}
+                <a class="desktop-nav-link" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+                {% endif %}
             {% endfor %}
             {% endif %}
         </div>
 
-        <div
-            class="desktop-logo {% if section.settings.image == blank %}desktop-logo--default{% else %}desktop-logo--custom{% endif %}">
+        <div class="desktop-logo {% if section.settings.image == blank %}desktop-logo--default{% else %}desktop-logo--custom{% endif %}">
             <a href="{{ shop.url }}" title="Homepage">
                 {% if section.settings.image == blank %}
                 <img src="{{ 'Header_ACL_Logo.png' | asset_url }}" alt="My company logo">
@@ -622,89 +507,89 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 
-        // ----- Mobile hamburger menu -----
-        var hamburgerBtn = document.getElementById('hamburger-btn');
-        var mobileMenu = document.getElementById('mobile-menu');
+    // ----- Mobile hamburger menu -----
+    var hamburgerBtn = document.getElementById('hamburger-btn');
+    var mobileMenu = document.getElementById('mobile-menu');
 
-        if (hamburgerBtn && mobileMenu) {
-            hamburgerBtn.addEventListener('click', function () {
-                var isOpen = mobileMenu.classList.toggle('is-open');
-                hamburgerBtn.classList.toggle('is-open', isOpen);
-                hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            });
-        }
-
-        // ----- Mobile accordion dropdowns -----
-        var mobileAccordions = document.querySelectorAll('.mobile-accordion');
-        mobileAccordions.forEach(function (accordion) {
-            var toggle = accordion.querySelector('.mobile-accordion__toggle');
-            toggle.addEventListener('click', function () {
-                var isOpen = accordion.classList.toggle('is-open');
-                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            });
+    if (hamburgerBtn && mobileMenu) {
+        hamburgerBtn.addEventListener('click', function () {
+            var isOpen = mobileMenu.classList.toggle('is-open');
+            hamburgerBtn.classList.toggle('is-open', isOpen);
+            hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
+    }
 
-        // ----- Desktop dropdowns (click to pin open, click again to close) -----
-        var navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(function (item) {
-            var toggle = item.querySelector('.nav-item__toggle');
-            toggle.addEventListener('click', function (e) {
-                e.stopPropagation();
-                var isOpen = item.classList.toggle('is-open');
-                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-                navItems.forEach(function (otherItem) {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('is-open');
-                        var otherToggle = otherItem.querySelector('.nav-item__toggle');
-                        if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
-                    }
-                });
-            });
+    // ----- Mobile accordion dropdowns -----
+    var mobileAccordions = document.querySelectorAll('.mobile-accordion');
+    mobileAccordions.forEach(function (accordion) {
+        var toggle = accordion.querySelector('.mobile-accordion__toggle');
+        toggle.addEventListener('click', function () {
+            var isOpen = accordion.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
-
-        document.addEventListener('click', function () {
-            navItems.forEach(function (item) {
-                item.classList.remove('is-open');
-                var toggle = item.querySelector('.nav-item__toggle');
-                if (toggle) toggle.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        // ----- Search modals -----
-        function openModal(modal) {
-            modal.classList.add('is-open');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeModal(modal) {
-            modal.classList.remove('is-open');
-            document.body.style.overflow = 'auto';
-        }
-
-        var searchOpenDesktop = document.getElementById('search-open-desktop');
-        var searchModalDesktop = document.getElementById('search-modal-desktop');
-        var searchCloseDesktop = document.getElementById('search-close-desktop');
-
-        if (searchOpenDesktop && searchModalDesktop) {
-            searchOpenDesktop.addEventListener('click', function () { openModal(searchModalDesktop); });
-        }
-        if (searchCloseDesktop && searchModalDesktop) {
-            searchCloseDesktop.addEventListener('click', function () { closeModal(searchModalDesktop); });
-        }
-
-        var searchOpenMobile = document.getElementById('search-open-mobile');
-        var searchModalMobile = document.getElementById('search-modal-mobile');
-        var searchCloseMobile = document.getElementById('search-close-mobile');
-
-        if (searchOpenMobile && searchModalMobile) {
-            searchOpenMobile.addEventListener('click', function () { openModal(searchModalMobile); });
-        }
-        if (searchCloseMobile && searchModalMobile) {
-            searchCloseMobile.addEventListener('click', function () { closeModal(searchModalMobile); });
-        }
-
     });
+
+    // ----- Desktop dropdowns (click to pin open, click again to close) -----
+    var navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(function (item) {
+        var toggle = item.querySelector('.nav-item__toggle');
+        toggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var isOpen = item.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            navItems.forEach(function (otherItem) {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('is-open');
+                    var otherToggle = otherItem.querySelector('.nav-item__toggle');
+                    if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+
+    document.addEventListener('click', function () {
+        navItems.forEach(function (item) {
+            item.classList.remove('is-open');
+            var toggle = item.querySelector('.nav-item__toggle');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+
+    // ----- Search modals -----
+    function openModal(modal) {
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal(modal) {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = 'auto';
+    }
+
+    var searchOpenDesktop = document.getElementById('search-open-desktop');
+    var searchModalDesktop = document.getElementById('search-modal-desktop');
+    var searchCloseDesktop = document.getElementById('search-close-desktop');
+
+    if (searchOpenDesktop && searchModalDesktop) {
+        searchOpenDesktop.addEventListener('click', function () { openModal(searchModalDesktop); });
+    }
+    if (searchCloseDesktop && searchModalDesktop) {
+        searchCloseDesktop.addEventListener('click', function () { closeModal(searchModalDesktop); });
+    }
+
+    var searchOpenMobile = document.getElementById('search-open-mobile');
+    var searchModalMobile = document.getElementById('search-modal-mobile');
+    var searchCloseMobile = document.getElementById('search-close-mobile');
+
+    if (searchOpenMobile && searchModalMobile) {
+        searchOpenMobile.addEventListener('click', function () { openModal(searchModalMobile); });
+    }
+    if (searchCloseMobile && searchModalMobile) {
+        searchCloseMobile.addEventListener('click', function () { closeModal(searchModalMobile); });
+    }
+
+});
 </script>
 
 {% schema %}
