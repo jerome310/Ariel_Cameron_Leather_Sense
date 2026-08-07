@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "main": {
+      "type": "pink-paradise"
+    }
+  },
+  "order": ["main"]
+}
