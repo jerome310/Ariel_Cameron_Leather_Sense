@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "card-holder"
+      "type": "card-holder-collection"
     }
   },
   "order": ["main"]
