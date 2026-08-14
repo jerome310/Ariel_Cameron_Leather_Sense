@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "main": {
+      "type": "card-holder"
+    }
+  },
+  "order": ["main"]
+}
