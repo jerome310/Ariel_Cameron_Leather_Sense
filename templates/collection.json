@@ -1,7 +1,7 @@
 {
     "sections": {
         "template": {
-            "type": "template-collection"
+            "type": "product-page"
         }
     },
     "order": ["template"]

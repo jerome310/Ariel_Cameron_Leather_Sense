@@ -10,7 +10,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   {{ content_for_header }} <!-- Header hook for plugins -->
   {{ 'application.css' | asset_url | stylesheet_tag }}
-  {% comment %} {{ 'application.js' | asset_url | script_tag }} {% endcomment %}
+{{ '02-product-grid.css' | asset_url | stylesheet_tag }}
+
+{% comment %} Product Collection Javascript {% endcomment %}
+<script src="{{ 'product-grid.js' | asset_url }}" defer></script>
+  
   <script src="{{'application.js' |  asset_url }}" defer="defer"></script>
   <script src="//unpkg.com/alpinejs" defer></script>
 

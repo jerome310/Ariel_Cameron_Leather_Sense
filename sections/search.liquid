@@ -1,75 +1,139 @@
-<div class="container mx-auto">
+<style>
+    .search-results-wrap {
+        font-family: Georgia, 'Times New Roman', serif;
+        background: #FBFAF7;
+        padding-bottom: 3rem;
+    }
+
+    .search-results-heading {
+        font-size: 1.5rem;
+        font-style: italic;
+        color: #1A1A18;
+        text-align: center;
+        margin: 2.5rem 0 0.5rem;
+    }
+
+    .search-results-count {
+        text-align: center;
+        color: #8A8578;
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin: 0.5rem 0 2.5rem;
+    }
+
+    .search-results-empty {
+        text-align: center;
+        color: #4A473E;
+        font-size: 0.95rem;
+        margin: 3rem 1rem;
+    }
+
+    .search-result-card {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+
+    .search-result-card__image-wrap {
+        position: relative;
+        width: 100%;
+        height: 360px;
+        overflow: hidden;
+        background: #F0EDE4;
+        border-radius: 4px 4px 0 0;
+    }
+
+    .search-result-card__image-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.3s ease;
+    }
+
+    .search-result-card__image-alt {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+    }
+
+    .search-result-card:hover .search-result-card__image-main {
+        opacity: 0;
+    }
+
+    .search-result-card:hover .search-result-card__image-alt {
+        opacity: 1;
+    }
+
+    .search-result-card__title {
+        text-align: center;
+        padding: 1rem 1rem 1.25rem;
+        background: #fff;
+        border: 1px solid #E5E1D8;
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+    }
+
+    .search-result-card__title h2 {
+        font-size: 0.95rem;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        color: #1A1A18;
+        margin: 0;
+    }
+
+    .search-result-card a {
+        text-decoration: none;
+        display: block;
+    }
+</style>
+
+<div class="search-results-wrap">
     {% paginate search.results by 6 %}
 
-    <h1 class="text-xl my-4 text-center">Search Results</h1>
-
-    <!-- Search Form (hidden by default) -->
-    <div id="searchFormContainer" class="flex justify-center items-center" style="display:none;">
-        <form action="{{ routes.search_url }}" method="get" class="border flex rounded">
-            <input type="search" name="q" placeholder="Search" value="{{ search.terms | escape }}"
-                class="px-4 py-2 w-80 border-none">
-            <button type="submit" class="bg-gray-900 hover:bg-gray-700 text-white border px-4">Search</button>
-        </form>
-    </div>
-
+    <h1 class="search-results-heading">Search Results</h1>
 
     {% if search.performed %}
-    {% if search.results.size > 0 %}
-    <div class="max-w-6xl mx-auto">
-        <p class="text-gray-500 text-center my-10">
-            {{ search.results.size }} results for the search term "{{ search.terms | escape }}"
+        {% if search.results.size > 0 %}
+        <p class="search-results-count">
+            {{ search.results.size }} result{% if search.results.size != 1 %}s{% endif %} for &ldquo;{{ search.terms | escape }}&rdquo;
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {% for item in search.results %}
-            {% if item.object_type == 'product' %}
-            
-            <a class="w-full" href="{{ item.url }}">
-                <div class="relative group mb-5 mr-5">
-                    <div class="hover:underline underline-offset-2 decoration-white w-full h-80 relative">
-                        <img src="{{ item.featured_image | img_url: 'large' }}" alt="{{ item.title }}"
-                            class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-t-2xl transition-opacity duration-300 group-hover:opacity-0">
-            
-                        {% assign images = item.images %}
-                        {% if images.size > 1 %}
-                        <img src="{{ images[1].src | img_url: 'large'}}" alt="{{ item.title }} Alternate Image"
-                            class="w-full h-[400px] md:h-full object-cover bg-gray-100 rounded-t-2xl absolute top-0 left-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        {% endif %}
-            
-                        <div class="text-white text-center py-2 px-6 mt-1 md:mt-0">
-                            <div class="text-black text-center py-6 px-6 mt-1 md:mt-0">
-                                <h1 class="text-xl">{{ item.title }}</h1>
-                            </div>
+        <div class="max-w-6xl mx-auto" style="max-width: 72rem; margin: 0 auto; padding: 0 1.5rem;">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4" style="display: grid; gap: 1.5rem;">
+                {% for item in search.results %}
+                {% if item.object_type == 'product' %}
+                <a href="{{ item.url }}">
+                    <div class="search-result-card">
+                        <div class="search-result-card__image-wrap">
+                            <img class="search-result-card__image-main"
+                                src="{{ item.featured_image | img_url: 'large' }}"
+                                alt="{{ item.title }}">
+
+                            {% assign images = item.images %}
+                            {% if images.size > 1 %}
+                            <img class="search-result-card__image-alt"
+                                src="{{ images[1].src | img_url: 'large' }}"
+                                alt="{{ item.title }} alternate view">
+                            {% endif %}
+                        </div>
+
+                        <div class="search-result-card__title">
+                            <h2>{{ item.title }}</h2>
                         </div>
                     </div>
-            
-                    <div style="background-color: #ffffff75"
-                        class="text-center bg-[#f6f6f6] py-10 pt-14 px-10 rounded-b-2xl text-black mt-20 md:mt-0">
-                    </div>
-                </div>
-            </a>
-            
-            {% endif %}
-            {% endfor %}
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    {% else %}
-    <div class="text-center my-4">
-        <p>No results found for the search term: "{{ search.terms | escape }}". Try a different keyword.</p>
-    </div>
-    {% endif %}
+        {% else %}
+        <div class="search-results-empty">
+            <p>No results found for &ldquo;{{ search.terms | escape }}&rdquo;. Try a different keyword.</p>
+        </div>
+        {% endif %}
     {% endif %}
 
     {% render 'pagination', pagination: paginate %}
     {% endpaginate %}
 </div>
-
-<script>
-    const searchToggle = document.getElementById('searchToggle');
-    const searchFormContainer = document.getElementById('searchFormContainer');
-
-    searchToggle.addEventListener('click', () => {
-        searchFormContainer.classList.toggle('hidden');
-        searchFormContainer.querySelector('input').focus();
-    });
-</script>

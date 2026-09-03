@@ -9,13 +9,13 @@
 
     .carousel-slides {
         position: relative;
-        height: 55vh;
+        height: calc(55vh + 150px);
     }
 
     @media (min-width: 768px) {
         .carousel-slides {
-            height: 62vh;
-            max-height: 580px;
+            height: calc(62vh + 170px);
+            max-height: 750px;
         }
     }
 
@@ -23,8 +23,7 @@
         position: absolute;
         inset: 0;
         display: flex;
-        align-items: flex-end;
-        justify-content: center;
+        flex-direction: column;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.9s ease;
@@ -35,99 +34,84 @@
         pointer-events: auto;
     }
 
-    /* Neutral backdrop fills the space around the uncropped product image */
-    .carousel-slide-bg {
-        position: absolute;
-        inset: 0;
+    /* Image area: full width, uncropped product, neutral backdrop fills any empty space */
+    .carousel-slide-media {
+        position: relative;
+        flex: 1;
+        min-height: 0;
         background: #EDE7D8;
-        z-index: 0;
     }
 
-    .carousel-slide img {
-        position: relative;
-        z-index: 0;
+    .carousel-slide-media img {
         width: 100%;
         height: 100%;
-        /* contain (not cover) so the entire product is always visible, uncropped */
         object-fit: contain;
         object-position: center;
     }
 
-    .carousel-gradient-overlay {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 40%;
-        background: linear-gradient(to top, rgba(26, 24, 21, 0.5), transparent);
-        z-index: 10;
-    }
-
+    /* Text area: sits below the image, on its own background, not overlaid */
     .carousel-content {
-        position: relative;
-        z-index: 20;
+        flex-shrink: 0;
+        background: #FBFAF7;
+        border-top: 1px solid #E5E1D8;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0.85rem;
+        align-items: center;
+        gap: 0.6rem;
         width: 100%;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 2rem 2.5rem;
+        padding: 1.5rem 2rem;
+        text-align: center;
     }
 
     .carousel-eyebrow {
-        color: #F2C744;
+        color: #B8941F;
         font-size: 0.7rem;
         font-weight: 400;
         letter-spacing: 0.22em;
         text-transform: uppercase;
         margin: 0;
-        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     }
 
     .carousel-heading {
-        color: white;
-        font-size: 1.5rem;
+        color: #1A1A18;
+        font-size: 1.35rem;
         font-style: italic;
         font-weight: 400;
-        text-align: left;
-        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
         margin: 0;
-        max-width: 20ch;
     }
 
     @media (min-width: 768px) {
         .carousel-heading {
-            font-size: 2.25rem;
+            font-size: 1.85rem;
         }
     }
 
     .carousel-btn {
-        background: #fff;
-        color: #1A1A18;
-        padding: 0.7rem 1.6rem;
+        background: #1A1A18;
+        color: #fff;
+        padding: 0.65rem 1.5rem;
         border-radius: 2px;
         font-family: Georgia, serif;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         text-decoration: none;
         transition: transform 0.25s ease, background-color 0.25s ease;
         display: inline-block;
-        margin-top: 0.4rem;
+        margin-top: 0.3rem;
     }
 
     .carousel-btn:hover {
-        background: #F7F5F0;
+        background: #2784FE;
         transform: translateY(-1px);
     }
 
     .carousel-arrow {
         position: absolute;
-        top: 50%;
+        top: calc(50% - 60px);
         transform: translateY(-50%);
         background: rgba(255, 255, 255, 0.85);
         color: #1A1A18;
@@ -159,7 +143,7 @@
 
     .carousel-dots {
         position: absolute;
-        bottom: 1.25rem;
+        bottom: 108px;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
@@ -173,13 +157,13 @@
         border-radius: 9999px;
         border: none;
         cursor: pointer;
-        background: rgba(255, 255, 255, 0.5);
+        background: #D8D4C8;
         padding: 0;
         transition: background-color 0.2s ease, transform 0.2s ease;
     }
 
     .carousel-dot.active {
-        background: #fff;
+        background: #1A1A18;
         transform: scale(1.3);
     }
 </style>
@@ -190,9 +174,9 @@
     <div class="carousel-slides">
 
         <div class="carousel-slide is-active" data-slide="0">
-            <div class="carousel-slide-bg"></div>
-            <img src="{{ 'strawberry-charm.jpeg' | asset_url }}" alt="Strawberry-shaped leather charm, hand-dyed and hand-stitched">
-            <div class="carousel-gradient-overlay"></div>
+            <div class="carousel-slide-media">
+                <img src="{{ 'strawberry-charm.jpeg' | asset_url }}" alt="Strawberry-shaped leather charm, hand-dyed and hand-stitched">
+            </div>
             <div class="carousel-content">
                 <p class="carousel-eyebrow">Handcrafted in America</p>
                 <h2 class="carousel-heading">The Charm Collection, in living color</h2>
@@ -203,9 +187,9 @@
         </div>
 
         <div class="carousel-slide" data-slide="1">
-            <div class="carousel-slide-bg"></div>
-            <img src="{{ 'bread-charm.jpeg' | asset_url }}" alt="Bread-shaped leather charm, hand-dyed and hand-stitched">
-            <div class="carousel-gradient-overlay"></div>
+            <div class="carousel-slide-media">
+                <img src="{{ 'bread-charm.jpeg' | asset_url }}" alt="Bread-shaped leather charm, hand-dyed and hand-stitched">
+            </div>
             <div class="carousel-content">
                 <p class="carousel-eyebrow">Handcrafted in America</p>
                 <h2 class="carousel-heading">No sewing machine. No neutrals.</h2>
@@ -216,9 +200,9 @@
         </div>
 
         <div class="carousel-slide" data-slide="2">
-            <div class="carousel-slide-bg"></div>
-            <img src="{{ 'butter-wallet.jpeg' | asset_url }}" alt="Butter-shaped leather wallet, hand-dyed and hand-stitched">
-            <div class="carousel-gradient-overlay"></div>
+            <div class="carousel-slide-media">
+                <img src="{{ 'butter-wallet.jpeg' | asset_url }}" alt="Butter-shaped leather wallet, hand-dyed and hand-stitched">
+            </div>
             <div class="carousel-content">
                 <p class="carousel-eyebrow">Handcrafted in America</p>
                 <h2 class="carousel-heading">One-of-one original designs</h2>
@@ -229,9 +213,9 @@
         </div>
 
         <div class="carousel-slide" data-slide="3">
-            <div class="carousel-slide-bg"></div>
-            <img src="{{ 'butter-charm.jpeg' | asset_url }}" alt="Butter-shaped leather charm, hand-dyed and hand-stitched">
-            <div class="carousel-gradient-overlay"></div>
+            <div class="carousel-slide-media">
+                <img src="{{ 'butter-charm.jpeg' | asset_url }}" alt="Butter-shaped leather charm, hand-dyed and hand-stitched">
+            </div>
             <div class="carousel-content">
                 <p class="carousel-eyebrow">Handcrafted in America</p>
                 <h2 class="carousel-heading">Small-batch. Full-grain. Yours alone.</h2>
@@ -242,9 +226,9 @@
         </div>
 
         <div class="carousel-slide" data-slide="4">
-            <div class="carousel-slide-bg"></div>
-            <img src="{{ 'pickle-charm.jpeg' | asset_url }}" alt="Pickle-shaped leather charm, hand-dyed and hand-stitched">
-            <div class="carousel-gradient-overlay"></div>
+            <div class="carousel-slide-media">
+                <img src="{{ 'pickle-charm.jpeg' | asset_url }}" alt="Pickle-shaped leather charm, hand-dyed and hand-stitched">
+            </div>
             <div class="carousel-content">
                 <p class="carousel-eyebrow">Handcrafted in America</p>
                 <h2 class="carousel-heading">Leather, unapologetically in color</h2>
@@ -323,7 +307,7 @@
     if (nextBtn) {
         nextBtn.addEventListener('click', function () {
             nextSlide();
-            startAutoplay(); // reset the timer so it doesn't double up right after a manual click
+            startAutoplay();
         });
     }
 
