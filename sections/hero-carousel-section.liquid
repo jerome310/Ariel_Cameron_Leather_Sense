@@ -38,14 +38,20 @@
         z-index: 0;
     }
 
-    /* Product image — right half of frame, never cropped */
+    /* Product image — right half of frame, never cropped.
+       Width is the enforced dimension (fills the full 50% box edge-to-edge);
+       height is auto, derived from the image's own aspect ratio, so it's
+       no longer scaled down to fit the tall container height with empty
+       space on either side. max-height is a safety net for unusually
+       tall/narrow photos so they can't overflow the slide vertically. */
     .carousel-slide img {
         position: absolute;
         right: 0;
-        top: 0;
-        bottom: 0;
+        top: 50%;
+        transform: translateY(-50%);
         width: 50%;
-        height: 100%;
+        height: auto;
+        max-height: 100%;
         object-fit: contain;
         object-position: right center;
         z-index: 1;

@@ -14,10 +14,9 @@
 
 {% comment %} Product Collection Javascript {% endcomment %}
 <script src="{{ 'product-grid.js' | asset_url }}" defer></script>
-  
-  <script src="{{'application.js' |  asset_url }}" defer="defer"></script>
-  <script src="//unpkg.com/alpinejs" defer></script>
 
+<script src="{{'application.js' |  asset_url }}" defer="defer"></script>
+<script src="//unpkg.com/alpinejs" defer></script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
@@ -29,6 +28,7 @@
 </head>
 
 <body class="bg-[#FEB82B]/20 font-comic">
+{% comment %} <body class="bg-[#ffffff] font-comic"> {% endcomment %}
   {% unless template.name == '404' %}
   {% section 'navbar' %}
   {% endunless %}
