@@ -1,5 +1,9 @@
 {
     "sections": {
+        "signup-popup-sequence": {
+            "type": "signup-popup-sequence",
+            "settings": {}
+        },
         "homepage-product-slider": {
             "type": "homepage-product-slider",
             "settings": {}
@@ -29,5 +33,5 @@
             "settings": {}
         }
     },
-    "order": ["homepage-product-slider","homepage-hero","collection-line","gradient-message", "variety-product-card", "customers-testimonials", "four-column-description"]
+    "order": ["signup-popup-sequence","homepage-product-slider","homepage-hero","collection-line","gradient-message", "variety-product-card", "customers-testimonials", "four-column-description"]
 }

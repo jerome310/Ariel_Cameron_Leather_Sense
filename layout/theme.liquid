@@ -40,6 +40,9 @@
   {% section 'footer' %}
 
   {{ 'shopify_payment_terms.js' | asset_url | script_tag }}
+
+  {% comment %} Email Popup Form {% endcomment %}
+  {% render 'signup-popup-sequence' %}
 </body>
 
 

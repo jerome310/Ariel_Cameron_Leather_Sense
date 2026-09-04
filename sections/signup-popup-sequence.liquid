@@ -1,0 +1,330 @@
+<style>
+    .signup-seq-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(26, 24, 21, 0.55);
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        padding: 1rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .signup-seq-overlay.is-open {
+        display: flex;
+    }
+
+    .signup-seq-overlay.is-visible {
+        opacity: 1;
+    }
+
+    .signup-seq-card {
+        background: #FBFAF7;
+        border-radius: 8px;
+        max-width: 620px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow: hidden;
+        position: relative;
+        transform: translateY(8px);
+        transition: transform 0.3s ease;
+    }
+
+    .signup-seq-overlay.is-visible .signup-seq-card {
+        transform: translateY(0);
+    }
+
+    @media (max-width: 640px) {
+        .signup-seq-card {
+            grid-template-columns: 1fr;
+        }
+
+        .signup-seq-media {
+            display: none;
+        }
+    }
+
+    .signup-seq-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #1A1A18;
+        z-index: 5;
+    }
+
+    .signup-seq-form-panel {
+        padding: 2.25rem 1.75rem;
+        font-family: Georgia, 'Times New Roman', serif;
+        /* Keeps the panel a consistent height whether showing the form or the thank-you state */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 340px;
+    }
+
+    .signup-seq-eyebrow {
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin: 0 0 10px;
+    }
+
+    .signup-seq-eyebrow--email {
+        color: #B8941F;
+    }
+
+    .signup-seq-heading {
+        font-size: 19px;
+        font-style: italic;
+        font-weight: 400;
+        color: #1A1A18;
+        margin: 0 0 10px;
+        line-height: 1.3;
+    }
+
+    .signup-seq-subtext {
+        font-size: 12px;
+        color: #4A473E;
+        margin: 0 0 20px;
+        line-height: 1.55;
+    }
+
+    .signup-seq-input {
+        width: 100%;
+        box-sizing: border-box;
+        border: 0.5px solid #D8D4C8;
+        background: #fff;
+        font-family: Georgia, serif;
+        font-size: 13px;
+        color: #1A1A18;
+        padding: 10px 12px;
+        outline: none;
+        border-radius: 2px;
+        margin-bottom: 14px;
+    }
+
+    .signup-seq-input:focus {
+        border-color: #2784FE;
+    }
+
+    .signup-seq-checkbox-label {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 11px;
+        color: #4A473E;
+        margin-bottom: 14px;
+        cursor: pointer;
+    }
+
+    .signup-seq-legal {
+        font-size: 9.5px;
+        color: #8A8578;
+        line-height: 1.5;
+        margin: 0 0 18px;
+    }
+
+    .signup-seq-submit {
+        width: 100%;
+        background: #1A1A18;
+        color: #fff;
+        font-family: Georgia, serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 11px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        margin-bottom: 12px;
+        transition: opacity 0.2s ease;
+    }
+
+    .signup-seq-submit:hover {
+        opacity: 0.88;
+    }
+
+    .signup-seq-message--error {
+        color: #B23A3A;
+        margin-bottom: 12px;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    /* ----- Enlarged thank-you state (same visual weight as the original form) ----- */
+    .signup-seq-success-heading {
+        font-size: 26px;
+        font-style: italic;
+        font-weight: 400;
+        color: #1A1A18;
+        margin: 0 0 14px;
+        line-height: 1.3;
+    }
+
+    .signup-seq-success-subtext {
+        font-size: 13px;
+        color: #4A473E;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .signup-seq-media {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .signup-seq-media--email {
+        background: linear-gradient(150deg, #F2C744, #E8934C 45%, #D65B8A);
+    }
+
+    .signup-seq-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        inset: 0;
+    }
+</style>
+
+<!-- ===== Email opt-in ===== -->
+<div class="signup-seq-overlay" id="signup-email-overlay" role="dialog" aria-modal="true"
+    aria-labelledby="signup-email-heading">
+    <div class="signup-seq-card">
+        <button type="button" class="signup-seq-close" id="signup-email-close" aria-label="Close">
+            {% render 'icon-close' %}
+        </button>
+
+        <div class="signup-seq-form-panel">
+            {% form 'customer', id: 'signup-email-form' %}
+
+            {% if form.posted_successfully? %}
+            <p class="signup-seq-eyebrow signup-seq-eyebrow--email">Ariel Cameron Leather</p>
+            <p class="signup-seq-success-heading">You're on the list — welcome to the family.</p>
+            <p class="signup-seq-success-subtext">Keep an eye on your inbox for exclusive offers and early access to our
+                latest colors.</p>
+            {% else %}
+
+            {% if form.errors %}
+            <p class="signup-seq-message--error">
+                {{ form.errors.messages['email'] | default: "Please enter a valid email address." }}
+            </p>
+            {% endif %}
+
+            <input type="hidden" name="contact[tags]" value="newsletter,popup-signup">
+
+            <p class="signup-seq-eyebrow signup-seq-eyebrow--email">Ariel Cameron Leather</p>
+            <p class="signup-seq-heading" id="signup-email-heading">Be part of our email family</p>
+            <p class="signup-seq-subtext">Stay in the loop with exclusive offers and early access to our latest colors.
+            </p>
+
+            <input type="email" name="contact[email]" class="signup-seq-input" placeholder="your email"
+                value="{{ form.email }}" aria-label="Email address" required>
+
+            <label class="signup-seq-checkbox-label">
+                <input type="checkbox" name="contact[accepts_marketing]" value="1">
+                Also send me online advertisement preferences
+            </label>
+
+            <p class="signup-seq-legal">
+                By providing your email and submitting this form, you consent to receive marketing emails from Ariel
+                Cameron Leather. We never share your information. Unsubscribe anytime.
+            </p>
+
+            <button type="submit" class="signup-seq-submit">Continue</button>
+
+            {% endif %}
+
+            {% endform %}
+        </div>
+
+        <div class="signup-seq-media signup-seq-media--email">
+            <i class="ti ti-camera" style="font-size:20px;color:#fff;opacity:0.7;" aria-hidden="true"></i>
+            <p
+                style="font-size:9px;color:#fff;opacity:0.7;margin:0;letter-spacing:0.5px;text-align:center;padding:0 20px;">
+                REPLACE WITH EDITORIAL PRODUCT PHOTO
+            </p>
+            {% comment %} To use a real image instead of the placeholder icon above, replace this block with: {%
+            endcomment %}
+            <img src="{{ 'about_img.jpg' | asset_url }}" alt="ACL CEO image">
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var STORAGE_KEY = 'aclSignupComplete'; // 'true' once shown/submitted/closed
+        var INITIAL_DELAY_MS = 4000;
+
+        if (localStorage.getItem(STORAGE_KEY) === 'true') return;
+
+        var emailOverlay = document.getElementById('signup-email-overlay');
+        if (!emailOverlay) return;
+
+        function openOverlay(overlay) {
+            overlay.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+            requestAnimationFrame(function () {
+                overlay.classList.add('is-visible');
+            });
+        }
+
+        function closeOverlay(overlay, callback) {
+            overlay.classList.remove('is-visible');
+            setTimeout(function () {
+                overlay.classList.remove('is-open');
+                document.body.style.overflow = '';
+                if (callback) callback();
+            }, 300);
+        }
+
+        function completeSequence() {
+            localStorage.setItem(STORAGE_KEY, 'true');
+        }
+
+        var emailCloseBtn = document.getElementById('signup-email-close');
+        var emailWasSubmittedSuccessfully = !!document.querySelector('#signup-email-overlay .signup-seq-success-heading');
+
+        if (emailCloseBtn) {
+            emailCloseBtn.addEventListener('click', function () {
+                closeOverlay(emailOverlay, completeSequence);
+            });
+        }
+
+        emailOverlay.addEventListener('click', function (e) {
+            if (e.target === emailOverlay) {
+                closeOverlay(emailOverlay, completeSequence);
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && emailOverlay.classList.contains('is-open')) {
+                closeOverlay(emailOverlay, completeSequence);
+            }
+        });
+
+        if (emailWasSubmittedSuccessfully) {
+            openOverlay(emailOverlay);
+            completeSequence();
+        } else {
+            setTimeout(function () { openOverlay(emailOverlay); }, INITIAL_DELAY_MS);
+        }
+    })();
+</script>
