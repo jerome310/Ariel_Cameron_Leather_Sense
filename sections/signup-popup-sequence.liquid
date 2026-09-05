@@ -44,26 +44,6 @@
         transform: translateY(0);
     }
 
-    @media (max-width: 768px) {
-    .signup-seq-overlay {
-        padding: 0.5rem;
-    }
-
-    .signup-seq-card {
-        flex-direction: column;
-        max-height: 96vh;
-        overflow-y: auto;
-    }
-
-    .signup-seq-media {
-        display: none;
-    }
-
-    .signup-seq-form-panel {
-        flex: 1 1 100%;
-    }
-}
-
     .signup-seq-close {
         position: absolute;
         top: 12px;
@@ -84,20 +64,12 @@
     .signup-seq-form-panel {
         padding: 2.25rem 1.75rem;
         font-family: Georgia, 'Times New Roman', serif;
-        /* Keeps the panel a consistent height whether showing the form or the thank-you state */
         display: flex;
         flex-direction: column;
         justify-content: center;
         min-height: 340px;
         overflow-wrap: break-word;
         word-break: break-word;
-    }
-
-    @media (max-width: 768px) {
-        .signup-seq-form-panel {
-            min-height: 0;
-            padding: 1.5rem 1.25rem;
-        }
     }
 
     .signup-seq-eyebrow {
@@ -191,7 +163,6 @@
         line-height: 1.6;
     }
 
-    /* ----- Enlarged thank-you state (same visual weight as the original form) ----- */
     .signup-seq-success-heading {
         font-size: 26px;
         font-style: italic;
@@ -227,6 +198,29 @@
         object-fit: cover;
         position: absolute;
         inset: 0;
+    }
+
+    /* ===== Mobile overrides — kept LAST so nothing above can win the cascade tie ===== */
+    @media (max-width: 768px) {
+        .signup-seq-overlay {
+            padding: 0.5rem;
+        }
+
+        .signup-seq-card {
+            flex-direction: column;
+            max-height: 96vh;
+            overflow-y: auto;
+        }
+
+        .signup-seq-form-panel {
+            flex: 1 1 100%;
+            min-height: 0;
+            padding: 1.5rem 1.25rem;
+        }
+
+        .signup-seq-media {
+            display: none;
+        }
     }
 </style>
 
