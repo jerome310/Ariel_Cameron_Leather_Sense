@@ -25,27 +25,44 @@
         border-radius: 8px;
         max-width: 620px;
         width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: row;
         overflow: hidden;
         position: relative;
         transform: translateY(8px);
         transition: transform 0.3s ease;
     }
 
+    .signup-seq-form-panel,
+    .signup-seq-media {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
     .signup-seq-overlay.is-visible .signup-seq-card {
         transform: translateY(0);
     }
 
-    @media (max-width: 640px) {
-        .signup-seq-card {
-            grid-template-columns: 1fr;
-        }
-
-        .signup-seq-media {
-            display: none;
-        }
+    @media (max-width: 768px) {
+    .signup-seq-overlay {
+        padding: 0.5rem;
     }
+
+    .signup-seq-card {
+        flex-direction: column;
+        max-height: 96vh;
+        overflow-y: auto;
+    }
+
+    .signup-seq-media {
+        display: none;
+    }
+
+    .signup-seq-form-panel {
+        flex: 1 1 100%;
+    }
+}
 
     .signup-seq-close {
         position: absolute;
@@ -72,6 +89,15 @@
         flex-direction: column;
         justify-content: center;
         min-height: 340px;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    @media (max-width: 768px) {
+        .signup-seq-form-panel {
+            min-height: 0;
+            padding: 1.5rem 1.25rem;
+        }
     }
 
     .signup-seq-eyebrow {
