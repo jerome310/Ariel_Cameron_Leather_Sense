@@ -1,17 +1,25 @@
 <style>
     .header-carousel {
-        margin-top: 0;
         position: relative;
         width: 100%;
         overflow: hidden;
-        font-family: Georgia, 'Times New Roman', serif;
     }
 
     .carousel-slides {
         position: relative;
-        height: 80vh;
-        max-height: 820px;
-        min-height: 480px;
+        width: 100%;
+        height: 480px;
+        /* mobile */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+        .carousel-slides {
+            height: 640px;
+            /* desktop — keeps CTA inside the fold on most laptop viewports */
+        }
     }
 
     .carousel-slide {
@@ -19,334 +27,277 @@
         inset: 0;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.9s ease;
-        overflow: hidden;
-    }
-
-    .carousel-slide.is-active {
-        opacity: 1;
-        pointer-events: auto;
+        justify-content: center;
     }
 
     .carousel-slide-bg {
         position: absolute;
         inset: 0;
-        background: #EDE7D8;
+        background: linear-gradient(to right, #feb82b, #2387ff, #e561a1);
         z-index: 0;
     }
 
-    /* Product image — right half of frame, never cropped */
     .carousel-slide img {
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: 50%;
+        position: relative;
+        z-index: 0;
+        width: 100%;
         height: 100%;
-        object-fit: contain;
-        object-position: right center;
-        z-index: 1;
+        object-fit: cover;
+        object-position: center;
     }
 
-    /* Cream fades left-to-right so product is fully revealed on the right.
-       Pulled the fade zone in (was 38%–68%) to match the image's new 50%
-       box and expose more of the photo unobstructed. */
     .carousel-gradient-overlay {
         position: absolute;
-        inset: 0;
-        background: linear-gradient(to right,
-                #EDE7D8 0%,
-                #EDE7D8 40%,
-                rgba(237, 231, 216, 0.7) 48%,
-                rgba(237, 231, 216, 0) 56%);
-        z-index: 2;
-        pointer-events: none;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 55%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 70%);
+        z-index: 10;
     }
 
-    /* Text lives on the left over the cream zone */
     .carousel-content {
-        position: relative;
-        z-index: 10;
+        position: absolute;
+        left: 6%;
+        bottom: 8%;
+        right: 6%;
+        z-index: 20;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
-        width: 42%;
-        max-width: 520px;
-        padding: 0 0 0 5%;
+        gap: 0.6rem;
+        max-width: 640px;
     }
 
     .carousel-eyebrow {
-        color: #9a7d4a;
-        font-size: 0.65rem;
-        font-weight: 400;
-        letter-spacing: 0.26em;
-        text-transform: uppercase;
+        color: white;
+        font-size: 1rem;
+        font-weight: 700;
         margin: 0;
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
     }
 
     .carousel-heading {
-        color: #1A1814;
-        font-size: 1.75rem;
+        color: white;
+        font-family: Georgia, "Times New Roman", serif;
         font-style: italic;
+        font-size: 2.75rem;
+        line-height: 1.1;
         font-weight: 400;
         text-align: left;
-        margin: 0;
-        max-width: 18ch;
-        line-height: 1.25;
+        margin: 0 0 0.75rem 0;
+        text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 767px) {
+        .carousel-heading {
+            font-size: 1.6rem;
+        }
+
+        .carousel-content {
+            bottom: 12%;
+        }
     }
 
     .carousel-btn {
-        background: #1A1814;
-        color: #fff;
-        padding: 0.75rem 1.75rem;
-        border-radius: 2px;
-        font-family: Georgia, serif;
-        font-size: 0.7rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
+        background: black;
+        color: white;
+        padding: 0.85rem 1.75rem;
+        border-radius: 0;
+        font-weight: 600;
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         text-decoration: none;
-        margin-top: 0.5rem;
+        transition: transform 0.3s ease, background-color 0.3s ease;
         display: inline-block;
-        transition: background-color 0.25s ease, transform 0.25s ease;
-        box-shadow: 0 6px 18px rgba(26, 24, 20, 0.18);
     }
 
     .carousel-btn:hover {
-        background: #3a3830;
-        transform: translateY(-2px);
+        background: #222;
+        transform: scale(1.03);
     }
 
     .carousel-arrow {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.88);
-        color: #1A1814;
-        width: 2.75rem;
-        height: 2.75rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 0.75rem;
         border-radius: 9999px;
         border: none;
         cursor: pointer;
         z-index: 30;
-        font-size: 0.9rem;
+        font-size: 1rem;
         line-height: 1;
-        transition: background-color 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
     }
 
     .carousel-arrow:hover {
-        background: #fff;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+        background: rgba(0, 0, 0, 0.7);
     }
 
     .carousel-arrow-left {
-        left: 1.25rem;
+        left: 1rem;
     }
 
     .carousel-arrow-right {
-        right: 1.25rem;
+        right: 1rem;
     }
 
+    /* dots moved to bottom-right */
     .carousel-dots {
         position: absolute;
-        bottom: 1.5rem;
-        left: 5%;
+        bottom: 1.25rem;
+        right: 1.5rem;
+        left: auto;
+        transform: none;
         display: flex;
         gap: 0.5rem;
         z-index: 30;
     }
 
     .carousel-dot {
-        width: 0.4rem;
-        height: 0.4rem;
+        width: 0.75rem;
+        height: 0.75rem;
         border-radius: 9999px;
         border: none;
         cursor: pointer;
-        background: rgba(26, 24, 20, 0.25);
+        background: rgba(255, 255, 255, 0.5);
         padding: 0;
-        transition: background-color 0.2s ease, transform 0.2s ease;
     }
 
     .carousel-dot.active {
-        background: #1A1814;
-        transform: scale(1.35);
+        background: white;
     }
 
-    /* Tablet */
-    @media (min-width: 768px) and (max-width: 1024px) {
-        .carousel-slides {
-            height: 72vh;
-        }
-
-        .carousel-slide img {
-            width: 58%;
-        }
-
-        .carousel-content {
-            width: 46%;
-        }
-
-        .carousel-heading {
-            font-size: 2rem;
-        }
+    /* Fade transition classes used by Alpine's x-transition */
+    .fade-enter {
+        transition: opacity 0.7s ease-out;
     }
 
-    /* Large desktop */
-    @media (min-width: 1024px) {
-        .carousel-heading {
-            font-size: 2.5rem;
-        }
+    .fade-enter-start {
+        opacity: 0;
     }
 
-    /* Mobile — image on top, text below */
-    @media (max-width: 767px) {
-        .carousel-slides {
-            height: auto;
-            min-height: unset;
-            max-height: unset;
-        }
+    .fade-enter-end {
+        opacity: 1;
+    }
 
-        /* FIX: only the active slide takes up layout space now.
-           Previously every slide became position:relative here while
-           staying in the DOM, so all 5 slides stacked vertically in
-           normal flow (hidden ones were just invisible, not gone),
-           making the whole carousel roughly 5x too tall on mobile. */
-        .carousel-slide {
-            display: none;
-            position: relative;
-            flex-direction: column;
-            align-items: stretch;
-        }
+    .fade-leave {
+        transition: opacity 0.7s ease-in;
+    }
 
-        .carousel-slide.is-active {
-            display: flex;
-        }
+    .fade-leave-start {
+        opacity: 1;
+    }
 
-        .carousel-slide img {
-            position: relative;
-            width: 100%;
-            height: 52vw;
-            max-height: 320px;
-            object-fit: contain;
-            object-position: center bottom;
-            z-index: 1;
-        }
-
-        .carousel-gradient-overlay {
-            background: linear-gradient(to bottom, rgba(237, 231, 216, 0) 0%, #EDE7D8 60%);
-            height: 80px;
-            position: absolute;
-            top: auto;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            inset: unset;
-        }
-
-        .carousel-content {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            padding: 1.25rem 1.5rem 4rem;
-        }
-
-        .carousel-heading {
-            font-size: 1.375rem;
-            max-width: 24ch;
-        }
-
-        .carousel-dots {
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 1.25rem;
-        }
-
-        /* FIX: was calc(52vw / 2), which ignored the 320px cap above and
-           drifted below the image on wider phones. min() keeps the arrows
-           vertically centered on the actual rendered image height. */
-        .carousel-arrow {
-            top: calc(min(52vw, 320px) / 2);
-        }
+    .fade-leave-end {
+        opacity: 0;
     }
 </style>
 
-<!-- Header Carousel (vanilla JS, no Alpine dependency) -->
-<div class="header-carousel" id="hero-carousel" data-autoplay-ms="6500">
+<!-- Header Carousel -->
+<div class="header-carousel" x-data="{ current: 0, slides: 5 }"
+    x-init="setInterval(() => { current = (current < slides - 1 ? current + 1 : 0) }, 5000)">
 
+    <!-- Slides container -->
     <div class="carousel-slides">
 
-        <div class="carousel-slide is-active" data-slide="0">
+        <!-- Slide 1 -->
+        <div x-show="current === 0" x-transition:enter="fade-enter" x-transition:enter-start="fade-enter-start"
+            x-transition:enter-end="fade-enter-end" x-transition:leave="fade-leave"
+            x-transition:leave-start="fade-leave-start" x-transition:leave-end="fade-leave-end" class="carousel-slide">
+
             <div class="carousel-slide-bg"></div>
-            <img src="{{ 'strawberry-charm.jpeg' | asset_url }}"
-                alt="Strawberry-shaped leather charm, hand-dyed and hand-stitched">
+            <img src="{{ 'strawberry-charm.jpeg' | asset_url }}" alt="Slide 1">
             <div class="carousel-gradient-overlay"></div>
+
             <div class="carousel-content">
                 <p class="carousel-eyebrow">Handcrafted in America</p>
-                <h2 class="carousel-heading">The Charm Collection, in living color</h2>
+                <h2 class="carousel-heading">
+                    Handcrafted &amp; hand-stitched&mdash;no sewing machine
+                </h2>
                 <a href="https://arielcameronleather.com/collections/charm?pb=0" class="carousel-btn">
                     Shop Charm Collection
                 </a>
             </div>
         </div>
 
-        <div class="carousel-slide" data-slide="1">
+        <!-- Slide 2 -->
+        <div x-show="current === 1" x-transition:enter="fade-enter" x-transition:enter-start="fade-enter-start"
+            x-transition:enter-end="fade-enter-end" x-transition:leave="fade-leave"
+            x-transition:leave-start="fade-leave-start" x-transition:leave-end="fade-leave-end" class="carousel-slide">
+
             <div class="carousel-slide-bg"></div>
-            <img src="{{ 'bread-charm.jpeg' | asset_url }}"
-                alt="Bread-shaped leather charm, hand-dyed and hand-stitched">
+            <img src="{{ 'bread-charm.jpeg' | asset_url }}" alt="Slide 2">
             <div class="carousel-gradient-overlay"></div>
+
             <div class="carousel-content">
                 <p class="carousel-eyebrow">Handcrafted in America</p>
-                <h2 class="carousel-heading">No sewing machine. No neutrals.</h2>
+                <h2 class="carousel-heading">
+                    You had me at polka dots
+                </h2>
                 <a href="https://arielcameronleather.com/collections/charm?pb=0" class="carousel-btn">
                     Shop Charm Collection
                 </a>
             </div>
         </div>
 
-        <div class="carousel-slide" data-slide="2">
+        <!-- Slide 3 -->
+        <div x-show="current === 2" x-transition:enter="fade-enter" x-transition:enter-start="fade-enter-start"
+            x-transition:enter-end="fade-enter-end" x-transition:leave="fade-leave"
+            x-transition:leave-start="fade-leave-start" x-transition:leave-end="fade-leave-end" class="carousel-slide">
+
             <div class="carousel-slide-bg"></div>
-            <img src="{{ 'butter-wallet.jpeg' | asset_url }}"
-                alt="Butter-shaped leather wallet, hand-dyed and hand-stitched">
+            <img src="{{ 'butter-wallet.jpeg' | asset_url }}" alt="Slide 3">
             <div class="carousel-gradient-overlay"></div>
+
             <div class="carousel-content">
                 <p class="carousel-eyebrow">Handcrafted in America</p>
-                <h2 class="carousel-heading">One-of-one original designs</h2>
+                <h2 class="carousel-heading">
+                    One-of-one original designs
+                </h2>
                 <a href="https://arielcameronleather.com/collections/charm?pb=0" class="carousel-btn">
                     Shop Charm Collection
                 </a>
             </div>
         </div>
 
-        <div class="carousel-slide" data-slide="3">
+        <!-- Slide 4 -->
+        <div x-show="current === 3" x-transition:enter="fade-enter" x-transition:enter-start="fade-enter-start"
+            x-transition:enter-end="fade-enter-end" x-transition:leave="fade-leave"
+            x-transition:leave-start="fade-leave-start" x-transition:leave-end="fade-leave-end" class="carousel-slide">
+
             <div class="carousel-slide-bg"></div>
-            <img src="{{ 'butter-charm.jpeg' | asset_url }}"
-                alt="Butter-shaped leather charm, hand-dyed and hand-stitched">
+            <img src="{{ 'butter-charm.jpeg' | asset_url }}" alt="Slide 4">
             <div class="carousel-gradient-overlay"></div>
+
             <div class="carousel-content">
                 <p class="carousel-eyebrow">Handcrafted in America</p>
-                <h2 class="carousel-heading">Small-batch. Full-grain. Yours alone.</h2>
+                <h2 class="carousel-heading">
+                    One-of-one original designs
+                </h2>
                 <a href="https://arielcameronleather.com/collections/charm?pb=0" class="carousel-btn">
                     Shop Charm Collection
                 </a>
             </div>
         </div>
 
-        <div class="carousel-slide" data-slide="4">
+        <!-- Slide 5 -->
+        <div x-show="current === 4" x-transition:enter="fade-enter" x-transition:enter-start="fade-enter-start"
+            x-transition:enter-end="fade-enter-end" x-transition:leave="fade-leave"
+            x-transition:leave-start="fade-leave-start" x-transition:leave-end="fade-leave-end" class="carousel-slide">
+
             <div class="carousel-slide-bg"></div>
-            <img src="{{ 'pickle-charm.jpeg' | asset_url }}"
-                alt="Pickle-shaped leather charm, hand-dyed and hand-stitched">
+            <img src="{{ 'pickle-charm.jpeg' | asset_url }}" alt="Slide 5">
             <div class="carousel-gradient-overlay"></div>
+
             <div class="carousel-content">
                 <p class="carousel-eyebrow">Handcrafted in America</p>
-                <h2 class="carousel-heading">Leather, unapologetically in color</h2>
+                <h2 class="carousel-heading">
+                    One-of-one original designs
+                </h2>
                 <a href="https://arielcameronleather.com/collections/charm?pb=0" class="carousel-btn">
                     Shop Charm Collection
                 </a>
@@ -355,92 +306,21 @@
 
     </div>
 
-    <button type="button" class="carousel-arrow carousel-arrow-left" data-carousel-prev aria-label="Previous slide">
+    <!-- Navigation Arrows -->
+    <button @click="current = (current > 0 ? current - 1 : slides - 1)" class="carousel-arrow carousel-arrow-left">
         &#10094;
     </button>
-    <button type="button" class="carousel-arrow carousel-arrow-right" data-carousel-next aria-label="Next slide">
+    <button @click="current = (current < slides - 1 ? current + 1 : 0)" class="carousel-arrow carousel-arrow-right">
         &#10095;
     </button>
 
+    <!-- Dots -->
     <div class="carousel-dots">
-        <button type="button" class="carousel-dot active" data-carousel-dot="0" aria-label="Go to slide 1"></button>
-        <button type="button" class="carousel-dot" data-carousel-dot="1" aria-label="Go to slide 2"></button>
-        <button type="button" class="carousel-dot" data-carousel-dot="2" aria-label="Go to slide 3"></button>
-        <button type="button" class="carousel-dot" data-carousel-dot="3" aria-label="Go to slide 4"></button>
-        <button type="button" class="carousel-dot" data-carousel-dot="4" aria-label="Go to slide 5"></button>
+        <button @click="current = 0" :class="{ active: current === 0 }" class="carousel-dot"></button>
+        <button @click="current = 1" :class="{ active: current === 1 }" class="carousel-dot"></button>
+        <button @click="current = 2" :class="{ active: current === 2 }" class="carousel-dot"></button>
+        <button @click="current = 3" :class="{ active: current === 3 }" class="carousel-dot"></button>
+        <button @click="current = 4" :class="{ active: current === 4 }" class="carousel-dot"></button>
     </div>
 
 </div>
-
-<script>
-    (function () {
-        var root = document.getElementById('hero-carousel');
-        if (!root) return;
-
-        var slides = Array.prototype.slice.call(root.querySelectorAll('.carousel-slide'));
-        var dots = Array.prototype.slice.call(root.querySelectorAll('[data-carousel-dot]'));
-        var prevBtn = root.querySelector('[data-carousel-prev]');
-        var nextBtn = root.querySelector('[data-carousel-next]');
-        var autoplayMs = parseInt(root.getAttribute('data-autoplay-ms'), 10) || 6500;
-
-        var current = 0;
-        var total = slides.length;
-        var timer = null;
-
-        function goToSlide(index) {
-            current = (index + total) % total;
-
-            slides.forEach(function (slide, i) {
-                slide.classList.toggle('is-active', i === current);
-            });
-
-            dots.forEach(function (dot, i) {
-                dot.classList.toggle('active', i === current);
-            });
-        }
-
-        function nextSlide() {
-            goToSlide(current + 1);
-        }
-
-        function prevSlide() {
-            goToSlide(current - 1);
-        }
-
-        function startAutoplay() {
-            stopAutoplay();
-            timer = setInterval(nextSlide, autoplayMs);
-        }
-
-        function stopAutoplay() {
-            if (timer) {
-                clearInterval(timer);
-                timer = null;
-            }
-        }
-
-        if (nextBtn) {
-            nextBtn.addEventListener('click', function () {
-                nextSlide();
-                startAutoplay(); // reset the timer so it doesn't double up right after a manual click
-            });
-        }
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', function () {
-                prevSlide();
-                startAutoplay();
-            });
-        }
-
-        dots.forEach(function (dot, i) {
-            dot.addEventListener('click', function () {
-                goToSlide(i);
-                startAutoplay();
-            });
-        });
-
-        goToSlide(0);
-        startAutoplay();
-    })();
-</script>
